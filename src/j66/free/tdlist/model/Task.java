@@ -9,16 +9,16 @@ public class Task extends Element implements Serializable {
     private LocalDateTime todoDate;
 
 
-    public Task(String name, String description, StatusTask status) {
+    public Task(String name, String description) {
         super(name, description);
         this.typeElement = TypeElement.TASK;
-        this.status = status;
+        this.status = StatusTask.NO_PLAN;
     }
 
-    public Task(String name, String description, Element parent, StatusTask status) {
+    public Task(String name, String description, Element parent) {
         super(name, description, parent);
         this.typeElement = TypeElement.TASK;
-        this.status = status;
+        this.status = StatusTask.NO_PLAN;
     }
 
     public StatusTask getStatus() {
