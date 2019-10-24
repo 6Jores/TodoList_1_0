@@ -30,4 +30,35 @@ abstract public class FileManager {
 
         return rtn;
     }
+
+    public static Object readAnObject (File file){
+
+        Object object = null;
+
+        ObjectInputStream ois = null;
+
+        try {
+            ois = new ObjectInputStream(
+                    new BufferedInputStream(
+                            new FileInputStream(file)));
+            object = ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ois != null) {
+                    ois.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return object;
+    }
+
+    public static String[] listFile (String path){
+        return new File(path).list();
+    }
+
 }

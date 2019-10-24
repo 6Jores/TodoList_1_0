@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minWidth="-Infinity" prefHeight="436.0" prefWidth="515.0" style="-fx-background-color: #2D3443;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="j66.free.tdlist.view.WelcomeView">
+   <children>
+      <VBox layoutX="139.0" layoutY="-30.0" prefHeight="430.0" prefWidth="603.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="TOP" prefHeight="65.0" prefWidth="606.0" text="TodoList" textFill="#b2b2b1">
+               <font>
+                  <Font size="36.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <Line endX="499.29290771484375" endY="-450.0" startX="1012.878662109375" startY="-450.0" stroke="#b2b2b1" strokeWidth="2.0" />
+            <HBox prefHeight="350.0" prefWidth="603.0">
+               <children>
+                  <VBox prefHeight="336.0" prefWidth="310.0">
+                     <children>
+                        <HBox prefHeight="46.0" prefWidth="310.0">
+                           <children>
+                              <TextField prefHeight="0.0" prefWidth="270.0" promptText="Search" style="-fx-text-fill: #b2b2b1; -fx-background-color: none;">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="10.0" top="6.0" />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <Line endX="200.0" startX="-70.0" stroke="#b2b2b1" strokeWidth="2.0">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="10.0" />
+                           </VBox.margin>
+                        </Line>
+                        <ListView fx:id="fileListView" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="270.0" style="-fx-background-color: none;">
+                           <VBox.margin>
+                              <Insets left="10.0" />
+                           </VBox.margin></ListView>
+                        <HBox prefHeight="57.0" prefWidth="310.0">
+                           <children>
+                              <CheckBox fx:id="withArchivedOrNot" mnemonicParsing="false" onAction="#setArchivedOrNot" prefHeight="29.0" prefWidth="143.0" style="-fx-text-fill: #b2b2b1;" text="Show Archived" textFill="#b2b2b1">
+                                 <HBox.margin>
+                                    <Insets left="10.0" top="15.0" />
+                                 </HBox.margin>
+                                 <padding>
+                                    <Insets top="10.0" />
+                                 </padding>
+                              </CheckBox>
+                              <ButtonBar prefHeight="41.0" prefWidth="170.0">
+                                 <padding>
+                                    <Insets top="10.0" />
+                                 </padding>
+                                 <buttons>
+                                    <Button alignment="BOTTOM_RIGHT" contentDisplay="RIGHT" minWidth="47.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="94.0" style="-fx-background-color: none;" text="&gt; Open" textAlignment="RIGHT" textFill="#b2b2b1" underline="true">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Button>
+                                 </buttons>
+                              </ButtonBar>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="336.0" prefWidth="289.0">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="21.0" prefWidth="200.0" style="-fx-text-fill: #b2b2b1;" text="Name" textFill="#b2b2b1">
+                           <VBox.margin>
+                              <Insets left="20.0" top="10.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="todoListName" alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0" style="-fx-text-fill: #b2b2b1;" text="todoListName" textFill="#b2b2b1">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="200.0" style="-fx-text-fill: #b2b2b1;" text="Creation Date" textFill="#b2b2b1">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="20.0" top="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label fx:id="todoListCreationDate" alignment="TOP_RIGHT" prefHeight="30.0" prefWidth="200.0" style="-fx-text-fill: #b2b2b1;" text="todoListCreationDate" textFill="#b2b2b1">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label alignment="TOP_RIGHT" prefHeight="21.0" prefWidth="200.0" style="-fx-text-fill: #b2b2b1;" text="Edition Date" textFill="#b2b2b1">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="20.0" top="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label fx:id="todoListEditionDate" alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0" style="-fx-text-fill: #b2b2b1;" text="todoListEditionDate" textFill="#b2b2b1">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="200.0" style="-fx-text-fill: #b2b2b1;" text="Description" textFill="#b2b2b1">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="20.0" top="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label fx:id="todoListDescription" alignment="TOP_RIGHT" contentDisplay="CENTER" prefHeight="96.0" prefWidth="200.0" style="-fx-text-fill: #b2b2b1;" text="todoListDescription" textFill="#b2b2b1" wrapText="true">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <VBox.margin>
+                              <Insets left="20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0" style="-fx-text-fill: #b2b2b1;" text="J66 - 2019" textFill="#b2b2b1">
+                           <VBox.margin>
+                              <Insets left="20.0" top="20.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
