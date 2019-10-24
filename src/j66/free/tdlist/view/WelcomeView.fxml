@@ -66,9 +66,9 @@
                                     <Insets top="10.0" />
                                  </padding>
                                  <buttons>
-                                    <Button alignment="BOTTOM_RIGHT" contentDisplay="RIGHT" minWidth="47.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="94.0" style="-fx-background-color: none;" text="&gt; Open" textAlignment="RIGHT" textFill="#b2b2b1" underline="true">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" minWidth="47.0" mnemonicParsing="false" onAction="#openTodoList" prefHeight="32.0" prefWidth="94.0" stylesheets="@style.css" text="&gt; Open" textAlignment="CENTER" textFill="#b2b2b1" underline="true">
                                        <font>
-                                          <Font name="System Bold" size="18.0" />
+                                          <Font size="14.0" />
                                        </font>
                                     </Button>
                                  </buttons>

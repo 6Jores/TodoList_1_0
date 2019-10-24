@@ -61,4 +61,8 @@ abstract public class FileManager {
         return new File(path).list();
     }
 
+    public static boolean removeFile(String path,String nameFile){
+        return new File(path+nameFile).delete();
+    }
+
 }

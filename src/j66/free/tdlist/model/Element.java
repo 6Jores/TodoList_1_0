@@ -11,7 +11,16 @@ abstract public class Element implements Serializable {
     private Element parent;
     private LocalDateTime creationDate;
     private LocalDateTime editionDate;
+
+    public void setTypeElement(TypeElement typeElement) {
+        this.typeElement = typeElement;
+    }
+
     TypeElement typeElement;
+
+    Element(){
+        initDates(this);
+    }
 
 
     Element(String name, String description) {

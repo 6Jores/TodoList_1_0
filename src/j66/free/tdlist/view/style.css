@@ -1,16 +1,12 @@
-.check-box .box {
-    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-white;
+
+.button {
+  -fx-background-color: #b2b2b1;
+  -fx-text-fill:  #2D3443;
+  -fx-background-radius: 20px;
 }
 
-.check-box:focused{
-	-fx-color:#ff5430;
-	-fx-focused-color:#f5f4f1
-}
-
-.check-box:selected .mark {
-    -fx-background-color: -fx-colour-white;
-}
-
-.check-box:selected .box {
-    -fx-background-color: -fx-blue;
+.button:hover{
+  -fx-background-color: #4fd4e5;
+  -fx-text-fill: #2D3443;
+  -fx-background-radius: 15px;
 }
