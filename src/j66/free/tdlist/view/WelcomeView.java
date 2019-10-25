@@ -3,8 +3,10 @@ package j66.free.tdlist.view;
 import j66.free.tdlist.Main;
 import j66.free.tdlist.model.TodoList;
 import j66.free.tdlist.model.TodoListManager;
+import j66.free.tdlist.tools.Constant;
 import j66.free.tdlist.tools.Tool;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.event.EventHandler;
@@ -12,7 +14,7 @@ import javafx.event.EventHandler;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
-
+import static j66.free.tdlist.tools.Tool.showAlert;
 
 
 public class WelcomeView {
@@ -21,7 +23,8 @@ public class WelcomeView {
     private ContextMenu contextMenu;
     private TodoList selectedTodoList;
 
-
+    @FXML
+    TextField search;
     @FXML
     CheckBox withArchivedOrNot;
     @FXML
@@ -34,6 +37,8 @@ public class WelcomeView {
     Label todoListCreationDate;
     @FXML
     Label todoListEditionDate;
+    @FXML
+    Tooltip tooltip;
 
     public void setMain(Main main){
         this.main = main;
@@ -59,26 +64,36 @@ public class WelcomeView {
 
         fileListView.addEventHandler(MouseEvent.MOUSE_CLICKED,eventHandler);
 
+        this.search.textProperty().addListener(((observableValue, oldValue, newValue) -> runSearch(newValue)));
+
     }
 
     @FXML
     public void setArchivedOrNot(){
-        fileListView.setItems(TodoListManager.getTodoLists(withArchivedOrNot.isSelected()));
+        if (search.getText().equals(""))
+            fileListView.setItems(TodoListManager.getTodoLists(withArchivedOrNot.isSelected()));
+        else
+            runSearch(search.getText());
     }
 
     private void initializeDescription(TodoList todoList){
-        if (todoList != null){
+        if (todoList != null && !todoList.getName().equals(Constant.NO_RESULT)){
             todoListName.setText(todoList.getName());
             todoListDescription.setText(todoList.getDescription());
             todoListCreationDate.setText(Tool.formatDate(todoList.getCreationDate()));
             todoListEditionDate.setText(Tool.formatDate(todoList.getEditionDate()));
-
+            if (todoList.getDescription().length() > 70){
+                tooltip.setText(todoList.getDescription());
+            }
+            else
+                tooltip.setText("Description");
         }
         else {
             todoListName.setText("");
             todoListDescription.setText("");
             todoListCreationDate.setText("");
             todoListEditionDate.setText("");
+            tooltip.setText("Description");
         }
     }
 
@@ -86,7 +101,7 @@ public class WelcomeView {
     private void openTodoList(){
         System.out.println("Open");
         if (thereIsASelected()){
-
+            main.openATodoList(selectedTodoList);
         }else {
             showAlert("Error","Please select a TodoList.");
         }
@@ -99,18 +114,16 @@ public class WelcomeView {
         TodoListManager.persistATodoList(selectedTodoList);
     }
 
-
     private void newTodoList(){
-        System.out.println("New");
+        search.setText("");
+        main.showEditTodoList(TodoListManager.getTodoList(true), Constant.ACTION_NEW_TODOLIST);
     }
-
 
     private void copyTodoList(){
         if (!TodoListManager.copyTodoList(selectedTodoList))
             showAlert("Copy Error","And error had occurred during the copy.");
         else {
-            fileListView.getItems().clear();
-            fileListView.getItems().addAll(TodoListManager.getTodoLists(withArchivedOrNot.isSelected()));
+            updateFileListView(TodoListManager.getTodoLists(withArchivedOrNot.isSelected()));
         }
     }
 
@@ -123,12 +136,35 @@ public class WelcomeView {
         }
     }
 
+    private void editTodoList(){
+        System.out.println("Edit");
+        main.showEditTodoList(selectedTodoList, Constant.ACTION_EDIT_TODOLIST);
+    }
 
+    private void runSearch(String key){
+        if (key != null){
+            updateFileListView(TodoListManager.getTodoLists(key,withArchivedOrNot.isSelected()));
+        }
+    }
+
+    private void updateFileListView(ObservableList<TodoList> todoLists){
+        fileListView.getItems().clear();
+        fileListView.getItems().addAll(todoLists);
+
+    }
+
+    public void updateFileListView(){
+        fileListView.getItems().clear();
+        fileListView.getItems().addAll(TodoListManager.getTodoLists(withArchivedOrNot.isSelected()));
+
+    }
 
     private boolean thereIsASelected(){
         boolean rtn = fileListView.getSelectionModel().getSelectedItem() != null;
-        if (rtn)
+        if (rtn) {
             selectedTodoList = fileListView.getSelectionModel().getSelectedItem();
+            rtn = !selectedTodoList.getName().equals(Constant.NO_RESULT);
+        }
         return rtn;
     }
 
@@ -140,6 +176,7 @@ public class WelcomeView {
         item1.setOnAction(actionEvent -> newTodoList());
 
         if (thereIsASelected()){
+
             MenuItem item2 = new MenuItem("Open");
             item2.setOnAction(actionEvent -> openTodoList());
             contextMenu.getItems().add(item2);
@@ -161,6 +198,10 @@ public class WelcomeView {
 
             contextMenu.getItems().add(new SeparatorMenuItem());
 
+            MenuItem item6 = new MenuItem("Edit");
+            item6.setOnAction(actionEvent -> editTodoList());
+            contextMenu.getItems().add(item6);
+
         }
 
         contextMenu.getItems().add(item1);
@@ -168,14 +209,4 @@ public class WelcomeView {
         fileListView.setOnContextMenuRequested(contextMenuEvent -> contextMenu.show(fileListView, event.getScreenX(),event.getScreenY()));
     }
 
-    public Main getMain() {
-        return main;
-    }
-
-    public void showAlert(String title, String message){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
-        alert.setHeaderText(message);
-        alert.showAndWait();
-    }
 }

@@ -9,5 +9,8 @@ abstract public class Constant {
     //Texts
     public static final String APP_NAME = "TodoList";
     public static final String WELCOME_VIEW_TITLE = APP_NAME+" - WelcomeView";
+    public static final String ACTION_EDIT_TODOLIST = "Edit";
+    public static final String ACTION_NEW_TODOLIST = "New";
+    public static final String NO_RESULT = "No result";
 
 }

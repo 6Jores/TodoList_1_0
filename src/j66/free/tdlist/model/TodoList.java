@@ -1,6 +1,5 @@
 package j66.free.tdlist.model;
 
-import javax.swing.plaf.TabbedPaneUI;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -51,11 +50,7 @@ public class TodoList extends Element implements Serializable {
         return nameFile;
     }
 
-    public void setNameFile(String nameFile) {
-        this.nameFile = nameFile;
-    }
-
-    public TodoList cloneMy(){
+    TodoList cloneMy(){
         TodoList source = this;
         TodoList clone = new TodoList();
 

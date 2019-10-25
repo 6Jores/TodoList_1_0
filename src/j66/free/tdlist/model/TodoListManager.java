@@ -1,6 +1,5 @@
 package j66.free.tdlist.model;
 
-import j66.free.tdlist.tools.Constant;
 import j66.free.tdlist.tools.FileManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,13 +14,11 @@ abstract public class TodoListManager {
 
     private static boolean saved;
     private static TodoList todoList;
-
+    private static ObservableList<TodoList> todoListsNoResults;
 
     private static ObservableList<TodoList> todoLists = FXCollections.observableArrayList();
 
     public static TodoList getTodoList(){
-        if (todoList == null)
-            todoList = getSampleTodoList();
         return todoList;
     }
 
@@ -39,7 +36,44 @@ abstract public class TodoListManager {
     }
 
     public static ObservableList<TodoList> getTodoLists() {
+        if (todoLists.size()==0)
+            return getTodoListsNoResults();
         return todoLists;
+    }
+
+    public static ObservableList<TodoList> getTodoLists(boolean withArchived){
+
+        ObservableList<TodoList> _todoLists = FXCollections.observableArrayList();
+
+        if (withArchived){
+            _todoLists = todoLists;
+        }else {
+            for (TodoList todoList : todoLists){
+                if (!todoList.isArchived())
+                    _todoLists.add(todoList);
+            }
+        }
+        if (_todoLists.size()==0)
+            _todoLists = getTodoListsNoResults();
+        return _todoLists;
+    }
+
+    public static ObservableList<TodoList> getTodoLists(String key, boolean withArchived){
+        ObservableList<TodoList> _todoLists = FXCollections.observableArrayList();
+
+        for (TodoList todoList : todoLists){
+            if (todoList.getName().toLowerCase().contains(key.toLowerCase()))
+                if (withArchived)
+                    _todoLists.add(todoList);
+                else {
+                    if (!todoList.isArchived())
+                        _todoLists.add(todoList);
+                }
+        }
+
+        if (_todoLists.size()==0)
+            _todoLists = getTodoListsNoResults();
+        return _todoLists;
     }
 
     private static TodoList getSampleTodoList(){
@@ -60,31 +94,25 @@ abstract public class TodoListManager {
         return sampleTodoList;
     }
 
-    public static boolean persistTodoList(){
-        return FileManager.writeFile(todoList, TODOLIST_PATH,todoList.getNameFile());
+    private static ObservableList<TodoList> getTodoListsNoResults() {
+        if (todoListsNoResults == null){
+            todoListsNoResults = FXCollections.observableArrayList();
+            TodoList _todoList = getSampleTodoList();
+            _todoList.setName(NO_RESULT);
+            _todoList.setDescription("");
+            todoListsNoResults.add(_todoList);
+        }
+        return todoListsNoResults;
     }
 
-    public static ObservableList<TodoList> getTodoLists(boolean withArchived){
-
-        ObservableList<TodoList> _todoLists = FXCollections.observableArrayList();
-
-        if (withArchived){
-            _todoLists = todoLists;
-        }else {
-            for (TodoList todoList : todoLists){
-                if (!todoList.isArchived())
-                    _todoLists.add(todoList);
-            }
-        }
-
-        return _todoLists;
+    public static boolean persistTodoList(){
+        return FileManager.writeFile(todoList, TODOLIST_PATH,todoList.getNameFile());
     }
 
     public static void setTodoLists (){
         String [] listPathFile = FileManager.listFile(TODOLIST_PATH);
 
         for (String pathFile : listPathFile){
-            File file = new File(pathFile);
             if (!pathFile.equals("TodoList ")){
                 todoLists.add((TodoList)FileManager.readAnObject(new File(TODOLIST_PATH+pathFile)));
             }
@@ -111,13 +139,11 @@ abstract public class TodoListManager {
     }
 
     public static boolean deleteTodoList(TodoList todoList){
-        boolean rtn = false;
-
+        boolean rtn ;
         rtn = FileManager.removeFile(TODOLIST_PATH,todoList.getNameFile());
         if (rtn){
             getTodoLists().remove(todoList);
         }
-
         return rtn;
     }
 

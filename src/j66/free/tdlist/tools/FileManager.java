@@ -65,4 +65,14 @@ abstract public class FileManager {
         return new File(path+nameFile).delete();
     }
 
+    public static boolean itsOkForFile(String nameFile){
+        String[] listForbidden = {"<",">",":","\"","\\","/","*","|","?"};
+        int j=0;
+        for (String forbidden : listForbidden){
+            if (nameFile.contains(forbidden))
+                j++;
+        }
+        return j==0;
+    }
+
 }

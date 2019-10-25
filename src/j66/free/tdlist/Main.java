@@ -1,11 +1,14 @@
 package j66.free.tdlist;
 
+import j66.free.tdlist.model.TodoList;
 import j66.free.tdlist.model.TodoListManager;
+import j66.free.tdlist.view.EditTodoList;
 import j66.free.tdlist.view.WelcomeView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -15,7 +18,8 @@ import static j66.free.tdlist.tools.Constant.*;
 public class Main extends Application {
 
     private Stage mainStage;
-    private AnchorPane mainContent;
+    private WelcomeView controllerWelcomeView;
+
 
     public static void main(String[] args) {
         launch(args);
@@ -36,19 +40,55 @@ public class Main extends Application {
         TodoListManager.setTodoLists();
 
         try{
-            mainContent = loader.load();
+            AnchorPane mainContent = loader.load();
             Scene scene = new Scene(mainContent);
 
             mainStage.setScene(scene);
 
             //Run Start viewcontroller
-            WelcomeView controller = loader.getController();
-            controller.setMain(this);
+            controllerWelcomeView = loader.getController();
+            controllerWelcomeView.setMain(this);
 
             mainStage.show();
 
         }catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    public void updateWelcomeView (){
+        controllerWelcomeView.updateFileListView();
+    }
+
+    public void showEditTodoList(TodoList todoList, String action){
+        try{
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("view/EditTodoList.fxml"));
+            AnchorPane pane = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle(action+" "+ APP_NAME);
+            stage.initModality(Modality.WINDOW_MODAL);
+
+            stage.initOwner(mainStage);
+            Scene scene = new Scene(pane);
+            stage.setScene(scene);
+
+            EditTodoList controller = loader.getController();
+            controller.setMain(this);
+            controller.setStage(stage);
+            controller.setTodoList(todoList);
+            controller.setAction(action);
+
+            stage.showAndWait();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void openATodoList(TodoList todoList){
+
     }
 }

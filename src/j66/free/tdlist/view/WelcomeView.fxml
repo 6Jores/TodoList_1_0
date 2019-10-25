@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -32,7 +33,7 @@
                      <children>
                         <HBox prefHeight="46.0" prefWidth="310.0">
                            <children>
-                              <TextField prefHeight="0.0" prefWidth="270.0" promptText="Search" style="-fx-text-fill: #b2b2b1; -fx-background-color: none;">
+                              <TextField fx:id="search" prefHeight="0.0" prefWidth="270.0" promptText="Search" styleClass="textField" stylesheets="@style.css">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
@@ -50,7 +51,10 @@
                         <ListView fx:id="fileListView" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="270.0" style="-fx-background-color: none;">
                            <VBox.margin>
                               <Insets left="10.0" />
-                           </VBox.margin></ListView>
+                           </VBox.margin>
+                           <tooltip>
+                              <Tooltip text="Right click for actions" />
+                           </tooltip></ListView>
                         <HBox prefHeight="57.0" prefWidth="310.0">
                            <children>
                               <CheckBox fx:id="withArchivedOrNot" mnemonicParsing="false" onAction="#setArchivedOrNot" prefHeight="29.0" prefWidth="143.0" style="-fx-text-fill: #b2b2b1;" text="Show Archived" textFill="#b2b2b1">
@@ -145,10 +149,13 @@
                            <VBox.margin>
                               <Insets left="20.0" />
                            </VBox.margin>
+                           <tooltip>
+                              <Tooltip fx:id="tooltip" text="Description" wrapText="true" />
+                           </tooltip>
                         </Label>
                         <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0" style="-fx-text-fill: #b2b2b1;" text="J66 - 2019" textFill="#b2b2b1">
                            <VBox.margin>
-                              <Insets left="20.0" top="20.0" />
+                              <Insets left="20.0" top="5.0" />
                            </VBox.margin>
                         </Label>
                      </children>

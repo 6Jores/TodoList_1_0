@@ -12,7 +12,7 @@ abstract public class Element implements Serializable {
     private LocalDateTime creationDate;
     private LocalDateTime editionDate;
 
-    public void setTypeElement(TypeElement typeElement) {
+    void setTypeElement(TypeElement typeElement) {
         this.typeElement = typeElement;
     }
 
