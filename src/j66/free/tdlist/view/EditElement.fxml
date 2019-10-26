@@ -12,8 +12,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="267.0" prefWidth="402.0" style="-fx-background-color: #2D3443;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="j66.free.tdlist.view.EditTodoList">
+<AnchorPane prefHeight="267.0" prefWidth="402.0" style="-fx-background-color: #2D3443;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="j66.free.tdlist.view.EditElement">
    <children>
       <VBox layoutX="150.0" layoutY="50.0" prefHeight="300.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -81,7 +80,7 @@
             </HBox>
             <ButtonBar prefHeight="40.0" prefWidth="200.0">
               <buttons>
-                <Button mnemonicParsing="false" onAction="#saveTodoList" prefHeight="25.0" prefWidth="95.0" stylesheets="@style.css" text="Save" />
+                <Button mnemonicParsing="false" onAction="#saveElement" prefHeight="25.0" prefWidth="95.0" stylesheets="@style.css" text="Save" />
                   <Button cancelButton="true" mnemonicParsing="false" onAction="#cancelAction" stylesheets="@style.css" text="Cancel" />
               </buttons>
                <padding>

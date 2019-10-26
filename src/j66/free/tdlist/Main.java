@@ -1,8 +1,9 @@
 package j66.free.tdlist;
 
+import j66.free.tdlist.model.Element;
 import j66.free.tdlist.model.TodoList;
 import j66.free.tdlist.model.TodoListManager;
-import j66.free.tdlist.view.EditTodoList;
+import j66.free.tdlist.view.EditElement;
 import j66.free.tdlist.view.HierarchyView;
 import j66.free.tdlist.view.MainContentView;
 import j66.free.tdlist.view.WelcomeView;
@@ -65,28 +66,27 @@ public class Main extends Application {
         controllerWelcomeView.updateFileListView();
     }
 
-    public void showEditTodoList(TodoList todoList, String action){
+    public void showEditElement(Element element, String action){
         try{
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("view/EditTodoList.fxml"));
+            loader.setLocation(Main.class.getResource("view/EditElement.fxml"));
             AnchorPane pane = loader.load();
 
             Stage stage = new Stage();
-            stage.setTitle(action+" "+ APP_NAME);
+            stage.setTitle(action+" "+ element.getTypeElement());
             stage.initModality(Modality.WINDOW_MODAL);
 
             stage.initOwner(mainStage);
             Scene scene = new Scene(pane);
             stage.setScene(scene);
 
-            EditTodoList controller = loader.getController();
+            EditElement controller = loader.getController();
             controller.setMain(this);
             controller.setStage(stage);
-            controller.setTodoList(todoList);
+            controller.setElement(element);
             controller.setAction(action);
 
             stage.showAndWait();
-
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -137,6 +137,10 @@ public class Main extends Application {
 
     public HierarchyView getControllerHierarchyView() {
         return controllerHierarchyView;
+    }
+
+    public WelcomeView getControllerWelcomeView() {
+        return controllerWelcomeView;
     }
 
     public void showHome(){

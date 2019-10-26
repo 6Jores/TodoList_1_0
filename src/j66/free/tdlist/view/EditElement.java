@@ -1,6 +1,7 @@
 package j66.free.tdlist.view;
 
 import j66.free.tdlist.Main;
+import j66.free.tdlist.model.Element;
 import j66.free.tdlist.model.TodoList;
 import j66.free.tdlist.model.TodoListManager;
 import j66.free.tdlist.tools.FileManager;
@@ -13,7 +14,7 @@ import javafx.stage.Stage;
 
 import static j66.free.tdlist.tools.Constant.*;
 
-public class EditTodoList {
+public class EditElement {
     @FXML
     Label title;
     @FXML
@@ -22,17 +23,17 @@ public class EditTodoList {
     TextArea description;
 
     private Main main;
-    private TodoList todoList;
+    private Element element;
     private String action;
     private Stage stage;
 
 
     @FXML
-    private void saveTodoList (){
+    private void saveTodoList (TodoList todoList){
         String _name = name.getText().trim();
         if (!_name.equals("") && !_name.equals(NO_RESULT) && FileManager.itsOkForFile(_name.replace(":","_"))){
-            todoList.setName(name.getText());
-            todoList.setDescription(description.getText());
+            element.setName(name.getText());
+            element.setDescription(description.getText());
             if (TodoListManager.persistATodoList(todoList)) {
                 if (this.action.equals(ACTION_NEW_TODOLIST)) {
                     TodoListManager.getTodoLists().add(todoList);
@@ -45,11 +46,28 @@ public class EditTodoList {
         }else{
             Tool.showAlert("Form Error","Invalid name, please correct it.");
         }
+        main.getControllerWelcomeView().initializeDescription(todoList);
     }
 
     @FXML
     private void cancelAction(){
         stage.close();
+    }
+
+    @FXML
+    private void saveElement(){
+        switch (element.getTypeElement()){
+
+            case TODOLIST:
+                saveTodoList((TodoList)element);
+                break;
+            case PROJECT:
+                break;
+            case SUBPROJECT:
+                break;
+            case TASK:
+                break;
+        }
     }
 
 
@@ -58,10 +76,10 @@ public class EditTodoList {
 
     }
 
-    public void setTodoList(TodoList todoList){
-        this.todoList = todoList;
-        this.name.setText(todoList.getName());
-        this.description.setText(todoList.getDescription());
+    public void setElement(Element element){
+        this.element = element;
+        this.name.setText(element.getName());
+        this.description.setText(element.getDescription());
     }
 
     public void setAction(String action) {

@@ -14,7 +14,7 @@ abstract public class TodoListManager {
 
     private static TodoList todoList;
     private static ObservableList<TodoList> todoListsNoResults;
-    private static boolean save;
+    private static boolean save=true;
     private static ObservableList<TodoList> todoLists = FXCollections.observableArrayList();
 
     public static TodoList getTodoList(){

@@ -82,7 +82,7 @@ public class WelcomeView {
             runSearch(search.getText());
     }
 
-    private void initializeDescription(TodoList todoList){
+    public void initializeDescription(TodoList todoList){
         if (todoList != null && !todoList.getName().equals(Constant.NO_RESULT)){
             todoListName.setText(todoList.getName());
             todoListDescription.setText(todoList.getDescription());
@@ -121,7 +121,7 @@ public class WelcomeView {
 
     private void newTodoList(){
         search.setText("");
-        main.showEditTodoList(TodoListManager.getTodoList(true), Constant.ACTION_NEW_TODOLIST);
+        main.showEditElement(TodoListManager.getTodoList(true), Constant.ACTION_NEW_TODOLIST);
     }
 
     private void copyTodoList(){
@@ -142,7 +142,7 @@ public class WelcomeView {
     }
 
     private void editTodoList(){
-        main.showEditTodoList(selectedTodoList, Constant.ACTION_EDIT_TODOLIST);
+        main.showEditElement(selectedTodoList, Constant.ACTION_EDIT_TODOLIST);
     }
 
     private void runSearch(String key){
