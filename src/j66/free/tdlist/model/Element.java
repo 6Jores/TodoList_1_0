@@ -10,13 +10,12 @@ abstract public class Element implements Serializable {
     private String description;
     private Element parent;
     private LocalDateTime creationDate;
-    private LocalDateTime editionDate;
+    LocalDateTime editionDate;
+    TypeElement typeElement;
 
     void setTypeElement(TypeElement typeElement) {
         this.typeElement = typeElement;
     }
-
-    TypeElement typeElement;
 
     Element(){
         initDates(this);

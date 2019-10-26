@@ -12,7 +12,6 @@ import static j66.free.tdlist.tools.Constant.*;
 
 abstract public class TodoListManager {
 
-    private static boolean saved;
     private static TodoList todoList;
     private static ObservableList<TodoList> todoListsNoResults;
 
@@ -27,12 +26,8 @@ abstract public class TodoListManager {
         return todoList;
     }
 
-    public static boolean isSaved() {
-        return saved;
-    }
-
-    public static void setSaved(boolean saved) {
-        TodoListManager.saved = saved;
+    public static void setTodoList(TodoList todoList) {
+        TodoListManager.todoList = todoList;
     }
 
     public static ObservableList<TodoList> getTodoLists() {

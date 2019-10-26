@@ -9,69 +9,67 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="600.0" prefWidth="300.0" style="-fx-background-color: #2D3443;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="j66.free.tdlist.view.HierarchyView">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="250.0" style="-fx-background-color: #2D3443;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="j66.free.tdlist.view.HierarchyView">
    <children>
       <VBox layoutX="150.0" layoutY="88.0" prefHeight="600.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TreeView prefHeight="422.0" prefWidth="300.0">
+            <TreeView fx:id="treeView" prefHeight="350.0" prefWidth="290.0">
                <VBox.margin>
                   <Insets left="5.0" right="5.0" top="10.0" />
                </VBox.margin>
             </TreeView>
-            <HBox prefHeight="162.0" prefWidth="300.0">
+            <AnchorPane minWidth="-Infinity" prefHeight="164.0" prefWidth="150.0" style="-fx-border-color: #b2b2b1;">
                <children>
-                  <VBox prefHeight="200.0" prefWidth="110.0">
+                  <HBox prefHeight="162.0">
                      <children>
-                        <Label alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="90.0" text="Name :" textAlignment="CENTER" textFill="#b2b2b1">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets bottom="5.0" left="10.0" top="15.0" />
-                           </VBox.margin>
-                        </Label>
-                        <Label alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="90.0" text="Edit Date :" textFill="#b2b2b1">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets bottom="5.0" left="10.0" />
-                           </VBox.margin>
-                        </Label>
-                        <Label alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="90.0" text="Description :" textFill="#b2b2b1">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets left="10.0" />
-                           </VBox.margin>
-                        </Label>
+                        <VBox prefHeight="200.0" prefWidth="90.0">
+                           <children>
+                              <Label alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="75.0" text="Name :" textAlignment="CENTER" textFill="#b2b2b1">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="10.0" top="15.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="75.0" text="Edit Date :" textFill="#b2b2b1">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="75.0" text="Description :" textFill="#b2b2b1">
+                                 <VBox.margin>
+                                    <Insets left="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="162.0" prefWidth="144.0">
+                           <children>
+                              <Label fx:id="elementName" prefWidth="130.0" text="elementName" textFill="#4fd4e5">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="13.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label fx:id="elementEditionDate" prefHeight="25.0" prefWidth="130.0" text="elementEditionDate" textFill="#4fd4e5">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="elementDescription" alignment="TOP_LEFT" prefHeight="89.0" prefWidth="140.0" text="elementDescription" textFill="#4fd4e5" wrapText="true">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
                      </children>
-                  </VBox>
-                  <VBox prefHeight="162.0" prefWidth="180.0">
-                     <children>
-                        <Label text="elementName" textFill="#4fd4e5">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets top="12.0" />
-                           </VBox.margin>
-                        </Label>
-                        <Label text="elementEditionDate" textFill="#4fd4e5">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="elementDescription" textFill="#4fd4e5">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
+                  </HBox>
                </children>
-            </HBox>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+               </VBox.margin>
+            </AnchorPane>
          </children>
       </VBox>
    </children>

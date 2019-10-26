@@ -1,6 +1,7 @@
 package j66.free.tdlist.model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class TodoList extends Element implements Serializable {
@@ -9,6 +10,7 @@ public class TodoList extends Element implements Serializable {
     private ArrayList<Task> listTask = new ArrayList<>();
     private boolean archived = false;
     private String nameFile;
+    private boolean save;
 
     private TodoList(){
 
@@ -26,6 +28,14 @@ public class TodoList extends Element implements Serializable {
 
     public ArrayList<Task> getListTask() {
         return listTask;
+    }
+
+    public boolean isSave() {
+        return save;
+    }
+
+    public void setSave(boolean save) {
+        this.save = save;
     }
 
     public void addTask(Task task){
@@ -65,5 +75,11 @@ public class TodoList extends Element implements Serializable {
         clone.archived = source.archived;
 
         return clone;
+    }
+
+    @Override
+    public void autoUpdate(){
+        this.editionDate = LocalDateTime.now();
+        save = false;
     }
 }

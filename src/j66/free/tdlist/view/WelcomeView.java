@@ -99,7 +99,6 @@ public class WelcomeView {
 
     @FXML
     private void openTodoList(){
-        System.out.println("Open");
         if (thereIsASelected()){
             main.openATodoList(selectedTodoList);
         }else {
@@ -137,7 +136,6 @@ public class WelcomeView {
     }
 
     private void editTodoList(){
-        System.out.println("Edit");
         main.showEditTodoList(selectedTodoList, Constant.ACTION_EDIT_TODOLIST);
     }
 

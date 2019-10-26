@@ -3,6 +3,8 @@ package j66.free.tdlist;
 import j66.free.tdlist.model.TodoList;
 import j66.free.tdlist.model.TodoListManager;
 import j66.free.tdlist.view.EditTodoList;
+import j66.free.tdlist.view.HierarchyView;
+import j66.free.tdlist.view.MainContentView;
 import j66.free.tdlist.view.WelcomeView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +20,9 @@ import static j66.free.tdlist.tools.Constant.*;
 public class Main extends Application {
 
     private Stage mainStage;
+    private MainContentView controllerMainContentView;
     private WelcomeView controllerWelcomeView;
+    private HierarchyView controllerHierarchyView;
 
 
     public static void main(String[] args) {
@@ -45,7 +49,7 @@ public class Main extends Application {
 
             mainStage.setScene(scene);
 
-            //Run Start viewcontroller
+            //Run Start viewController
             controllerWelcomeView = loader.getController();
             controllerWelcomeView.setMain(this);
 
@@ -90,5 +94,46 @@ public class Main extends Application {
 
     public void openATodoList(TodoList todoList){
 
+        TodoListManager.setTodoList(todoList);
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource("view/MainContentView.fxml"));
+
+        try{
+            AnchorPane mainContent = loader.load();
+            Scene scene = new Scene(mainContent);
+
+            mainStage.setScene(scene);
+
+            //Run Start viewcontroller
+            controllerMainContentView = loader.getController();
+            controllerMainContentView.setMain(this);
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void initHierarchyView(TodoList todoList){
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource("view/HierarchyView.fxml"));
+
+        try{
+            AnchorPane mainContent = loader.load();
+
+            controllerHierarchyView = loader.getController();
+
+            controllerHierarchyView.setAnchorPane(mainContent);
+            controllerHierarchyView = loader.getController();
+            controllerHierarchyView.setMain(this);
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public HierarchyView getControllerHierarchyView() {
+        return controllerHierarchyView;
     }
 }
