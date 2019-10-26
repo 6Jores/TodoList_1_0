@@ -7,6 +7,7 @@ public class Task extends Element implements Serializable {
 
     private StatusTask status;
     private LocalDateTime todoDate;
+    private LocalDateTime doneDate;
 
 
     public Task(String name, String description) {
@@ -27,11 +28,18 @@ public class Task extends Element implements Serializable {
 
     public void setStatus(StatusTask status) {
         this.status = status;
+        if (status==StatusTask.DONE){
+            doneDate = LocalDateTime.now();
+        }
         autoUpdate();
     }
 
     public LocalDateTime getTodoDate() {
         return todoDate;
+    }
+
+    public LocalDateTime getDoneDate() {
+        return doneDate;
     }
 
     public void setTodoDate(LocalDateTime todoDate) {

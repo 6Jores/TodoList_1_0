@@ -8,6 +8,7 @@ import j66.free.tdlist.tools.Tool;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.event.EventHandler;
 
@@ -21,6 +22,7 @@ public class WelcomeView {
 
     private Main main;
     private ContextMenu contextMenu;
+    private Scene scene;
     private TodoList selectedTodoList;
 
     @FXML
@@ -44,10 +46,10 @@ public class WelcomeView {
         this.main = main;
 
         fileListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        fileListView.setItems(TodoListManager.getTodoLists(withArchivedOrNot.isSelected()));
+
+        updateFileListView();
 
         initializeDescription(null);
-
     }
 
     @FXML
@@ -59,6 +61,10 @@ public class WelcomeView {
                 contextMenu.hide();
             if (e.getButton() == MouseButton.SECONDARY){
                 showPop(e);
+            } else if (e.getButton() == MouseButton.PRIMARY){
+              if (e.getClickCount()==2 && thereIsASelected())
+                  openTodoList();
+
             }
         };
 
@@ -207,4 +213,11 @@ public class WelcomeView {
         fileListView.setOnContextMenuRequested(contextMenuEvent -> contextMenu.show(fileListView, event.getScreenX(),event.getScreenY()));
     }
 
+    public Scene getScene() {
+        return scene;
+    }
+
+    public void setScene(Scene scene) {
+        this.scene = scene;
+    }
 }

@@ -147,34 +147,74 @@ public class HierarchyView {
                 item3.setOnAction(actionEvent -> removeElement());
             }
 
+            Menu info = new Menu("Info");
+
+            switch (element.getTypeElement()){
+                case TODOLIST:
+                    break;
+                case PROJECT:
+                    MenuItem itemProject = new MenuItem("Project");
+                    itemProject.setGraphic(new ImageView(projectImage));
+                    info.getItems().add(itemProject);
+                    break;
+                case SUBPROJECT:
+                    MenuItem itemSubProject = new MenuItem("SubProject");
+                    itemSubProject.setGraphic(new ImageView(subProjectImage));
+                    info.getItems().add(itemSubProject);
+                    break;
+                case TASK:
+
+                    Menu menuPlanDate = new Menu("Plan Date");
+                    MenuItem itemPlanDate = new MenuItem(Tool.formatDate(((Task)element).getTodoDate()));
+                    menuPlanDate.getItems().add(itemPlanDate);
+
+                    switch (((Task)element).getStatus()){
+                        case NO_PLAN:
+                            MenuItem itemNoPlanTask = new MenuItem("Task not Plan");
+                            itemNoPlanTask.setGraphic(new ImageView(noPlanImage));
+                            info.getItems().add(itemNoPlanTask);
+                            break;
+                        case PLAN:
+                            MenuItem itemPlanTask = new MenuItem("Task Plan");
+                            itemPlanTask.setGraphic(new ImageView(planImage));
+
+                            info.getItems().add(itemPlanTask);
+                            info.getItems().add(menuPlanDate);
+                            break;
+                        case DONE:
+                            MenuItem itemDoneTask = new MenuItem("Task Done");
+                            itemDoneTask.setGraphic(new ImageView(doneImage));
+
+                            Menu menuDoneDate = new Menu("Done Date");
+                            MenuItem itemDoneDate = new MenuItem(Tool.formatDate(((Task)element).getDoneDate()));
+                            menuDoneDate.getItems().add(itemDoneDate);
+
+                            info.getItems().add(itemDoneTask);
+                            info.getItems().add(menuDoneDate);
+                            break;
+                        case LATE:
+                            MenuItem itemLateTask = new MenuItem("Task Late");
+                            itemLateTask.setGraphic(new ImageView(lateImage));
+
+                            info.getItems().add(itemLateTask);
+                            info.getItems().add(menuPlanDate);
+                            break;
+                        case CANCEL:
+                            MenuItem itemCancelTask = new MenuItem("Task Cancel");
+                            itemCancelTask.setGraphic(new ImageView(cancelImage));
+                            info.getItems().add(itemCancelTask);
+                            break;
+                    }
+                    break;
+            }
+            if (element.getTypeElement() != TypeElement.TODOLIST){
+                contextMenu.getItems().add(new SeparatorMenuItem());
+                contextMenu.getItems().add(info);
+            }
+
         }else {
             contextMenu.getItems().add(item0);
         }
-        // add info
-        Menu itemInfo = new Menu("Infos");
-
-        MenuItem itemProject = new MenuItem("Project");
-        itemProject.setGraphic(new ImageView(projectImage));
-        MenuItem itemSubProject = new MenuItem("SubProject");
-        itemSubProject.setGraphic(new ImageView(subProjectImage));
-
-        itemInfo.getItems().addAll(itemProject,itemSubProject);
-        itemInfo.getItems().add(new SeparatorMenuItem());
-
-        MenuItem itemDoneTask = new MenuItem("Task Done");
-        itemDoneTask.setGraphic(new ImageView(doneImage));
-        MenuItem itemPlanTask = new MenuItem("Task Plan");
-        itemPlanTask.setGraphic(new ImageView(planImage));
-        MenuItem itemNoPlanTask = new MenuItem("Task not Plan");
-        itemNoPlanTask.setGraphic(new ImageView(noPlanImage));
-        MenuItem itemLateTask = new MenuItem("Task Late");
-        itemLateTask.setGraphic(new ImageView(lateImage));
-        MenuItem itemCancelTask = new MenuItem("Task Cancel");
-        itemCancelTask.setGraphic(new ImageView(cancelImage));
-        itemInfo.getItems().addAll(itemDoneTask,itemPlanTask,itemNoPlanTask,itemLateTask,itemCancelTask);
-
-        contextMenu.getItems().add(itemInfo);
-
         treeView.setOnContextMenuRequested(contextMenuEvent -> contextMenu.show(treeView, event.getScreenX(),event.getScreenY()));
     }
 

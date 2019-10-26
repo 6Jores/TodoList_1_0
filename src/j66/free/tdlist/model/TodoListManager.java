@@ -14,7 +14,7 @@ abstract public class TodoListManager {
 
     private static TodoList todoList;
     private static ObservableList<TodoList> todoListsNoResults;
-
+    private static boolean save;
     private static ObservableList<TodoList> todoLists = FXCollections.observableArrayList();
 
     public static TodoList getTodoList(){
@@ -28,6 +28,14 @@ abstract public class TodoListManager {
 
     public static void setTodoList(TodoList todoList) {
         TodoListManager.todoList = todoList;
+    }
+
+    public static boolean isSave() {
+        return save;
+    }
+
+    public static void setSave(boolean save) {
+        TodoListManager.save = save;
     }
 
     public static ObservableList<TodoList> getTodoLists() {
@@ -101,7 +109,8 @@ abstract public class TodoListManager {
     }
 
     public static boolean persistTodoList(){
-        return FileManager.writeFile(todoList, TODOLIST_PATH,todoList.getNameFile());
+        save = FileManager.writeFile(todoList, TODOLIST_PATH,todoList.getNameFile());
+        return save;
     }
 
     public static void setTodoLists (){

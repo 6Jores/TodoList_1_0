@@ -37,7 +37,7 @@ public class Main extends Application {
         this.initialization();
     }
 
-    private void initialization(){
+    public void initialization(){
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("view/WelcomeView.fxml"));
 
@@ -52,6 +52,7 @@ public class Main extends Application {
             //Run Start viewController
             controllerWelcomeView = loader.getController();
             controllerWelcomeView.setMain(this);
+            controllerWelcomeView.setScene(scene);
 
             mainStage.show();
 
@@ -108,6 +109,7 @@ public class Main extends Application {
             //Run Start viewcontroller
             controllerMainContentView = loader.getController();
             controllerMainContentView.setMain(this);
+            controllerMainContentView.setStage(mainStage);
 
         }catch (IOException e){
             e.printStackTrace();
@@ -135,5 +137,9 @@ public class Main extends Application {
 
     public HierarchyView getControllerHierarchyView() {
         return controllerHierarchyView;
+    }
+
+    public void showHome(){
+        mainStage.setScene(controllerWelcomeView.getScene());
     }
 }

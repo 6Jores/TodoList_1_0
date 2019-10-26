@@ -10,7 +10,6 @@ public class TodoList extends Element implements Serializable {
     private ArrayList<Task> listTask = new ArrayList<>();
     private boolean archived = false;
     private String nameFile;
-    private boolean save;
 
     private TodoList(){
 
@@ -28,14 +27,6 @@ public class TodoList extends Element implements Serializable {
 
     public ArrayList<Task> getListTask() {
         return listTask;
-    }
-
-    public boolean isSave() {
-        return save;
-    }
-
-    public void setSave(boolean save) {
-        this.save = save;
     }
 
     public void addTask(Task task){
@@ -80,6 +71,15 @@ public class TodoList extends Element implements Serializable {
     @Override
     public void autoUpdate(){
         this.editionDate = LocalDateTime.now();
-        save = false;
+        TodoListManager.setSave(false);
+    }
+
+    @Override
+    public String toString(){
+        String rtn =this.getName();
+        if (isArchived()){
+            rtn+=" - Archived";
+        }
+        return rtn;
     }
 }
