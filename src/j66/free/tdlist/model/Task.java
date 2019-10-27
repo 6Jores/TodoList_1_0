@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 public class Task extends Element implements Serializable {
 
     private StatusTask status;
+    private boolean daily;
+    private PriorityTask priority;
     private LocalDateTime todoDate;
     private LocalDateTime doneDate;
 
@@ -14,12 +16,16 @@ public class Task extends Element implements Serializable {
         super(name, description);
         this.typeElement = TypeElement.TASK;
         this.status = StatusTask.NO_PLAN;
+        this.priority = PriorityTask.NORMAL;
+        this.daily = false;
     }
 
     public Task(String name, String description, Element parent) {
         super(name, description, parent);
         this.typeElement = TypeElement.TASK;
         this.status = StatusTask.NO_PLAN;
+        this.priority = PriorityTask.NORMAL;
+        this.daily = false;
     }
 
     public StatusTask getStatus() {
@@ -45,5 +51,21 @@ public class Task extends Element implements Serializable {
     public void setTodoDate(LocalDateTime todoDate) {
         this.todoDate = todoDate;
         autoUpdate();
+    }
+
+    public boolean isDaily() {
+        return daily;
+    }
+
+    public void setDaily(boolean daily) {
+        this.daily = daily;
+    }
+
+    public PriorityTask getPriority() {
+        return priority;
+    }
+
+    public void setPriority(PriorityTask priority) {
+        this.priority = priority;
     }
 }
