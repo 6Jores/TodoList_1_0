@@ -241,22 +241,26 @@ public class HierarchyView {
                 break;
             case TASK:
                 item = new TreeItem<>((Task)element);
-                switch (((Task)element).getStatus()){
-                    case NO_PLAN:
-                        item.setGraphic(new ImageView(noPlanImage));
-                        break;
-                    case PLAN:
-                        item.setGraphic(new ImageView(planImage));
-                        break;
-                    case DONE:
-                        item.setGraphic(new ImageView(doneImage));
-                        break;
-                    case LATE:
-                        item.setGraphic(new ImageView(lateImage));
-                        break;
-                    case CANCEL:
-                        item.setGraphic(new ImageView(cancelImage));
-                        break;
+                if (((Task)element).isDaily()){
+                    item.setGraphic(new ImageView(dailyImage));
+                }else {
+                    switch (((Task) element).getStatus()) {
+                        case NO_PLAN:
+                            item.setGraphic(new ImageView(noPlanImage));
+                            break;
+                        case PLAN:
+                            item.setGraphic(new ImageView(planImage));
+                            break;
+                        case DONE:
+                            item.setGraphic(new ImageView(doneImage));
+                            break;
+                        case LATE:
+                            item.setGraphic(new ImageView(lateImage));
+                            break;
+                        case CANCEL:
+                            item.setGraphic(new ImageView(cancelImage));
+                            break;
+                    }
                 }
                 break;
         }
