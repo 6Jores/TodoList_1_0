@@ -17,6 +17,7 @@ abstract public class Constant {
     public static final String LATE_IMAGE = IMAGE_PATH+"late.png";
     public static final String DONE_IMAGE = IMAGE_PATH+"done.png";
     public static final String CANCEL_IMAGE = IMAGE_PATH+"cancel.png";
+    public static final String DAILY_IMAGE = IMAGE_PATH+"daily.png";
 
     //Texts
     public static final String APP_NAME = "TodoList";

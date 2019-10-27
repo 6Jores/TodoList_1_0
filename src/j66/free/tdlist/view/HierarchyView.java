@@ -30,6 +30,7 @@ public class HierarchyView {
     private Image lateImage;
     private Image doneImage;
     private Image cancelImage;
+    private Image dailyImage;
     private ContextMenu contextMenu;
 
     @FXML
@@ -72,6 +73,7 @@ public class HierarchyView {
             lateImage = new Image(new FileInputStream(LATE_IMAGE),20,20,false,false);
             doneImage = new Image(new FileInputStream(DONE_IMAGE),20,20,false,false);
             cancelImage = new Image(new FileInputStream(CANCEL_IMAGE),20,20,false,false);
+            dailyImage = new Image(new FileInputStream(DAILY_IMAGE),20,20,false,false);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -134,6 +136,11 @@ public class HierarchyView {
                     contextMenu.getItems().add(item11);
                     item11.setOnAction(actionEvent -> cancelTask());
                 }
+                CheckMenuItem item12 = new CheckMenuItem("Daily Task");
+                item12.setSelected(((Task)element).isDaily());
+                item12.setOnAction(actionEvent -> setTaskDaily((Task)element));
+                contextMenu.getItems().add(item12);
+
                 contextMenu.getItems().add(new SeparatorMenuItem());
             }
             contextMenu.getItems().add(item0);
@@ -312,5 +319,9 @@ public class HierarchyView {
 
     private void removeElement(){
         System.out.println("Hierarchy View - removeElement");
+    }
+
+    private void setTaskDaily(Task task){
+
     }
 }

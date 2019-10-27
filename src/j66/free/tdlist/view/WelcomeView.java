@@ -112,7 +112,6 @@ public class WelcomeView {
         }
     }
 
-
     private void archiveTodoList(){
         selectedTodoList.setArchived(!selectedTodoList.isArchived());
         setArchivedOrNot();
