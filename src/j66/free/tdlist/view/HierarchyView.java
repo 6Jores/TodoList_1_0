@@ -33,6 +33,10 @@ public class HierarchyView {
     private Image doneImage;
     private Image cancelImage;
     private Image dailyImage;
+    private Image addElementImage;
+    private Image removeElementImage;
+    private Image editElementImage;
+    private Image planTaskImage;
     private ContextMenu contextMenu;
 
     private TreeItem<Element> selectedTreeView;
@@ -51,6 +55,9 @@ public class HierarchyView {
 
     @FXML
     private void initialize(){
+
+        initializeImages();
+
         treeView.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue)
                 -> initializeDescription(newValue.getValue())));
 
@@ -68,12 +75,11 @@ public class HierarchyView {
     public void setMain(Main main) {
         this.main = main;
         initializeDescription(null);
-        initializeImages();
         initializeTreeView(TodoListManager.getTodoList());
     }
 
     private void initializeImages(){
-        try{
+        try {
             projectImage = new Image(new FileInputStream(PROJECT_IMAGE),20,20,false,false);
             subProjectImage = new Image(new FileInputStream( SUB_PROJECT_IMAGE),20,20,false,false);
             planImage = new Image(new FileInputStream(PLAN_IMAGE),20,20,false,false);
@@ -83,6 +89,10 @@ public class HierarchyView {
             cancelImage = new Image(new FileInputStream(CANCEL_IMAGE),20,20,false,false);
             dailyImage = new Image(new FileInputStream(DAILY_IMAGE),20,20,false,false);
 
+            addElementImage = new Image(new FileInputStream(ADD_ELEMENT_IMAGE),15,15,false,false);
+            editElementImage = new Image(new FileInputStream(EDIT_ELEMENT_IMAGE),15,15,false,false);
+            removeElementImage = new Image(new FileInputStream(REMOVE_ELEMENT_IMAGE),15,15,false,false);
+            planTaskImage =  new Image(new FileInputStream(PLAN_TASK_IMAGE),15,15,false,false);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -129,6 +139,7 @@ public class HierarchyView {
         contextMenu = new ContextMenu();
 
         MenuItem item0 = new MenuItem("Add Element");
+        item0.setGraphic(new ImageView(addElementImage));
         item0.setOnAction(actionEvent -> addElement());
 
         if (thereIsASelected){
@@ -138,6 +149,7 @@ public class HierarchyView {
                 if (((Task) selectedElement).getStatus()==StatusTask.PLAN)
                     text = "RePlan Task";
                 MenuItem item1 = new MenuItem(text);
+                item1.setGraphic(new ImageView(planTaskImage));
                 contextMenu.getItems().add(item1);
                 item1.setOnAction(actionEvent -> planTask());
 
@@ -159,9 +171,11 @@ public class HierarchyView {
 
             if (selectedElement.getTypeElement() != TypeElement.TODOLIST){
                 MenuItem item2 = new MenuItem("Edit Element");
+                item2.setGraphic(new ImageView(editElementImage));
                 contextMenu.getItems().add(item2);
                 item2.setOnAction(actionEvent -> editElement());
                 MenuItem item3 = new MenuItem("Remove Element");
+                item3.setGraphic(new ImageView(removeElementImage));
                 contextMenu.getItems().add(item3);
                 item3.setOnAction(actionEvent -> removeElement());
             }

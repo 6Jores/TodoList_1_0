@@ -103,10 +103,11 @@ public class Main extends Application {
 
             mainStage.setScene(scene);
 
-            //Run Start viewcontroller
             controllerMainContentView = loader.getController();
             controllerMainContentView.setMain(this);
             controllerMainContentView.setStage(mainStage);
+
+            controllerMainContentView.endInitialization();
 
         }catch (IOException e){
             e.printStackTrace();
@@ -138,6 +139,10 @@ public class Main extends Application {
 
     public WelcomeView getControllerWelcomeView() {
         return controllerWelcomeView;
+    }
+
+    public MainContentView getControllerMainContentView() {
+        return controllerMainContentView;
     }
 
     public void showHome(){

@@ -2,6 +2,8 @@ package j66.free.tdlist.tools;
 
 import javafx.scene.image.Image;
 
+import java.io.FileInputStream;
+
 abstract public class Constant {
     private static final String curDir = System.getProperty("user.dir") + "/";
 
@@ -9,7 +11,7 @@ abstract public class Constant {
     public static final String TODOLIST_PATH = curDir+"files/TodoLists/";
     public static final String IMAGE_PATH = curDir+"files/images/";
 
-    //Icons
+    //image paths
     public static final String PROJECT_IMAGE = IMAGE_PATH+"project.png";
     public static final String SUB_PROJECT_IMAGE = IMAGE_PATH+"subProject.png";
     public static final String PLAN_IMAGE = IMAGE_PATH+"plan.png";
@@ -18,6 +20,13 @@ abstract public class Constant {
     public static final String DONE_IMAGE = IMAGE_PATH+"done.png";
     public static final String CANCEL_IMAGE = IMAGE_PATH+"cancel.png";
     public static final String DAILY_IMAGE = IMAGE_PATH+"daily.png";
+    public static final String BOTH_VIEW_IMAGE = IMAGE_PATH+"both.png";
+    public static final String HIERARCHY_VIEW_IMAGE = IMAGE_PATH+"hierarchy.png";
+    public static final String TODOLIST_VIEW_IMAGE = IMAGE_PATH+"todoListView.png";
+    public static final String ADD_ELEMENT_IMAGE = IMAGE_PATH+"addElement.png";
+    public static final String EDIT_ELEMENT_IMAGE = IMAGE_PATH+"editElement.png";
+    public static final String REMOVE_ELEMENT_IMAGE = IMAGE_PATH+"removeElement.png";
+    public static final String PLAN_TASK_IMAGE = IMAGE_PATH+"planTask.png";
 
     //Texts
     public static final String APP_NAME = "TodoList";

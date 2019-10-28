@@ -11,6 +11,16 @@
   -fx-background-radius: 10px;
 }
 
+.toolBarButton{
+     -fx-background-color : none;
+     -fx-border-color: #b2b2b1;
+ }
+
+.toolBarButton:hover{
+    -fx-border-color: #f15a23;
+    -fx-background-color : none;
+}
+
 .textField{
     -fx-text-fill : #b2b2b1;
     -fx-background-color: none;
