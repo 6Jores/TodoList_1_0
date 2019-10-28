@@ -1,9 +1,12 @@
 package j66.free.tdlist.tools;
 
+import j66.free.tdlist.model.TypeElement;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ChoiceDialog;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 abstract public class Tool {
 
@@ -33,5 +36,15 @@ abstract public class Tool {
         alert.setContentText(context);
 
         return alert;
+    }
+
+    public static ChoiceDialog<TypeElement> getChoiceDialog(ArrayList<TypeElement> choice, String tile, String headerText){
+        ChoiceDialog<TypeElement> choiceDialog = new ChoiceDialog<TypeElement>();
+        choiceDialog.getItems().addAll(choice);
+
+        choiceDialog.setTitle(tile);
+        choiceDialog.setHeaderText(headerText);
+
+        return choiceDialog;
     }
 }

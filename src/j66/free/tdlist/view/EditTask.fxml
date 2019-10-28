@@ -15,12 +15,11 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="360.0" style="-fx-background-color: #2D3443;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="j66.free.tdlist.view.EditTask">
    <children>
       <VBox layoutX="250.0" layoutY="50.0" prefHeight="400.0" prefWidth="360.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label alignment="CENTER" prefHeight="60.0" prefWidth="400.0" text="New / Edit Task" textFill="#b2b2b1">
+            <Label fx:id="titleLabel" alignment="CENTER" prefHeight="60.0" prefWidth="400.0" text="New / Edit Task" textFill="#b2b2b1">
                <font>
                   <Font size="25.0" />
                </font>

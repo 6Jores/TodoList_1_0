@@ -49,12 +49,12 @@
                   </VBox>
                   <VBox prefHeight="171.0" prefWidth="224.0">
                      <children>
-                        <TextField fx:id="name" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="200.0" styleClass="textField" stylesheets="@style.css">
+                        <TextField fx:id="nameElement" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="200.0" styleClass="textField" stylesheets="@style.css">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </TextField>
-                        <TextArea fx:id="description" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" styleClass="textAera" stylesheets="@style.css" wrapText="true">
+                        <TextArea fx:id="descriptionElement" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" styleClass="textAera" stylesheets="@style.css" wrapText="true">
                            <VBox.margin>
                               <Insets top="15.0" />
                            </VBox.margin>

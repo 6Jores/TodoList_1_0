@@ -16,6 +16,8 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Optional;
 
 import static j66.free.tdlist.tools.Constant.*;
 
@@ -35,6 +37,7 @@ public class HierarchyView {
 
     private TreeItem<Element> selectedTreeView;
     private Element selectedElement;
+    private Element newElement;
     private boolean thereIsASelected;
 
     @FXML
@@ -281,7 +284,7 @@ public class HierarchyView {
         }
     }
 
-    public AnchorPane getAnchorPane() {
+    AnchorPane getAnchorPane() {
         return anchorPane;
     }
 
@@ -296,26 +299,61 @@ public class HierarchyView {
     }
 
     private void addElement(){
-        System.out.println("Hierarchy View - addElement");
+        newElement = null;
+        ArrayList<TypeElement> choice = new ArrayList<>();
+        Optional<TypeElement> option;
+        switch (selectedElement.getTypeElement()){
+            case TODOLIST:
+                choice.add(TypeElement.PROJECT);
+                choice.add(TypeElement.TASK);
+                break;
+            case PROJECT:
+                choice.add(TypeElement.SUBPROJECT);
+                choice.add(TypeElement.TASK);
+                break;
+        }
+        if (choice.size()>0){
+            ChoiceDialog<TypeElement> choiceDialog = Tool.getChoiceDialog(choice,"Select child type.",
+                    "Select a type");
+            choiceDialog.setSelectedItem(TypeElement.TASK);
+            option = choiceDialog.showAndWait();
+            option.ifPresent(this::setNewElement);
+        }else{
+            setNewElement(TypeElement.TASK);
+        }
+        if(newElement != null){
+            if (newElement.getTypeElement()==TypeElement.TASK){
+                main.showEditTask((Task)newElement, ACTION_NEW_ELEMENT);
+            }else {
+                main.showEditElement(newElement, ACTION_NEW_ELEMENT);
+            }
+        }
+
     }
 
     private void editElement(){
         System.out.println("Hierarchy View - editElement");
-        Element element = treeView.getSelectionModel().getSelectedItem().getValue();
-        if (element.getTypeElement()==TypeElement.TASK){
-            main.showEditTask((Task)element,"Edit");
-            selectedTreeView.setGraphic(getImageView((Task)element));
+        if (selectedElement.getTypeElement()==TypeElement.TASK){
+            main.showEditTask((Task)selectedElement,ACTION_EDIT_ELEMENT);
+            selectedTreeView.setGraphic(getImageView((Task)selectedElement));
+        }else{
+            main.showEditElement(selectedElement,ACTION_EDIT_ELEMENT);
         }
     }
 
     private void planTask(){
-        System.out.println("Hierarchy View - PlanTask");
+        editElement();
     }
 
     private void removeElement(){
-        TreeItem<Element> parentSelectedElement = selectedTreeView.getParent();
-        TodoListManager.removeElement(selectedElement);
-        parentSelectedElement.getChildren().remove(selectedTreeView);
+        Alert alert = Tool.getConfirmAlert("Confirm suppression",
+                selectedElement.getTypeElement()+" : "+selectedElement.getName());
+        Optional<ButtonType> option = alert.showAndWait();
+        if (option.get() == ButtonType.OK) {
+            TreeItem<Element> parentSelectedElement = selectedTreeView.getParent();
+            TodoListManager.removeElement(selectedElement);
+            parentSelectedElement.getChildren().remove(selectedTreeView);
+        }
     }
 
     private void setTaskDaily(Task task){
@@ -358,5 +396,13 @@ public class HierarchyView {
             selectedElement = null;
             thereIsASelected = false;
         }
+    }
+
+    private void setNewElement(TypeElement typeElement) {
+        newElement = TodoListManager.getNewElement(typeElement,selectedElement);
+    }
+
+    void updateAdding(){
+        selectedTreeView.getChildren().add(itemViewFactory(newElement));
     }
 }

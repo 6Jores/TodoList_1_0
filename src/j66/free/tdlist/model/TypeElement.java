@@ -9,7 +9,7 @@ public enum TypeElement {
         this.nameElement = nameElement;
     }
 
-    public String getNameElement() {
+    public String toString() {
         return nameElement;
     }
 }

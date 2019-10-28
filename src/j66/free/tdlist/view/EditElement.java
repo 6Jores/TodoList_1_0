@@ -4,6 +4,7 @@ import j66.free.tdlist.Main;
 import j66.free.tdlist.model.Element;
 import j66.free.tdlist.model.TodoList;
 import j66.free.tdlist.model.TodoListManager;
+import j66.free.tdlist.tools.Constant;
 import j66.free.tdlist.tools.FileManager;
 import j66.free.tdlist.tools.Tool;
 import javafx.fxml.FXML;
@@ -18,9 +19,9 @@ public class EditElement {
     @FXML
     Label title;
     @FXML
-    TextField name;
+    TextField nameElement;
     @FXML
-    TextArea description;
+    TextArea descriptionElement;
 
     private Main main;
     private Element element;
@@ -30,12 +31,12 @@ public class EditElement {
 
     @FXML
     private void saveTodoList (TodoList todoList){
-        String _name = name.getText().trim();
+        String _name = nameElement.getText().trim();
         if (!_name.equals("") && !_name.equals(NO_RESULT) && FileManager.itsOkForFile(_name.replace(":","_"))){
-            element.setName(name.getText());
-            element.setDescription(description.getText());
+            element.setName(nameElement.getText());
+            element.setDescription(descriptionElement.getText());
             if (TodoListManager.persistATodoList(todoList)) {
-                if (this.action.equals(ACTION_NEW_TODOLIST)) {
+                if (this.action.equals(ACTION_NEW_ELEMENT)) {
                     TodoListManager.getTodoLists().add(todoList);
                     main.updateWelcomeView();
                 }
@@ -44,7 +45,7 @@ public class EditElement {
             }
             stage.close();
         }else{
-            Tool.showAlert("Form Error","Invalid name, please correct it.");
+            Tool.showAlert("Form Error","Invalid nameElement, please correct it.");
         }
         main.getControllerWelcomeView().initializeDescription(todoList);
     }
@@ -57,19 +58,25 @@ public class EditElement {
     @FXML
     private void saveElement(){
         switch (element.getTypeElement()){
-
             case TODOLIST:
                 saveTodoList((TodoList)element);
                 break;
             case PROJECT:
-                break;
-            case SUBPROJECT:
-                break;
             case TASK:
+            case SUBPROJECT:
+                if (nameElement.getText().trim().equals("")){
+                    Tool.showAlert("Form Error","Invalid nameElement, please correct it.");
+                }else {
+                    element.setName(nameElement.getText());
+                    element.setDescription(descriptionElement.getText());
+                    stage.close();
+                }
+                if (action == Constant.ACTION_NEW_ELEMENT){
+                    main.getControllerHierarchyView().updateAdding();
+                }
                 break;
         }
     }
-
 
     public void setMain(Main main){
         this.main = main;
@@ -78,13 +85,13 @@ public class EditElement {
 
     public void setElement(Element element){
         this.element = element;
-        this.name.setText(element.getName());
-        this.description.setText(element.getDescription());
+        this.nameElement.setText(element.getName());
+        this.descriptionElement.setText(element.getDescription());
     }
 
     public void setAction(String action) {
         this.action = action;
-        this.title.setText(action+" "+ APP_NAME);
+        this.title.setText(action+" "+ element.getTypeElement());
     }
 
     public void setStage(Stage stage){

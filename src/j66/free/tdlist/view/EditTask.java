@@ -4,6 +4,8 @@ import j66.free.tdlist.Main;
 import j66.free.tdlist.model.PriorityTask;
 import j66.free.tdlist.model.StatusTask;
 import j66.free.tdlist.model.Task;
+import j66.free.tdlist.tools.Constant;
+import j66.free.tdlist.tools.Tool;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -36,6 +38,8 @@ public class EditTask {
     CheckBox archivedCheckBox;
     @FXML
     CheckBox planCheckBox;
+    @FXML
+    Label titleLabel;
 
     @FXML
     private void cancel(){
@@ -43,26 +47,34 @@ public class EditTask {
     }
     @FXML
     private void saveTask(){
-        task.setName(nameTask.getText());
-        task.setDescription(descriptionTask.getText());
+        if (nameTask.getText().trim().equals("")){
+            Tool.showAlert("Form Error","Invalid nameElement, please correct it.");
+        }else {
+            task.setName(nameTask.getText());
+            task.setDescription(descriptionTask.getText());
 
-        if (planCheckBox.isSelected()){
-            LocalDate date = todoDatePicker.getValue();
-            task.setTodoDate(date);
-            if(date.isBefore(LocalDate.now())){
-                task.setStatus(LATE);
-            }else {
-                task.setStatus(PLAN);
+            if (planCheckBox.isSelected()) {
+                LocalDate date = todoDatePicker.getValue();
+                task.setTodoDate(date);
+                if (date.isBefore(LocalDate.now())) {
+                    task.setStatus(LATE);
+                } else {
+                    task.setStatus(PLAN);
+                }
             }
-        }
 
-        task.setPriority(priorityTaskComboBox.getValue());
-        task.setDaily(dailyCheckBox.isSelected());
-        if (archivedCheckBox.isSelected()){
-            task.setStatus(CANCEL);
-        }
+            task.setPriority(priorityTaskComboBox.getValue());
+            task.setDaily(dailyCheckBox.isSelected());
+            if (archivedCheckBox.isSelected()) {
+                task.setStatus(CANCEL);
+            }
 
-        stage.close();
+            if (action == Constant.ACTION_NEW_ELEMENT){
+                main.getControllerHierarchyView().updateAdding();
+            }
+
+            stage.close();
+        }
 
     }
     @FXML
@@ -90,6 +102,8 @@ public class EditTask {
     public void setMain(Main main) {
         this.main = main;
 
+        titleLabel.setText(action + " Task");
+
         nameTask.setText(task.getName());
         descriptionTask.setText(task.getDescription());
         dailyCheckBox.setSelected(task.isDaily());
@@ -98,8 +112,6 @@ public class EditTask {
         updatePickerEnable();
 
         priorityTaskComboBox.setValue(task.getPriority());
-
-
     }
 
     @FXML

@@ -147,7 +147,8 @@ abstract public class TodoListManager {
         boolean rtn ;
         rtn = FileManager.removeFile(TODOLIST_PATH,todoList.getNameFile());
         if (rtn){
-            getTodoLists().remove(todoList);
+            todoLists.removeAll(todoLists);
+            setTodoLists();
         }
         return rtn;
     }
@@ -180,6 +181,31 @@ abstract public class TodoListManager {
 
         if (save)
             save=false;
+    }
+
+    public static Element getNewElement(TypeElement typeElement, Element elementParent){
+        Element element=null;
+        switch (typeElement){
+            case PROJECT:
+                element = new Project("New "+typeElement.toString(),"New description",todoList);
+                todoList.getListProject().add((Project) element);
+                break;
+            case SUBPROJECT:
+                element = new SubProject("New "+typeElement.toString(),"New description",elementParent);
+                ((Project)elementParent).getListSubProject().add((SubProject) element);
+                break;
+            case TASK:
+                element = new Task("New "+typeElement.toString(),"New description",elementParent);
+                if (elementParent.getTypeElement() == TypeElement.TODOLIST){
+                    todoList.getListTask().add((Task)element);
+                }else if(elementParent.getTypeElement() == TypeElement.PROJECT){
+                    ((Project)elementParent).getListTask().add((Task)element);
+                }else {
+                    ((SubProject)elementParent).getListTask().add((Task)element);
+                }
+                break;
+        }
+        return element;
     }
 
 }

@@ -15,6 +15,8 @@ import javafx.event.EventHandler;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
+import java.util.Optional;
+
 import static j66.free.tdlist.tools.Tool.showAlert;
 
 
@@ -54,7 +56,8 @@ public class WelcomeView {
 
     @FXML
     private void initialize(){
-        fileListView.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> initializeDescription(newValue)));
+        fileListView.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue)
+                -> initializeDescription(newValue)));
 
         EventHandler<MouseEvent> eventHandler = e -> {
             if (contextMenu!=null && contextMenu.isShowing())
@@ -120,7 +123,7 @@ public class WelcomeView {
 
     private void newTodoList(){
         search.setText("");
-        main.showEditElement(TodoListManager.getTodoList(true), Constant.ACTION_NEW_TODOLIST);
+        main.showEditElement(TodoListManager.getTodoList(true), Constant.ACTION_NEW_ELEMENT);
     }
 
     private void copyTodoList(){
@@ -132,16 +135,20 @@ public class WelcomeView {
     }
 
     private void deleteTodoList(){
-        if (!TodoListManager.deleteTodoList(selectedTodoList))
-            showAlert("Delete Error","And error had occurred during the delete.");
-        else {
-            fileListView.getItems().clear();
-            fileListView.getItems().addAll(TodoListManager.getTodoLists(withArchivedOrNot.isSelected()));
+        Alert alert = Tool.getConfirmAlert("Confirm suppression","TodoList : "+selectedTodoList.getName());
+        Optional<ButtonType> option = alert.showAndWait();
+        if (option.get() == ButtonType.OK) {
+            if (!TodoListManager.deleteTodoList(selectedTodoList))
+                showAlert("Delete Error","And error had occurred during the delete.");
+            else {
+                search.setText("-");
+                search.setText("");
+            }
         }
     }
 
     private void editTodoList(){
-        main.showEditElement(selectedTodoList, Constant.ACTION_EDIT_TODOLIST);
+        main.showEditElement(selectedTodoList, Constant.ACTION_EDIT_ELEMENT);
     }
 
     private void runSearch(String key){
@@ -159,7 +166,6 @@ public class WelcomeView {
     public void updateFileListView(){
         fileListView.getItems().clear();
         fileListView.getItems().addAll(TodoListManager.getTodoLists(withArchivedOrNot.isSelected()));
-
     }
 
     private boolean thereIsASelected(){

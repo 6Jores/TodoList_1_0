@@ -1,7 +1,7 @@
 package j66.free.tdlist.model;
 
 public enum PriorityTask {
-    VERY_LOW("Very low"),LOW("Low"),NORMAL("Normal"),HIGH("High"),VERY_HIGH("Very high");
+    VERY_HIGH("Very high"),HIGH("High"),NORMAL("Normal"),LOW("Low"),VERY_LOW("Very low");
 
     String name;
 
