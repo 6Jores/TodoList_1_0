@@ -33,6 +33,10 @@ public class HierarchyView {
     private Image dailyImage;
     private ContextMenu contextMenu;
 
+    private TreeItem<Element> selectedTreeView;
+    private Element selectedElement;
+    private boolean thereIsASelected;
+
     @FXML
     Label elementName;
     @FXML
@@ -44,16 +48,17 @@ public class HierarchyView {
 
     @FXML
     private void initialize(){
-        treeView.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> initializeDescription(newValue.getValue())));
+        treeView.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue)
+                -> initializeDescription(newValue.getValue())));
 
         EventHandler<MouseEvent> eventHandler = e -> {
+            setSelectedElement();
             if (contextMenu!=null && contextMenu.isShowing())
                 contextMenu.hide();
             if (e.getButton() == MouseButton.SECONDARY){
                 showContextMenu(e);
             }
         };
-
         treeView.addEventFilter(MouseEvent.MOUSE_CLICKED,eventHandler);
     }
 
@@ -94,58 +99,62 @@ public class HierarchyView {
                 TreeItem<Element> rootSubProject = itemViewFactory(subProject);
                 rootProject.getChildren().add(rootSubProject);
                 for(Task task:subProject.getListTask()){
-                    //
+                    //task
+                    TodoListManager.updateTask(task);
                     TreeItem<Element> itemTask = itemViewFactory(task);
                     rootSubProject.getChildren().add(itemTask);
                 }
             }
-
             //
             for (Task task : project.getListTask()){
-                //
+                //task
+                TodoListManager.updateTask(task);
                 TreeItem<Element> itemTask = itemViewFactory(task);
                 rootProject.getChildren().add(itemTask);
             }
-
         }
         for (Task task : todoList.getListTask()){
-            //
+            //task
+            TodoListManager.updateTask(task);
             TreeItem<Element> itemTask = itemViewFactory(task);
             rootElement.getChildren().add(itemTask);
         }
-
         treeView.setRoot(rootElement);
-
     }
 
     private void showContextMenu(MouseEvent event){
         contextMenu = new ContextMenu();
-        boolean thereIsASelected;
-        thereIsASelected = treeView.getSelectionModel().getSelectedItem() != null;
+
         MenuItem item0 = new MenuItem("Add Element");
         item0.setOnAction(actionEvent -> addElement());
 
         if (thereIsASelected){
-            Element element = treeView.getSelectionModel().getSelectedItem().getValue();
-            if (element.getTypeElement() == TypeElement.TASK){
-                MenuItem item1 = new MenuItem("Plan Task");
+
+            if (selectedElement.getTypeElement() == TypeElement.TASK){
+                String text="Plan Task";
+                if (((Task) selectedElement).getStatus()==StatusTask.PLAN)
+                    text = "RePlan Task";
+                MenuItem item1 = new MenuItem(text);
                 contextMenu.getItems().add(item1);
                 item1.setOnAction(actionEvent -> planTask());
-                if (((Task)element).getStatus() != StatusTask.CANCEL){
+
+                if (((Task) selectedElement).getStatus() != StatusTask.CANCEL){
                     MenuItem item11 = new MenuItem("Cancel Task");
                     contextMenu.getItems().add(item11);
                     item11.setOnAction(actionEvent -> cancelTask());
                 }
                 CheckMenuItem item12 = new CheckMenuItem("Daily Task");
-                item12.setSelected(((Task)element).isDaily());
-                item12.setOnAction(actionEvent -> setTaskDaily((Task)element));
+                item12.setSelected(((Task) selectedElement).isDaily());
+                item12.setOnAction(actionEvent -> setTaskDaily((Task) selectedElement));
                 contextMenu.getItems().add(item12);
 
                 contextMenu.getItems().add(new SeparatorMenuItem());
+            }else{
+                contextMenu.getItems().add(item0);
             }
-            contextMenu.getItems().add(item0);
 
-            if (treeView.getSelectionModel().getSelectedItem().getValue().getTypeElement() != TypeElement.TODOLIST){
+
+            if (selectedElement.getTypeElement() != TypeElement.TODOLIST){
                 MenuItem item2 = new MenuItem("Edit Element");
                 contextMenu.getItems().add(item2);
                 item2.setOnAction(actionEvent -> editElement());
@@ -156,7 +165,7 @@ public class HierarchyView {
 
             Menu info = new Menu("Info");
 
-            switch (element.getTypeElement()){
+            switch (selectedElement.getTypeElement()){
                 case TODOLIST:
                     break;
                 case PROJECT:
@@ -172,10 +181,10 @@ public class HierarchyView {
                 case TASK:
 
                     Menu menuPlanDate = new Menu("Plan Date");
-                    MenuItem itemPlanDate = new MenuItem(Tool.formatDate(((Task)element).getTodoDate()));
+                    MenuItem itemPlanDate = new MenuItem(Tool.formatDate(((Task) selectedElement).getTodoDate()));
                     menuPlanDate.getItems().add(itemPlanDate);
 
-                    switch (((Task)element).getStatus()){
+                    switch (((Task) selectedElement).getStatus()){
                         case NO_PLAN:
                             MenuItem itemNoPlanTask = new MenuItem("Task not Plan");
                             itemNoPlanTask.setGraphic(new ImageView(noPlanImage));
@@ -193,7 +202,7 @@ public class HierarchyView {
                             itemDoneTask.setGraphic(new ImageView(doneImage));
 
                             Menu menuDoneDate = new Menu("Done Date");
-                            MenuItem itemDoneDate = new MenuItem(Tool.formatDate(((Task)element).getDoneDate()));
+                            MenuItem itemDoneDate = new MenuItem(Tool.formatDate(((Task) selectedElement).getDoneDate()));
                             menuDoneDate.getItems().add(itemDoneDate);
 
                             info.getItems().add(itemDoneTask);
@@ -214,7 +223,7 @@ public class HierarchyView {
                     }
                     break;
             }
-            if (element.getTypeElement() != TypeElement.TODOLIST){
+            if (selectedElement.getTypeElement() != TypeElement.TODOLIST){
                 contextMenu.getItems().add(new SeparatorMenuItem());
                 contextMenu.getItems().add(info);
             }
@@ -229,42 +238,21 @@ public class HierarchyView {
         TreeItem<Element> item = new TreeItem<>();
         switch (element.getTypeElement()){
             case TODOLIST:
-                item = new TreeItem<>((TodoList)element);
+                item = new TreeItem<>(element);
                 break;
             case PROJECT:
-                item = new TreeItem<>((Project)element);
+                item = new TreeItem<>(element);
                 item.setGraphic(new ImageView(projectImage));
                 break;
             case SUBPROJECT:
-                item = new TreeItem<>((SubProject)element);
+                item = new TreeItem<>(element);
                 item.setGraphic(new ImageView(subProjectImage));
                 break;
             case TASK:
-                item = new TreeItem<>((Task)element);
-                if (((Task)element).isDaily()){
-                    item.setGraphic(new ImageView(dailyImage));
-                }else {
-                    switch (((Task) element).getStatus()) {
-                        case NO_PLAN:
-                            item.setGraphic(new ImageView(noPlanImage));
-                            break;
-                        case PLAN:
-                            item.setGraphic(new ImageView(planImage));
-                            break;
-                        case DONE:
-                            item.setGraphic(new ImageView(doneImage));
-                            break;
-                        case LATE:
-                            item.setGraphic(new ImageView(lateImage));
-                            break;
-                        case CANCEL:
-                            item.setGraphic(new ImageView(cancelImage));
-                            break;
-                    }
-                }
+                item = new TreeItem<>(element);
+                item.setGraphic(getImageView((Task)element));
                 break;
         }
-
         return item;
     }
 
@@ -301,16 +289,10 @@ public class HierarchyView {
         this.anchorPane = anchorPane;
     }
 
-    private void planTask(){
-        System.out.println("Hierarchy View - PlanTask");
-    }
-
     private void cancelTask(){
-        System.out.println("Hierarchy View - cancelTask");
-        TreeItem<Element> element = treeView.getSelectionModel().getSelectedItem();
-        Task task = (Task)element.getValue();
+        Task task = (Task) selectedElement;
         task.setStatus(StatusTask.CANCEL);
-        element.setGraphic(new ImageView(cancelImage));
+        selectedTreeView.setGraphic(new ImageView(cancelImage));
     }
 
     private void addElement(){
@@ -319,13 +301,62 @@ public class HierarchyView {
 
     private void editElement(){
         System.out.println("Hierarchy View - editElement");
+        Element element = treeView.getSelectionModel().getSelectedItem().getValue();
+        if (element.getTypeElement()==TypeElement.TASK){
+            main.showEditTask((Task)element,"Edit");
+            selectedTreeView.setGraphic(getImageView((Task)element));
+        }
+    }
+
+    private void planTask(){
+        System.out.println("Hierarchy View - PlanTask");
     }
 
     private void removeElement(){
-        System.out.println("Hierarchy View - removeElement");
+        TreeItem<Element> parentSelectedElement = selectedTreeView.getParent();
+        TodoListManager.removeElement(selectedElement);
+        parentSelectedElement.getChildren().remove(selectedTreeView);
     }
 
     private void setTaskDaily(Task task){
+        task.setDaily(!task.isDaily());
+        treeView.getSelectionModel().getSelectedItem().setGraphic(getImageView(task));
+    }
 
+    private ImageView getImageView(Task task){
+        ImageView imageView=null;
+        if (task.isDaily() && task.getStatus()!=StatusTask.CANCEL){
+            imageView = new ImageView(dailyImage);
+        }else {
+            switch (task.getStatus()) {
+                case NO_PLAN:
+                    imageView = new ImageView(noPlanImage);
+                    break;
+                case PLAN:
+                    imageView = new ImageView(planImage);
+                    break;
+                case DONE:
+                    imageView = new ImageView(doneImage);
+                    break;
+                case LATE:
+                    imageView = new ImageView(lateImage);
+                    break;
+                case CANCEL:
+                    imageView = new ImageView(cancelImage);
+                    break;
+            }
+        }
+        return imageView;
+    }
+
+    private void setSelectedElement(){
+        selectedTreeView = treeView.getSelectionModel().getSelectedItem();
+        if (selectedTreeView != null){
+            selectedElement = selectedTreeView.getValue();
+            thereIsASelected = true;
+        }else {
+            selectedElement = null;
+            thereIsASelected = false;
+        }
     }
 }

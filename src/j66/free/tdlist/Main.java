@@ -1,12 +1,10 @@
 package j66.free.tdlist;
 
 import j66.free.tdlist.model.Element;
+import j66.free.tdlist.model.Task;
 import j66.free.tdlist.model.TodoList;
 import j66.free.tdlist.model.TodoListManager;
-import j66.free.tdlist.view.EditElement;
-import j66.free.tdlist.view.HierarchyView;
-import j66.free.tdlist.view.MainContentView;
-import j66.free.tdlist.view.WelcomeView;
+import j66.free.tdlist.view.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -38,7 +36,7 @@ public class Main extends Application {
         this.initialization();
     }
 
-    public void initialization(){
+    private void initialization(){
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("view/WelcomeView.fxml"));
 
@@ -50,7 +48,6 @@ public class Main extends Application {
 
             mainStage.setScene(scene);
 
-            //Run Start viewController
             controllerWelcomeView = loader.getController();
             controllerWelcomeView.setMain(this);
             controllerWelcomeView.setScene(scene);
@@ -116,7 +113,7 @@ public class Main extends Application {
         }
     }
 
-    public void initHierarchyView(TodoList todoList){
+    public void initHierarchyView(){
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("view/HierarchyView.fxml"));
@@ -145,5 +142,36 @@ public class Main extends Application {
 
     public void showHome(){
         mainStage.setScene(controllerWelcomeView.getScene());
+    }
+
+    public void showEditTask(Task task, String action){
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource("view/EditTask.fxml"));
+
+        try{
+            AnchorPane mainContent = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle(action+" Task");
+            stage.initModality(Modality.WINDOW_MODAL);
+
+            stage.initOwner(mainStage);
+            Scene scene = new Scene(mainContent);
+            stage.setScene(scene);
+
+            EditTask controller = loader.getController();
+            controller.setTask(task);
+            controller.setAction(action);
+            controller.setStage(stage);
+
+            controller.setMain(this);
+
+            stage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }

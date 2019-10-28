@@ -1,15 +1,15 @@
 package j66.free.tdlist.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class Task extends Element implements Serializable {
 
     private StatusTask status;
     private boolean daily;
     private PriorityTask priority;
-    private LocalDateTime todoDate;
-    private LocalDateTime doneDate;
+    private LocalDate todoDate;
+    private LocalDate doneDate;
 
 
     public Task(String name, String description) {
@@ -35,20 +35,20 @@ public class Task extends Element implements Serializable {
     public void setStatus(StatusTask status) {
         this.status = status;
         if (status==StatusTask.DONE){
-            doneDate = LocalDateTime.now();
+            doneDate = LocalDate.now();
         }
         autoUpdate();
     }
 
-    public LocalDateTime getTodoDate() {
+    public LocalDate getTodoDate() {
         return todoDate;
     }
 
-    public LocalDateTime getDoneDate() {
+    public LocalDate getDoneDate() {
         return doneDate;
     }
 
-    public void setTodoDate(LocalDateTime todoDate) {
+    public void setTodoDate(LocalDate todoDate) {
         this.todoDate = todoDate;
         autoUpdate();
     }

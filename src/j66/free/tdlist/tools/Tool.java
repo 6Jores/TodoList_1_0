@@ -2,6 +2,7 @@ package j66.free.tdlist.tools;
 
 import javafx.scene.control.Alert;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 abstract public class Tool {
@@ -10,6 +11,12 @@ abstract public class Tool {
         if(l == null)
             l=LocalDateTime.now();
         return l.getYear()+"-"+l.getMonthValue()+"-"+l.getDayOfMonth()+" "+l.getHour()+":"+l.getMinute()+":"+l.getSecond();
+    }
+
+    public static String formatDate(LocalDate l){
+        if(l == null)
+            l= LocalDate.now();
+        return l.getYear()+"-"+l.getMonthValue()+"-"+l.getDayOfMonth();
     }
 
     public static void showAlert(String title, String message){

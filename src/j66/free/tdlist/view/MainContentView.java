@@ -38,7 +38,7 @@ public class MainContentView {
 
     public void setMain(Main main) {
         this.main = main;
-        this.main.initHierarchyView(TodoListManager.getTodoList());
+        this.main.initHierarchyView();
         hierarchyPane.getChildren().add(this.main.getControllerHierarchyView().getAnchorPane());
     }
 

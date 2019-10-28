@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 
 import java.io.File;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import static j66.free.tdlist.tools.Constant.*;
@@ -149,6 +150,36 @@ abstract public class TodoListManager {
             getTodoLists().remove(todoList);
         }
         return rtn;
+    }
+
+    public static void updateTask(Task task){
+        if (task.getStatus() == StatusTask.PLAN){
+            if(task.getTodoDate().isBefore(LocalDate.now())){
+                task.setStatus(StatusTask.LATE);
+            }
+        }
+    }
+
+    public static void removeElement(Element element){
+        Element elementParent = element.getParent();
+        if (elementParent.getTypeElement() == TypeElement.TODOLIST){
+            if (element.getTypeElement()==TypeElement.PROJECT){
+                ((TodoList)elementParent).getListProject().remove(element);
+            }else if (element.getTypeElement()==TypeElement.TASK){
+                ((TodoList)elementParent).getListTask().remove(element);
+            }
+        }else if (elementParent.getTypeElement() == TypeElement.PROJECT){
+            if (element.getTypeElement()==TypeElement.SUBPROJECT){
+                ((Project)elementParent).getListSubProject().remove(element);
+            }else if (element.getTypeElement()==TypeElement.TASK){
+                ((Project)elementParent).getListTask().remove(element);
+            }
+        }else if (elementParent.getTypeElement() == TypeElement.SUBPROJECT){
+            ((SubProject)elementParent).getListTask().remove(element);
+        }
+
+        if (save)
+            save=false;
     }
 
 }
