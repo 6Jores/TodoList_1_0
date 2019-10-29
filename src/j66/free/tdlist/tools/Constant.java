@@ -1,9 +1,5 @@
 package j66.free.tdlist.tools;
 
-import javafx.scene.image.Image;
-
-import java.io.FileInputStream;
-
 abstract public class Constant {
     private static final String curDir = System.getProperty("user.dir") + "/";
 
