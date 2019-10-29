@@ -1,6 +1,7 @@
 package j66.free.tdlist.view;
 
 import j66.free.tdlist.Main;
+import j66.free.tdlist.model.Element;
 import j66.free.tdlist.model.PriorityTask;
 import j66.free.tdlist.model.StatusTask;
 import j66.free.tdlist.model.Task;
@@ -117,6 +118,9 @@ public class EditTask {
     @FXML
     private void updatePickerEnable(){
         todoDatePicker.setDisable(!planCheckBox.isSelected());
+        if(planCheckBox.isSelected() && task.getStatus()== CANCEL){
+            archivedCheckBox.setSelected(false);
+        }
     }
 
 }

@@ -19,7 +19,9 @@ abstract public class Constant {
     public static final String BOTH_VIEW_IMAGE = IMAGE_PATH+"both.png";
     public static final String HIERARCHY_VIEW_IMAGE = IMAGE_PATH+"hierarchy.png";
     public static final String TODOLIST_VIEW_IMAGE = IMAGE_PATH+"todoListView.png";
+
     public static final String ADD_ELEMENT_IMAGE = IMAGE_PATH+"addElement.png";
+
     public static final String EDIT_ELEMENT_IMAGE = IMAGE_PATH+"editElement.png";
     public static final String REMOVE_ELEMENT_IMAGE = IMAGE_PATH+"removeElement.png";
     public static final String PLAN_TASK_IMAGE = IMAGE_PATH+"planTask.png";

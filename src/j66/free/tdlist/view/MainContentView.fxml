@@ -63,7 +63,7 @@
                   </MenuBar>
                   <ToolBar maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="500.0" style="-fx-background-color: none; -fx-border-color: #b2b2b1;">
                     <items>
-                      <Button fx:id="addButton" mnemonicParsing="false" onAction="#addElement" prefHeight="27.0" prefWidth="27.0" styleClass="toolBarButton" stylesheets="@style.css" />
+                      <Button fx:id="addButton" mnemonicParsing="false" onAction="#addElement" prefHeight="27.0" prefWidth="27.0" style="-fx-background-image: 'addElement.png';" styleClass="toolBarButton" stylesheets="@style.css" />
                         <Separator orientation="VERTICAL" prefHeight="200.0" />
                         <Button fx:id="planButton" mnemonicParsing="false" onAction="#planTask" prefHeight="27.0" prefWidth="27.0" styleClass="toolBarButton" stylesheets="@style.css" />
                         <Button fx:id="editButton" mnemonicParsing="false" onAction="#editElement" prefHeight="27.0" prefWidth="27.0" styleClass="toolBarButton" stylesheets="@style.css" />

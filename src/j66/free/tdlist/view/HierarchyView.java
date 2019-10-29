@@ -89,10 +89,10 @@ public class HierarchyView {
             cancelImage = new Image(new FileInputStream(CANCEL_IMAGE),20,20,false,false);
             dailyImage = new Image(new FileInputStream(DAILY_IMAGE),20,20,false,false);
 
-            addElementImage = new Image(new FileInputStream(ADD_ELEMENT_IMAGE),15,15,false,false);
-            editElementImage = new Image(new FileInputStream(EDIT_ELEMENT_IMAGE),15,15,false,false);
-            removeElementImage = new Image(new FileInputStream(REMOVE_ELEMENT_IMAGE),15,15,false,false);
-            planTaskImage =  new Image(new FileInputStream(PLAN_TASK_IMAGE),15,15,false,false);
+            addElementImage = new Image(new FileInputStream(ADD_ELEMENT_IMAGE),20,20,false,false);
+            editElementImage = new Image(new FileInputStream(EDIT_ELEMENT_IMAGE),20,20,false,false);
+            removeElementImage = new Image(new FileInputStream(REMOVE_ELEMENT_IMAGE),20,20,false,false);
+            planTaskImage =  new Image(new FileInputStream(PLAN_TASK_IMAGE),20,20,false,false);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -312,7 +312,7 @@ public class HierarchyView {
         selectedTreeView.setGraphic(new ImageView(cancelImage));
     }
 
-    private void addElement(){
+    void addElement(){
         newElement = null;
         ArrayList<TypeElement> choice = new ArrayList<>();
         Optional<TypeElement> option;
@@ -345,7 +345,7 @@ public class HierarchyView {
 
     }
 
-    private void editElement(){
+    void editElement(){
         System.out.println("Hierarchy View - editElement");
         if (selectedElement.getTypeElement()==TypeElement.TASK){
             main.showEditTask((Task)selectedElement,ACTION_EDIT_ELEMENT);
@@ -355,11 +355,11 @@ public class HierarchyView {
         }
     }
 
-    private void planTask(){
+    void planTask(){
         editElement();
     }
 
-    private void removeElement(){
+    void removeElement(){
         Alert alert = Tool.getConfirmAlert("Confirm suppression",
                 selectedElement.getTypeElement()+" : "+selectedElement.getName());
         Optional<ButtonType> option = alert.showAndWait();
@@ -406,6 +406,7 @@ public class HierarchyView {
         if (selectedTreeView != null){
             selectedElement = selectedTreeView.getValue();
             thereIsASelected = true;
+            main.getControllerMainContentView().updateToolBarElement(selectedElement);
         }else {
             selectedElement = null;
             thereIsASelected = false;

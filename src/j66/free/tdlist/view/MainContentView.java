@@ -1,7 +1,9 @@
 package j66.free.tdlist.view;
 
 import j66.free.tdlist.Main;
+import j66.free.tdlist.model.Element;
 import j66.free.tdlist.model.TodoListManager;
+import j66.free.tdlist.tools.Constant;
 import j66.free.tdlist.tools.Tool;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -17,20 +19,11 @@ import java.io.FileNotFoundException;
 import java.util.Optional;
 
 import static j66.free.tdlist.tools.Constant.*;
-import static j66.free.tdlist.tools.Constant.DAILY_IMAGE;
 
 public class MainContentView {
     private Main main;
     private Stage stage;
 
-    private Image _projectImage;
-    private Image _subProjectImage;
-    private Image _planImage;
-    private Image _noPlanImage;
-    private Image _lateImage;
-    private Image _doneImage;
-    private Image _cancelImage;
-    private Image _dailyImage;
     private Image _bothViewImage;
     private Image _hierarchyViewImage;
     private Image _todoListViewImage;
@@ -75,22 +68,13 @@ public class MainContentView {
 
     private void initializeImages(){
         try{
-            _projectImage = new Image(new FileInputStream(PROJECT_IMAGE),20,20,false,false);
-            _subProjectImage = new Image(new FileInputStream( SUB_PROJECT_IMAGE),20,20,false,false);
-            _planImage = new Image(new FileInputStream(PLAN_IMAGE),20,20,false,false);
-            _noPlanImage = new Image(new FileInputStream(NO_PLAN_IMAGE),20,20,false,false);
-            _lateImage = new Image(new FileInputStream(LATE_IMAGE),20,20,false,false);
-            _doneImage = new Image(new FileInputStream(DONE_IMAGE),20,20,false,false);
-            _cancelImage = new Image(new FileInputStream(CANCEL_IMAGE),20,20,false,false);
-            _dailyImage = new Image(new FileInputStream(DAILY_IMAGE),20,20,false,false);
-
-            _bothViewImage = new Image(new FileInputStream(BOTH_VIEW_IMAGE),15,15,false,false);
-            _hierarchyViewImage = new Image(new FileInputStream(HIERARCHY_VIEW_IMAGE),15,15,false,false);
-            _todoListViewImage = new Image(new FileInputStream(TODOLIST_VIEW_IMAGE),15,15,false,false);
-            _addElementImage = new Image(new FileInputStream(ADD_ELEMENT_IMAGE),15,15,false,false);
-            _editElementImage = new Image(new FileInputStream(EDIT_ELEMENT_IMAGE),15,15,false,false);
-            _removeElementImage = new Image(new FileInputStream(REMOVE_ELEMENT_IMAGE),15,15,false,false);
-            _planTaskImage =  new Image(new FileInputStream(PLAN_TASK_IMAGE),15,15,false,false);
+            _bothViewImage = new Image(new FileInputStream(BOTH_VIEW_IMAGE),10,10,false,false);
+            _hierarchyViewImage = new Image(new FileInputStream(HIERARCHY_VIEW_IMAGE),10,10,false,false);
+            _todoListViewImage = new Image(new FileInputStream(TODOLIST_VIEW_IMAGE),10,10,false,false);
+            _addElementImage = new Image(new FileInputStream(ADD_ELEMENT_IMAGE),10,10,false,false);
+            _editElementImage = new Image(new FileInputStream(EDIT_ELEMENT_IMAGE),10,10,false,false);
+            _removeElementImage = new Image(new FileInputStream(REMOVE_ELEMENT_IMAGE),10,10,false,false);
+            _planTaskImage =  new Image(new FileInputStream(PLAN_TASK_IMAGE),10,10,false,false);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -99,7 +83,7 @@ public class MainContentView {
     public void setMain(Main main) {
         this.main = main;
         initializeImages();
-        initToolBox();
+        initToolBar();
     }
 
     public void endInitialization(){
@@ -115,12 +99,13 @@ public class MainContentView {
         menuItemSave.setDisable(TodoListManager.isSave());
     }
 
-    private void initToolBox(){
+    private void initToolBar(){
         addButton.setGraphic(new ImageView(_addElementImage));
         addButton.setTooltip(new Tooltip("Add Element"));
+        addButton.setDisable(true);
 
         planButton.setGraphic(new ImageView(_planTaskImage));
-        addButton.setTooltip(new Tooltip("Plan Task"));
+        planButton.setTooltip(new Tooltip("Plan Task"));
         planButton.setDisable(true);
         editButton.setGraphic(new ImageView(_editElementImage));
         editButton.setTooltip(new Tooltip("Edit Element"));
@@ -136,6 +121,31 @@ public class MainContentView {
         bothButton.setDisable(true);
         listButton.setGraphic(new ImageView(_todoListViewImage));
         listButton.setTooltip(new Tooltip("Just TodoList View"));
+    }
+
+    void updateToolBarElement(Element selectedElement){
+        switch (selectedElement.getTypeElement()){
+
+            case TODOLIST:
+                addButton.setDisable(false);
+                planButton.setDisable(true);
+                editButton.setDisable(true);
+                removeButton.setDisable(true);
+                break;
+            case PROJECT:
+            case SUBPROJECT:
+                addButton.setDisable(false);
+                planButton.setDisable(true);
+                editButton.setDisable(false);
+                removeButton.setDisable(false);
+                break;
+            case TASK:
+                addButton.setDisable(true);
+                planButton.setDisable(false);
+                editButton.setDisable(false);
+                removeButton.setDisable(false);
+                break;
+        }
     }
 
     @FXML
@@ -170,22 +180,22 @@ public class MainContentView {
 
     @FXML
     private void addElement(){
-
+        main.getControllerHierarchyView().addElement();
     }
 
     @FXML
     private void planTask(){
-
+        main.getControllerHierarchyView().planTask();
     }
 
     @FXML
     private void editElement(){
-
+        main.getControllerHierarchyView().editElement();
     }
 
     @FXML
     private void removeElement(){
-
+        main.getControllerHierarchyView().removeElement();
     }
 
     @FXML
