@@ -8,11 +8,15 @@ import j66.free.tdlist.view.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.TreeItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 import static j66.free.tdlist.tools.Constant.*;
 
@@ -23,7 +27,7 @@ public class Main extends Application {
     private WelcomeView controllerWelcomeView;
     private HierarchyView controllerHierarchyView;
     private TodoListView controllerTodoListView;
-
+    private Map<Task, TreeItem<Element>> register = new HashMap<>();
 
     public static void main(String[] args) {
         launch(args);
@@ -133,7 +137,7 @@ public class Main extends Application {
         }
     }
 
-    public void initTodoListView(){
+    public void initTodoListView(LocalDate date){
         FXMLLoader loader =  new FXMLLoader();
         loader.setLocation(Main.class.getResource("view/TodoListView.fxml"));
 
@@ -143,12 +147,38 @@ public class Main extends Application {
             controllerTodoListView = loader.getController();
 
             controllerTodoListView.setAnchorPane(mainContent);
+            controllerTodoListView.setDate(date);
             controllerTodoListView.setMain(this);
+
+            controllerTodoListView.initializeTodoList();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+    }
+
+    public ElementView getAnElementView(Task task){
+        ElementView elementView = new ElementView();
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource("view/ElementView.fxml"));
+
+        try{
+            AnchorPane mainContent = loader.load();
+
+            elementView = loader.getController();
+
+            elementView.setMain(this);
+            elementView.setAnchorPane(mainContent);
+            elementView.setTask(task);
+            elementView.initElementView();
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+        return elementView;
     }
 
     public HierarchyView getControllerHierarchyView() {
@@ -200,5 +230,13 @@ public class Main extends Application {
             e.printStackTrace();
         }
 
+    }
+
+    public void updateRegister(Task task, TreeItem<Element> treeItem){
+        register.put(task,treeItem);
+    }
+
+    public Map<Task, TreeItem<Element>> getRegister() {
+        return register;
     }
 }

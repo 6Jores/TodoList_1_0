@@ -3,11 +3,13 @@ package j66.free.tdlist.model;
 import j66.free.tdlist.tools.FileManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import net.sf.cglib.core.Local;
 
 import java.io.File;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static j66.free.tdlist.tools.Constant.*;
 
@@ -161,6 +163,16 @@ abstract public class TodoListManager {
         }
     }
 
+    public static void updateDoneTask(Task task){
+        if (task.getStatus() == StatusTask.DONE && !task.isDaily()){
+            if (task.getTodoDate().isBefore(LocalDate.now())){
+                task.setStatus(StatusTask.LATE);
+            }else {
+                task.setStatus(StatusTask.PLAN);
+            }
+        }
+    }
+
     public static void removeElement(Element element){
         Element elementParent = element.getParent();
         if (elementParent.getTypeElement() == TypeElement.TODOLIST){
@@ -206,6 +218,80 @@ abstract public class TodoListManager {
                 break;
         }
         return element;
+    }
+
+    public static List<Task> getListTaskForDate (LocalDate date){
+        List<Task> taskList = new ArrayList<>();
+
+        for (Task task : todoList.getListTask()){
+            if (isTodoForDate(date,task))
+                taskList.add(task);
+        }
+        for (Project project : todoList.getListProject()){
+            for (Task task : project.getListTask()){
+                if (isTodoForDate(date,task))
+                    taskList.add(task);
+            }
+            for(SubProject subProject : project.getListSubProject()){
+                for (Task task : subProject.getListTask()){
+                    if (isTodoForDate(date,task))
+                        taskList.add(task);
+                }
+            }
+        }
+
+        return rangeByPriority(taskList);
+    }
+
+    private static boolean isTodoForDate(LocalDate date, Task task){
+        boolean rtn = false;
+        if (task.getStatus()!= StatusTask.CANCEL){
+            if (task.isDaily()){
+                rtn = true;
+            }else if(task.getStatus() == StatusTask.LATE || task.getStatus() == StatusTask.PLAN) {
+                if (!task.getTodoDate().isAfter(date))
+                    rtn = true;
+            }
+        }
+        return rtn;
+    }
+
+    private static List<Task> rangeByPriority(List<Task> sourceList){
+        List<Task> listVeryHigh = new ArrayList<>();
+        List<Task> listHigh = new ArrayList<>();
+        List<Task> listNormal = new ArrayList<>();
+        List<Task> listLow = new ArrayList<>();
+        List<Task> listVeryLow = new ArrayList<>();
+        List<Task> returnList = new ArrayList<>();
+
+        for (Task task :sourceList){
+            switch (task.getPriority()){
+                case VERY_HIGH:
+                    listVeryHigh.add(task);
+                    break;
+                case HIGH:
+                    listHigh.add(task);
+                    break;
+                case NORMAL:
+                    listNormal.add(task);
+                    break;
+                case LOW:
+                    listLow.add(task);
+                    break;
+                case VERY_LOW:
+                    listVeryLow.add(task);
+                    break;
+            }
+        }
+
+        returnList.addAll(listVeryHigh);
+        returnList.addAll(listHigh);
+        returnList.addAll(listNormal);
+        returnList.addAll(listLow);
+        returnList.addAll(listVeryLow);
+
+
+        return returnList;
     }
 
 }

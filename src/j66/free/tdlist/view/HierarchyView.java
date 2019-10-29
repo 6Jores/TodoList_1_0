@@ -268,7 +268,7 @@ public class HierarchyView {
             case TASK:
                 item = new TreeItem<>(element);
                 item.setGraphic(getImageView((Task)element));
-                ((Task)element).setTaskTreeItem(item);
+                main.updateRegister((Task)element,item);
                 break;
         }
         return item;
@@ -347,7 +347,6 @@ public class HierarchyView {
     }
 
     void editElement(){
-        System.out.println("Hierarchy View - editElement");
         if (selectedElement.getTypeElement()==TypeElement.TASK){
             main.showEditTask((Task)selectedElement,ACTION_EDIT_ELEMENT);
             selectedTreeView.setGraphic(getImageView((Task)selectedElement));
@@ -420,5 +419,9 @@ public class HierarchyView {
 
     void updateAdding(){
         selectedTreeView.getChildren().add(itemViewFactory(newElement));
+    }
+
+    void setSelectedElement(TreeItem<Element> selectedElement,Task task){
+        selectedElement.setGraphic(getImageView(task));
     }
 }

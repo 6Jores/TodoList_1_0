@@ -11,6 +11,18 @@
   -fx-background-radius: 10px;
 }
 
+ .elementButton{
+    -fx-background-color : none;
+    -fx-border-color: none;
+    -fx-text-fill : #4fd4e5;
+ }
+
+  .elementButton:hover{
+        -fx-border-color: #none;
+        -fx-background-color : none;
+        -fx-text-fill : #f15a23;
+  }
+
 .toolBarButton{
      -fx-background-color : none;
      -fx-border-color: #b2b2b1;

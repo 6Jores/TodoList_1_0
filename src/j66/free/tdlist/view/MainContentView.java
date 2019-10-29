@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
 import java.util.Optional;
 
 import static j66.free.tdlist.tools.Constant.*;
@@ -89,7 +90,7 @@ public class MainContentView {
 
     public void endInitialization(){
         this.main.initHierarchyView();
-        this.main.initTodoListView();
+        this.main.initTodoListView(LocalDate.now());
         hierarchyPane.getChildren().add(this.main.getControllerHierarchyView().getAnchorPane());
         todoListPane.getChildren().add(this.main.getControllerTodoListView().getAnchorPane());
     }

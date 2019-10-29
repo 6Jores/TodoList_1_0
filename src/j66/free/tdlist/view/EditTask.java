@@ -80,7 +80,11 @@ public class EditTask {
     }
     @FXML
     private void initialize(){
-        todoDatePicker.setValue(LocalDate.now());
+        if (task.getTodoDate() == null)
+            todoDatePicker.setValue(LocalDate.now());
+        else
+            todoDatePicker.setValue(task.getTodoDate());
+
         todoDatePicker.setShowWeekNumbers(true);
 
         ObservableList<PriorityTask> observableList = FXCollections.observableArrayList();

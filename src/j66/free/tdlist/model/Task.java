@@ -1,8 +1,5 @@
 package j66.free.tdlist.model;
 
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -13,7 +10,6 @@ public class Task extends Element implements Serializable {
     private PriorityTask priority;
     private LocalDate todoDate;
     private LocalDate doneDate;
-    private TreeItem<Element> taskTreeItem;
 
     public Task(String name, String description) {
         super(name, description);
@@ -76,11 +72,4 @@ public class Task extends Element implements Serializable {
         this.priority = priority;
     }
 
-    public TreeItem<Element> getTaskTreeItem() {
-        return taskTreeItem;
-    }
-
-    public void setTaskTreeItem(TreeItem<Element> taskTreeItem) {
-        this.taskTreeItem = taskTreeItem;
-    }
 }
