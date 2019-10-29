@@ -3,7 +3,6 @@ package j66.free.tdlist.view;
 import j66.free.tdlist.Main;
 import j66.free.tdlist.model.Element;
 import j66.free.tdlist.model.TodoListManager;
-import j66.free.tdlist.tools.Constant;
 import j66.free.tdlist.tools.Tool;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -34,6 +33,8 @@ public class MainContentView {
 
     @FXML
     Pane hierarchyPane;
+    @FXML
+    ToolBar toolBar;
     @FXML
     Pane todoListPane;
     @FXML
@@ -68,13 +69,13 @@ public class MainContentView {
 
     private void initializeImages(){
         try{
-            _bothViewImage = new Image(new FileInputStream(BOTH_VIEW_IMAGE),10,10,false,false);
-            _hierarchyViewImage = new Image(new FileInputStream(HIERARCHY_VIEW_IMAGE),10,10,false,false);
-            _todoListViewImage = new Image(new FileInputStream(TODOLIST_VIEW_IMAGE),10,10,false,false);
-            _addElementImage = new Image(new FileInputStream(ADD_ELEMENT_IMAGE),10,10,false,false);
-            _editElementImage = new Image(new FileInputStream(EDIT_ELEMENT_IMAGE),10,10,false,false);
-            _removeElementImage = new Image(new FileInputStream(REMOVE_ELEMENT_IMAGE),10,10,false,false);
-            _planTaskImage =  new Image(new FileInputStream(PLAN_TASK_IMAGE),10,10,false,false);
+            _bothViewImage = new Image(new FileInputStream(BOTH_VIEW_IMAGE),20,20,false,false);
+            _hierarchyViewImage = new Image(new FileInputStream(HIERARCHY_VIEW_IMAGE),20,20,false,false);
+            _todoListViewImage = new Image(new FileInputStream(TODOLIST_VIEW_IMAGE),20,20,false,false);
+            _addElementImage = new Image(new FileInputStream(ADD_ELEMENT_IMAGE),20,20,false,false);
+            _editElementImage = new Image(new FileInputStream(EDIT_ELEMENT_IMAGE),20,20,false,false);
+            _removeElementImage = new Image(new FileInputStream(REMOVE_ELEMENT_IMAGE),20,20,false,false);
+            _planTaskImage =  new Image(new FileInputStream(PLAN_TASK_IMAGE),20,20,false,false);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -88,7 +89,9 @@ public class MainContentView {
 
     public void endInitialization(){
         this.main.initHierarchyView();
+        this.main.initTodoListView();
         hierarchyPane.getChildren().add(this.main.getControllerHierarchyView().getAnchorPane());
+        todoListPane.getChildren().add(this.main.getControllerTodoListView().getAnchorPane());
     }
 
     public void setStage(Stage stage) {
@@ -124,27 +127,28 @@ public class MainContentView {
     }
 
     void updateToolBarElement(Element selectedElement){
-        switch (selectedElement.getTypeElement()){
-
-            case TODOLIST:
-                addButton.setDisable(false);
-                planButton.setDisable(true);
-                editButton.setDisable(true);
-                removeButton.setDisable(true);
-                break;
-            case PROJECT:
-            case SUBPROJECT:
-                addButton.setDisable(false);
-                planButton.setDisable(true);
-                editButton.setDisable(false);
-                removeButton.setDisable(false);
-                break;
-            case TASK:
-                addButton.setDisable(true);
-                planButton.setDisable(false);
-                editButton.setDisable(false);
-                removeButton.setDisable(false);
-                break;
+        if (toolBar.isVisible()){
+            switch (selectedElement.getTypeElement()){
+                case TODOLIST:
+                    addButton.setDisable(false);
+                    planButton.setDisable(true);
+                    editButton.setDisable(true);
+                    removeButton.setDisable(true);
+                    break;
+                case PROJECT:
+                case SUBPROJECT:
+                    addButton.setDisable(false);
+                    planButton.setDisable(true);
+                    editButton.setDisable(false);
+                    removeButton.setDisable(false);
+                    break;
+                case TASK:
+                    addButton.setDisable(true);
+                    planButton.setDisable(false);
+                    editButton.setDisable(false);
+                    removeButton.setDisable(false);
+                    break;
+            }
         }
     }
 

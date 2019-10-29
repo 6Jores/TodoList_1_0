@@ -268,6 +268,7 @@ public class HierarchyView {
             case TASK:
                 item = new TreeItem<>(element);
                 item.setGraphic(getImageView((Task)element));
+                ((Task)element).setTaskTreeItem(item);
                 break;
         }
         return item;

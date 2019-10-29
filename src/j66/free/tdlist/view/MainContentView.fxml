@@ -13,19 +13,19 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="500.0" style="-fx-background-color: #2D3443;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="j66.free.tdlist.view.MainContentView">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="500.0" style="-fx-background-color: none;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="j66.free.tdlist.view.MainContentView">
    <children>
-      <BorderPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="564.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
             <HBox BorderPane.alignment="CENTER">
                <children>
                   <Pane fx:id="hierarchyPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="250.0" />
-                  <Pane fx:id="todoListPane" prefHeight="540.0" prefWidth="250.0" />
+                  <Pane fx:id="todoListPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="250.0" />
                </children>
             </HBox>
          </center>
          <top>
-            <VBox prefWidth="100.0" BorderPane.alignment="CENTER">
+            <VBox BorderPane.alignment="CENTER">
                <children>
                   <MenuBar fx:id="menuBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="500.0">
                     <menus>
@@ -61,9 +61,9 @@
                       </Menu>
                     </menus>
                   </MenuBar>
-                  <ToolBar maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="500.0" style="-fx-background-color: none; -fx-border-color: #b2b2b1;">
+                  <ToolBar fx:id="toolBar" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" style="-fx-background-color: #2D3443; -fx-border-color: #b2b2b1;">
                     <items>
-                      <Button fx:id="addButton" mnemonicParsing="false" onAction="#addElement" prefHeight="27.0" prefWidth="27.0" style="-fx-background-image: 'addElement.png';" styleClass="toolBarButton" stylesheets="@style.css" />
+                      <Button fx:id="addButton" mnemonicParsing="false" onAction="#addElement" prefHeight="27.0" prefWidth="27.0" styleClass="toolBarButton" stylesheets="@style.css" />
                         <Separator orientation="VERTICAL" prefHeight="200.0" />
                         <Button fx:id="planButton" mnemonicParsing="false" onAction="#planTask" prefHeight="27.0" prefWidth="27.0" styleClass="toolBarButton" stylesheets="@style.css" />
                         <Button fx:id="editButton" mnemonicParsing="false" onAction="#editElement" prefHeight="27.0" prefWidth="27.0" styleClass="toolBarButton" stylesheets="@style.css" />

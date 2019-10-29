@@ -22,6 +22,7 @@ public class Main extends Application {
     private MainContentView controllerMainContentView;
     private WelcomeView controllerWelcomeView;
     private HierarchyView controllerHierarchyView;
+    private TodoListView controllerTodoListView;
 
 
     public static void main(String[] args) {
@@ -109,13 +110,13 @@ public class Main extends Application {
 
             controllerMainContentView.endInitialization();
 
+
         }catch (IOException e){
             e.printStackTrace();
         }
     }
 
     public void initHierarchyView(){
-
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("view/HierarchyView.fxml"));
 
@@ -125,12 +126,29 @@ public class Main extends Application {
             controllerHierarchyView = loader.getController();
 
             controllerHierarchyView.setAnchorPane(mainContent);
-            controllerHierarchyView = loader.getController();
             controllerHierarchyView.setMain(this);
 
         }catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    public void initTodoListView(){
+        FXMLLoader loader =  new FXMLLoader();
+        loader.setLocation(Main.class.getResource("view/TodoListView.fxml"));
+
+        try {
+            AnchorPane mainContent = loader.load();
+
+            controllerTodoListView = loader.getController();
+
+            controllerTodoListView.setAnchorPane(mainContent);
+            controllerTodoListView.setMain(this);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public HierarchyView getControllerHierarchyView() {
@@ -143,6 +161,10 @@ public class Main extends Application {
 
     public MainContentView getControllerMainContentView() {
         return controllerMainContentView;
+    }
+
+    public TodoListView getControllerTodoListView() {
+        return controllerTodoListView;
     }
 
     public void showHome(){
