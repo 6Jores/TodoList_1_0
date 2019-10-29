@@ -26,6 +26,9 @@ abstract public class Constant {
     public static final String REMOVE_ELEMENT_IMAGE = IMAGE_PATH+"removeElement.png";
     public static final String PLAN_TASK_IMAGE = IMAGE_PATH+"planTask.png";
 
+    public static final String TODAY_IMAGE = IMAGE_PATH+"today.png";
+    public static final String REFRESH_IMAGE = IMAGE_PATH+"refresh.png";
+
     //Texts
     public static final String APP_NAME = "TodoList";
     public static final String WELCOME_VIEW_TITLE = APP_NAME+" - WelcomeView";

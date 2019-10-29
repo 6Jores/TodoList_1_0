@@ -18,7 +18,7 @@
  }
 
   .elementButton:hover{
-        -fx-border-color: #none;
+        -fx-border-color: none;
         -fx-background-color : none;
         -fx-text-fill : #f15a23;
   }

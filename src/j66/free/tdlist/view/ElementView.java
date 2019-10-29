@@ -1,14 +1,14 @@
 package j66.free.tdlist.view;
 
 import j66.free.tdlist.Main;
-import j66.free.tdlist.model.Element;
+
 import j66.free.tdlist.model.StatusTask;
 import j66.free.tdlist.model.Task;
 import j66.free.tdlist.model.TodoListManager;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseButton;
+
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;

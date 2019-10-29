@@ -197,6 +197,11 @@ public class HierarchyView {
                     break;
                 case TASK:
 
+                    Menu menuPriority = new Menu("Priority");
+                    MenuItem itemPriority = new MenuItem(((Task)selectedElement).getPriority().toString());
+                    menuPriority.getItems().add(itemPriority);
+                    info.getItems().add(menuPriority);
+
                     Menu menuPlanDate = new Menu("Plan Date");
                     MenuItem itemPlanDate = new MenuItem(Tool.formatDate(((Task) selectedElement).getTodoDate()));
                     menuPlanDate.getItems().add(itemPlanDate);

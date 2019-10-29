@@ -13,13 +13,13 @@
          <children>
             <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="250.0">
                <children>
-                  <Button fx:id="todayButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="toolBarButton" stylesheets="@style.css" />
+                  <Button fx:id="todayButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#todayList" prefHeight="25.0" prefWidth="25.0" styleClass="toolBarButton" stylesheets="@style.css" />
                   <DatePicker fx:id="datePicker" prefHeight="25.0" prefWidth="142.0">
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </HBox.margin>
                   </DatePicker>
-                  <Button fx:id="updateButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="toolBarButton" stylesheets="@style.css" />
+                  <Button fx:id="updateButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#refreshList" prefHeight="25.0" prefWidth="25.0" styleClass="toolBarButton" stylesheets="@style.css" />
                </children>
             </HBox>
             <VBox fx:id="listContent" prefHeight="523.0" prefWidth="250.0" style="-fx-border-color: #b2b2b1;">
