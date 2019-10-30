@@ -62,6 +62,10 @@ public class ElementView {
         contextMenu.getItems().add(archiveItem);
 
         MenuItem setDailyItem = new MenuItem("Set daily");
+        if (task.isDaily()){
+            setDailyItem.setText("UnSet Daily");
+        }
+
         setDailyItem.setOnAction(actionEvent -> setDailyTask());
         contextMenu.getItems().add(setDailyItem);
 
@@ -95,15 +99,21 @@ public class ElementView {
     }
 
     private void rePlanTask(){
-
+        main.getControllerHierarchyView().setSelectedElement(main.getRegister().get(task),task);
+        main.getControllerHierarchyView().editElement();
+        main.getControllerTodoListView().refreshList();
     }
 
     private void archiveTask(){
-
+        main.getControllerHierarchyView().setSelectedElement(main.getRegister().get(task),task);
+        main.getControllerHierarchyView().cancelTask();
+        main.getControllerTodoListView().refreshList();
     }
 
     private void setDailyTask(){
-
+        main.getControllerHierarchyView().setSelectedElement(main.getRegister().get(task),task);
+        main.getControllerHierarchyView().setTaskDaily();
+        main.getControllerTodoListView().refreshList();
     }
 
     @FXML

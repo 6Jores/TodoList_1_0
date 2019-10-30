@@ -160,7 +160,7 @@ public class HierarchyView {
                 }
                 CheckMenuItem item12 = new CheckMenuItem("Daily Task");
                 item12.setSelected(((Task) selectedElement).isDaily());
-                item12.setOnAction(actionEvent -> setTaskDaily((Task) selectedElement));
+                item12.setOnAction(actionEvent -> setTaskDaily());
                 contextMenu.getItems().add(item12);
 
                 contextMenu.getItems().add(new SeparatorMenuItem());
@@ -312,7 +312,7 @@ public class HierarchyView {
         this.anchorPane = anchorPane;
     }
 
-    private void cancelTask(){
+    void cancelTask(){
         Task task = (Task) selectedElement;
         task.setStatus(StatusTask.CANCEL);
         selectedTreeView.setGraphic(new ImageView(cancelImage));
@@ -375,7 +375,8 @@ public class HierarchyView {
         }
     }
 
-    private void setTaskDaily(Task task){
+    void setTaskDaily(){
+        Task task = (Task)selectedElement;
         task.setDaily(!task.isDaily());
         treeView.getSelectionModel().getSelectedItem().setGraphic(getImageView(task));
     }
@@ -426,7 +427,16 @@ public class HierarchyView {
         selectedTreeView.getChildren().add(itemViewFactory(newElement));
     }
 
-    void setSelectedElement(TreeItem<Element> selectedElement,Task task){
-        selectedElement.setGraphic(getImageView(task));
+    void setSelectedElement(TreeItem<Element> item,Task task){
+        int row = treeView.getRow(item);
+        if (item != null){
+            selectedTreeView = item;
+            selectedElement = task;
+        }
+        if (row > -1){
+            treeView.getSelectionModel().select(row);
+        }
+        System.out.println(" HierarchyView - getSelectedElement : "+row);
+        item.setGraphic(getImageView(task));
     }
 }

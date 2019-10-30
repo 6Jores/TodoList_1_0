@@ -50,6 +50,9 @@ public class TodoListView {
     }
 
     public void initializeTodoList(){
+
+        listContent.getChildren().clear();
+
         List<Task> taskList = TodoListManager.getListTaskForDate(date);
         for (Task task: taskList){
             listContent.getChildren().add(main.getAnElementView(task).getAnchorPane());
@@ -69,12 +72,12 @@ public class TodoListView {
         this.date = date;
     }
 
-    public AnchorPane getAnchorPane() {
+    AnchorPane getAnchorPane() {
         return anchorPane;
     }
 
     @FXML
-    private void refreshList(){
+    void refreshList(){
         System.out.println("TodoListView - Refresh");
         date = datePicker.getValue();
         initializeTodoList();
