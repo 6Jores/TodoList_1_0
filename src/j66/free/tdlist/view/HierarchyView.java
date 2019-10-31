@@ -355,6 +355,7 @@ public class HierarchyView {
         if (selectedElement.getTypeElement()==TypeElement.TASK){
             main.showEditTask((Task)selectedElement,ACTION_EDIT_ELEMENT);
             selectedTreeView.setGraphic(getImageView((Task)selectedElement));
+            main.getControllerTodoListView().refreshList();
         }else{
             main.showEditElement(selectedElement,ACTION_EDIT_ELEMENT);
         }

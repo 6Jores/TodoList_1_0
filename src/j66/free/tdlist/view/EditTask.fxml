@@ -43,7 +43,7 @@
                               <Insets top="15.0" />
                            </VBox.margin>
                         </Label>
-                        <CheckBox fx:id="planCheckBox" mnemonicParsing="false" text="To do Date :" textFill="#b2b2b1">
+                        <CheckBox fx:id="planCheckBox" mnemonicParsing="false" onAction="#updatePickerEnable" text="To do Date :" textFill="#b2b2b1">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -87,7 +87,7 @@
                               <Insets bottom="11.0" />
                            </VBox.margin>
                         </TextField>
-                        <TextArea fx:id="descriptionTask" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" prefWidth="153.0" styleClass="textAera" stylesheets="@style.css">
+                        <TextArea fx:id="descriptionTask" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" prefWidth="153.0" styleClass="textAera" stylesheets="@style.css" wrapText="true">
                            <VBox.margin>
                               <Insets bottom="11.0" />
                            </VBox.margin>
@@ -118,8 +118,8 @@
             <Line endX="220.0" startX="-100.0" stroke="#b2b2b1" strokeWidth="2.0" />
             <ButtonBar prefHeight="60.0" prefWidth="301.0">
               <buttons>
-                <Button mnemonicParsing="false" stylesheets="@style.css" text="Save" />
-                  <Button mnemonicParsing="false" stylesheets="@style.css" text="Cancel" />
+                <Button mnemonicParsing="false" onAction="#saveTask" stylesheets="@style.css" text="Save" />
+                  <Button mnemonicParsing="false" onAction="#cancelAction" stylesheets="@style.css" text="Cancel" />
               </buttons>
                <VBox.margin>
                   <Insets right="10.0" />
