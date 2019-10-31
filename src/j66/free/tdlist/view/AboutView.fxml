@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="200.0" prefWidth="400.0" style="-fx-background-color: #2D3443;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="j66.free.tdlist.view.AboutView">
+   <children>
+      <VBox layoutX="150.0" layoutY="34.0" prefHeight="200.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="150.0" prefWidth="400.0" text="Welcome everyone, TodoList it's just a basic application to manage to-do list. I always use to-do list to manage my days, and one day I thought that, it's was smarter to have a to-do list like an agenda. And as I'm Engineer, I have added the project structure and some basic tools for more efficiency." textAlignment="CENTER" textFill="#b2b2b1" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" prefHeight="36.0" prefWidth="402.0" text="For notices, remarks and recommandations : noubissi.jores@gmail.com" textAlignment="CENTER" textFill="#b2b2b1" />
+            <Line endX="300.0" endY="300.0" startX="-100.0" startY="300.0" stroke="#f15a23" strokeWidth="2.0" />
+            <Label alignment="CENTER" prefHeight="50.0" prefWidth="400.0" text="TodoList - V1.0 - Licence : CC - BY - NC - SA" textAlignment="CENTER" textFill="#4fd4e5">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

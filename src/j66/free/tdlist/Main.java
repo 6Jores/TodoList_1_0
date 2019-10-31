@@ -5,6 +5,7 @@ import j66.free.tdlist.model.Task;
 import j66.free.tdlist.model.TodoList;
 import j66.free.tdlist.model.TodoListManager;
 import j66.free.tdlist.view.*;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -60,6 +61,27 @@ public class Main extends Application {
             mainStage.show();
 
         }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void showAboutView(){
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource("view/AboutView.fxml"));
+        try{
+            AnchorPane pane = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("About App");
+            stage.initModality(Modality.WINDOW_MODAL);
+
+            stage.initOwner(mainStage);
+
+            Scene scene = new Scene(pane);
+            stage.setScene(scene);
+
+            stage.showAndWait();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

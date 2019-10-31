@@ -24,10 +24,7 @@
                      </font>
                      <HBox.margin>
                         <Insets left="10.0" top="5.0" />
-                     </HBox.margin>
-                     <tooltip>
-                        <Tooltip text="Done or not" />
-                     </tooltip></CheckBox>
+                     </HBox.margin></CheckBox>
                   <Button fx:id="menuButton" mnemonicParsing="false" styleClass="elementButton" stylesheets="@style.css" text=". . . ">
                      <font>
                         <Font name="System Bold" size="14.0" />

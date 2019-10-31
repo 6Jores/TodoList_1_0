@@ -32,9 +32,7 @@ public class ElementView {
 
     @FXML
     private void initialize(){
-        EventHandler<MouseEvent> eventHandler = e -> {
-            contextMenu.show(menuButton,e.getScreenX(),e.getScreenY());
-        };
+        EventHandler<MouseEvent> eventHandler = e -> contextMenu.show(menuButton,e.getScreenX(),e.getScreenY());
         menuButton.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
     }
 
@@ -47,7 +45,7 @@ public class ElementView {
     }
 
     public void initElementView(){
-        System.out.println("ElementView - init : "+task.getName());
+
         doOrNotCheckBox.setText(task.getName());
         doOrNotCheckBox.setSelected(task.getStatus()== StatusTask.DONE);
 
@@ -88,9 +86,21 @@ public class ElementView {
                 break;
         }
 
+        String info = TodoListManager.getParentInfoForTask(task);
+
+        if (!info.equals("")){
+            Tooltip tooltip = new Tooltip(info);
+
+            tooltip.setPrefWidth(150);
+            tooltip.setWrapText(true);
+
+            doOrNotCheckBox.setTooltip(tooltip);
+            descriptionLabel.setTooltip(tooltip);
+        }
+
     }
 
-    public AnchorPane getAnchorPane() {
+    AnchorPane getAnchorPane() {
         return anchorPane;
     }
 

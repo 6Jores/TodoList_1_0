@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -32,6 +33,8 @@ public class MainContentView {
     private Image _editElementImage;
     private Image _removeElementImage;
 
+    @FXML
+    HBox hBox;
     @FXML
     Pane hierarchyPane;
     @FXML
@@ -206,16 +209,44 @@ public class MainContentView {
     @FXML
     private void justHierarchyView(){
 
+        hBox.getChildren().removeAll(hierarchyPane,todoListPane);
+        hBox.getChildren().add(hierarchyPane);
+
+        stage.setWidth(265);
+
+        hierarchyButton.setDisable(true);
+        bothButton.setDisable(false);
+        listButton.setDisable(false);
     }
 
     @FXML
     private void justListView(){
 
+        hBox.getChildren().removeAll(hierarchyPane,todoListPane);
+        hBox.getChildren().add(todoListPane);
+
+        stage.setWidth(265);
+
+        hierarchyButton.setDisable(false);
+        bothButton.setDisable(false);
+        listButton.setDisable(true);
     }
 
     @FXML
     private void bothView(){
+        hBox.getChildren().removeAll(hierarchyPane,todoListPane);
+        hBox.getChildren().add(hierarchyPane);
+        hBox.getChildren().add(todoListPane);
+        stage.setWidth(515);
 
+        hierarchyButton.setDisable(false);
+        bothButton.setDisable(true);
+        listButton.setDisable(false);
+    }
+
+    @FXML
+    private void aboutView(){
+        main.showAboutView();
     }
 
 

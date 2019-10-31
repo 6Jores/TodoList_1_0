@@ -294,4 +294,27 @@ abstract public class TodoListManager {
         return returnList;
     }
 
+    public static String getParentInfoForTask(Task task){
+        String str = "";
+
+        switch (task.getParent().getTypeElement()){
+
+            case TODOLIST:
+                str += "Orphan task";
+                break;
+            case PROJECT:
+                str += "Parent : Project : "+task.getParent().getName();
+                break;
+            case SUBPROJECT:
+                SubProject subProject = (SubProject) task.getParent();
+                Project project = (Project) subProject.getParent();
+                str += "Parent : SubProject : "+subProject.getName();
+                str += "- - -";
+                str += "Parent Parent : Project : "+project.getName();
+                break;
+        }
+
+        return str;
+    }
+
 }

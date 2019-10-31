@@ -8,75 +8,69 @@
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="500.0" style="-fx-background-color: none;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="j66.free.tdlist.view.MainContentView">
    <children>
-      <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <center>
-            <HBox BorderPane.alignment="CENTER">
+      <VBox prefHeight="605.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <MenuBar fx:id="menuBar">
+              <menus>
+                <Menu fx:id="todoListMenu" mnemonicParsing="false" style="-fx-text-fill: #b2b2b1;" text="TodoList">
+                  <items>
+                        <MenuItem mnemonicParsing="false" onAction="#getMainView" text="Home">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="H" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                        <MenuItem fx:id="menuItemSave" mnemonicParsing="false" onAction="#saveTodoList" text="Save">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                    <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Close">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="View">
+                  <items>
+                        <MenuItem mnemonicParsing="false" onAction="#justHierarchyView" text="Just Hierarchy" />
+                    <MenuItem mnemonicParsing="false" onAction="#justListView" text="Just TodoList" />
+                        <MenuItem mnemonicParsing="false" onAction="#bothView" text="Both View" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="About">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#aboutView" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <ToolBar fx:id="toolBar" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" style="-fx-background-color: #2D3443; -fx-border-color: #b2b2b1;">
+              <items>
+                <Button fx:id="addButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addElement" prefHeight="27.0" prefWidth="27.0" styleClass="toolBarButton" stylesheets="@style.css" />
+                  <Separator orientation="VERTICAL" prefHeight="200.0" />
+                  <Button fx:id="planButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#planTask" prefHeight="27.0" prefWidth="27.0" styleClass="toolBarButton" stylesheets="@style.css" />
+                  <Button fx:id="editButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#editElement" prefHeight="27.0" prefWidth="27.0" styleClass="toolBarButton" stylesheets="@style.css" />
+                  <Button fx:id="removeButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#removeElement" prefHeight="27.0" prefWidth="27.0" styleClass="toolBarButton" stylesheets="@style.css" />
+                  <Separator orientation="VERTICAL" prefHeight="200.0" />
+                  <Button fx:id="hierarchyButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#justHierarchyView" prefHeight="27.0" prefWidth="27.0" styleClass="toolBarButton" stylesheets="@style.css" />
+                  <Button fx:id="bothButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#bothView" prefHeight="27.0" prefWidth="27.0" styleClass="toolBarButton" stylesheets="@style.css" />
+                  <Button fx:id="listButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#justListView" prefHeight="27.0" prefWidth="27.0" styleClass="toolBarButton" stylesheets="@style.css" />
+              </items>
+            </ToolBar>
+            <HBox fx:id="hBox" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Pane fx:id="hierarchyPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="250.0" />
                   <Pane fx:id="todoListPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="250.0" />
                </children>
             </HBox>
-         </center>
-         <top>
-            <VBox BorderPane.alignment="CENTER">
-               <children>
-                  <MenuBar fx:id="menuBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="500.0">
-                    <menus>
-                      <Menu fx:id="todoListMenu" mnemonicParsing="false" style="-fx-text-fill: #b2b2b1;" text="TodoList">
-                        <items>
-                              <MenuItem mnemonicParsing="false" onAction="#getMainView" text="Home">
-                                 <accelerator>
-                                    <KeyCodeCombination alt="UP" code="H" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
-                                 </accelerator>
-                              </MenuItem>
-                              <MenuItem fx:id="menuItemSave" mnemonicParsing="false" onAction="#saveTodoList" text="Save">
-                                 <accelerator>
-                                    <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
-                                 </accelerator>
-                              </MenuItem>
-                          <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Close">
-                                 <accelerator>
-                                    <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
-                                 </accelerator></MenuItem>
-                        </items>
-                      </Menu>
-                      <Menu mnemonicParsing="false" text="View">
-                        <items>
-                              <MenuItem mnemonicParsing="false" onAction="#justHierarchyView" text="Just Hierarchy" />
-                          <MenuItem mnemonicParsing="false" onAction="#justListView" text="Just TodoList" />
-                              <MenuItem mnemonicParsing="false" onAction="#bothView" text="Both View" />
-                        </items>
-                      </Menu>
-                      <Menu mnemonicParsing="false" text="About">
-                        <items>
-                          <MenuItem mnemonicParsing="false" text="About" />
-                        </items>
-                      </Menu>
-                    </menus>
-                  </MenuBar>
-                  <ToolBar fx:id="toolBar" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" style="-fx-background-color: #2D3443; -fx-border-color: #b2b2b1;">
-                    <items>
-                      <Button fx:id="addButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addElement" prefHeight="27.0" prefWidth="27.0" styleClass="toolBarButton" stylesheets="@style.css" />
-                        <Separator orientation="VERTICAL" prefHeight="200.0" />
-                        <Button fx:id="planButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#planTask" prefHeight="27.0" prefWidth="27.0" styleClass="toolBarButton" stylesheets="@style.css" />
-                        <Button fx:id="editButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#editElement" prefHeight="27.0" prefWidth="27.0" styleClass="toolBarButton" stylesheets="@style.css" />
-                        <Button fx:id="removeButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#removeElement" prefHeight="27.0" prefWidth="27.0" styleClass="toolBarButton" stylesheets="@style.css" />
-                        <Separator orientation="VERTICAL" prefHeight="200.0" />
-                        <Button fx:id="hierarchyButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#justHierarchyView" prefHeight="27.0" prefWidth="27.0" styleClass="toolBarButton" stylesheets="@style.css" />
-                        <Button fx:id="bothButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#bothView" prefHeight="27.0" prefWidth="27.0" styleClass="toolBarButton" stylesheets="@style.css" />
-                        <Button fx:id="listButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#justListView" prefHeight="27.0" prefWidth="27.0" styleClass="toolBarButton" stylesheets="@style.css" />
-                    </items>
-                  </ToolBar>
-               </children>
-            </VBox>
-         </top>
-      </BorderPane>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
