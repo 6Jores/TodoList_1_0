@@ -12,11 +12,11 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="220.0" style="-fx-background-color: #2D3443;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="j66.free.tdlist.view.ElementView">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="225.0" style="-fx-background-color: #2D3443;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="j66.free.tdlist.view.ElementView">
    <children>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="230.0">
          <children>
-            <HBox prefHeight="29.0" prefWidth="230.0">
+            <HBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="29.0" prefWidth="220.0">
                <children>
                   <CheckBox fx:id="doOrNotCheckBox" mnemonicParsing="false" onAction="#setDone" prefHeight="17.0" prefWidth="184.0" text="Task" textFill="#4fd4e5">
                      <font>
@@ -25,7 +25,7 @@
                      <HBox.margin>
                         <Insets left="10.0" top="5.0" />
                      </HBox.margin></CheckBox>
-                  <Button fx:id="menuButton" mnemonicParsing="false" styleClass="elementButton" stylesheets="@style.css" text=". . . ">
+                  <Button fx:id="menuButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="29.0" styleClass="elementButton" stylesheets="@style.css" text=". . . ">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -41,7 +41,7 @@
                      </contextMenu></Button>
                </children>
             </HBox>
-            <Label fx:id="descriptionLabel" prefHeight="38.0" prefWidth="230.0" text="On verifie que l' element peut bien contenir plus d' une ligne" textFill="#b2b2b1" wrapText="true">
+            <Label fx:id="descriptionLabel" prefHeight="38.0" prefWidth="225.0" text="On verifie que l' element peut bien contenir plus d' une ligne" textFill="#b2b2b1" wrapText="true">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
@@ -51,7 +51,7 @@
                <font>
                   <Font name="System Italic" size="12.0" />
                </font></Label>
-            <Line fx:id="statusLine" endX="115.0" startX="-100.0" strokeWidth="2.0" style="-fx-background-color: #b2b2b1;" />
+            <Line fx:id="statusLine" endX="120.0" startX="-100.0" strokeWidth="2.0" style="-fx-background-color: #b2b2b1;" />
          </children>
       </VBox>
    </children>

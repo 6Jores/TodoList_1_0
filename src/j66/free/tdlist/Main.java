@@ -53,6 +53,7 @@ public class Main extends Application {
             Scene scene = new Scene(mainContent);
 
             mainStage.setScene(scene);
+            mainStage.setResizable(false);
 
             controllerWelcomeView = loader.getController();
             controllerWelcomeView.setMain(this);
@@ -79,6 +80,7 @@ public class Main extends Application {
 
             Scene scene = new Scene(pane);
             stage.setScene(scene);
+            stage.setResizable(false);
 
             stage.showAndWait();
         } catch (IOException e) {
@@ -103,6 +105,7 @@ public class Main extends Application {
             stage.initOwner(mainStage);
             Scene scene = new Scene(pane);
             stage.setScene(scene);
+            stage.setResizable(false);
 
             EditElement controller = loader.getController();
             controller.setMain(this);
@@ -129,13 +132,13 @@ public class Main extends Application {
             Scene scene = new Scene(mainContent);
 
             mainStage.setScene(scene);
+            mainStage.setResizable(false);
 
             controllerMainContentView = loader.getController();
             controllerMainContentView.setMain(this);
             controllerMainContentView.setStage(mainStage);
 
             controllerMainContentView.endInitialization();
-
 
         }catch (IOException e){
             e.printStackTrace();
@@ -238,6 +241,7 @@ public class Main extends Application {
             stage.initOwner(mainStage);
             Scene scene = new Scene(mainContent);
             stage.setScene(scene);
+            stage.setResizable(false);
 
             EditTask controller = loader.getController();
             controller.setTask(task);

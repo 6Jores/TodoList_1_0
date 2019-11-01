@@ -3,7 +3,6 @@ package j66.free.tdlist.model;
 import j66.free.tdlist.tools.FileManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import net.sf.cglib.core.Local;
 
 import java.io.File;
 import java.time.LocalDate;
@@ -25,7 +24,8 @@ abstract public class TodoListManager {
     }
 
     public static TodoList getTodoList(boolean aSample){
-        todoList = getSampleTodoList();
+        if (aSample)
+            todoList = getSampleTodoList();
         return todoList;
     }
 

@@ -70,3 +70,7 @@
 .textAera .scroll-pane {
     -fx-background-color: #2D3443;
 }
+
+.scroll_Pane > .viewport{
+    -fx-background-color : #2D3443;
+}

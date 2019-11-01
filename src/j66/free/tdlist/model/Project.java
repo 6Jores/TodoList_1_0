@@ -8,12 +8,12 @@ public class Project extends Element implements Serializable {
     private ArrayList<Task> listTask = new ArrayList<>();
     private ArrayList<SubProject> listSubProject = new ArrayList<>();
 
-    public Project(String name, String description) {
+    Project(String name, String description) {
         super(name, description);
         this.typeElement = TypeElement.PROJECT;
     }
 
-    public Project(String name, String description, Element parent) {
+    Project(String name, String description, Element parent) {
         super(name, description, parent);
         this.typeElement = TypeElement.PROJECT;
     }
@@ -26,13 +26,13 @@ public class Project extends Element implements Serializable {
         return listSubProject;
     }
 
-    public void addTask(Task task){
+    void addTask(Task task){
         listTask.add(task);
         task.setParent(this);
         task.autoUpdate();
     }
 
-    public void addSubProject(SubProject subProject){
+    void addSubProject(SubProject subProject){
         listSubProject.add(subProject);
         subProject.setParent(this);
         subProject.autoUpdate();

@@ -4,9 +4,9 @@ import j66.free.tdlist.Main;
 import j66.free.tdlist.model.Element;
 import j66.free.tdlist.model.TodoList;
 import j66.free.tdlist.model.TodoListManager;
-import j66.free.tdlist.tools.Constant;
 import j66.free.tdlist.tools.FileManager;
 import j66.free.tdlist.tools.Tool;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -71,7 +71,7 @@ public class EditElement {
                     element.setDescription(descriptionElement.getText());
                     stage.close();
                 }
-                if (action == Constant.ACTION_NEW_ELEMENT){
+                if (action.equals(ACTION_NEW_ELEMENT)){
                     main.getControllerHierarchyView().updateAdding();
                 }
                 break;

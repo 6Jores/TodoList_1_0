@@ -39,7 +39,7 @@ abstract public class Tool {
     }
 
     public static ChoiceDialog<TypeElement> getChoiceDialog(ArrayList<TypeElement> choice, String tile, String headerText){
-        ChoiceDialog<TypeElement> choiceDialog = new ChoiceDialog<TypeElement>();
+        ChoiceDialog<TypeElement> choiceDialog = new ChoiceDialog<>();
         choiceDialog.getItems().addAll(choice);
 
         choiceDialog.setTitle(tile);

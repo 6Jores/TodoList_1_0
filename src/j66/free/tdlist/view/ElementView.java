@@ -14,6 +14,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
+import java.time.LocalDate;
+
 public class ElementView {
     @FXML
     CheckBox doOrNotCheckBox;
@@ -130,8 +132,10 @@ public class ElementView {
     private void setDone(){
         if (doOrNotCheckBox.isSelected()){
             task.setStatus(StatusTask.DONE);
+            task.setDoneDate(LocalDate.now());
         }else {
             TodoListManager.updateDoneTask(task);
+            task.setDoneDate(null);
         }
         main.getControllerHierarchyView().setSelectedElement(main.getRegister().get(task),task);
     }

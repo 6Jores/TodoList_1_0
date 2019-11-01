@@ -72,7 +72,7 @@ abstract public class Element implements Serializable {
         autoUpdate();
     }
 
-    public Element getParent() {
+    Element getParent() {
         return parent;
     }
 

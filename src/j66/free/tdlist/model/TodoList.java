@@ -29,12 +29,12 @@ public class TodoList extends Element implements Serializable {
         return listTask;
     }
 
-    public void addTask(Task task){
+    void addTask(Task task){
         listTask.add(task);
         task.setParent(this);
     }
 
-    public void addProject(Project project){
+    void addProject(Project project){
         listProject.add(project);
         project.setParent(this);
     }
@@ -47,7 +47,7 @@ public class TodoList extends Element implements Serializable {
         this.archived = archived;
     }
 
-    public String getNameFile() {
+    String getNameFile() {
         return nameFile;
     }
 

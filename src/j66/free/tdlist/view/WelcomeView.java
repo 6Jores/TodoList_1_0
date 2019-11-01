@@ -85,7 +85,7 @@ public class WelcomeView {
             runSearch(search.getText());
     }
 
-    public void initializeDescription(TodoList todoList){
+    void initializeDescription(TodoList todoList){
         if (todoList != null && !todoList.getName().equals(Constant.NO_RESULT)){
             todoListName.setText(todoList.getName());
             todoListDescription.setText(todoList.getDescription());

@@ -5,7 +5,7 @@ abstract public class Constant {
 
     //Paths
     public static final String TODOLIST_PATH = curDir+"files/TodoLists/";
-    public static final String IMAGE_PATH = curDir+"files/images/";
+    private static final String IMAGE_PATH = curDir+"files/images/";
 
     //image paths
     public static final String PROJECT_IMAGE = IMAGE_PATH+"project.png";

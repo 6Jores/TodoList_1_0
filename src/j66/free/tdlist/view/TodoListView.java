@@ -51,8 +51,6 @@ public class TodoListView {
 
         listContent = new VBox();
         listContent.setPrefWidth(220);
-        scrollPane.setStyle("-fx-background:none");
-        scrollPane.setStyle("-fx-border-color:#b2b2b1");
 
     }
 
