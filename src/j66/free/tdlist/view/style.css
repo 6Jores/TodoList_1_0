@@ -61,6 +61,12 @@
     -fx-background-color: #2D3443;
 }
 
+.scrollPane{
+    -fx-background: none;
+    -fx-border:#b2b2b1;
+}
+
+
 .textAera .scroll-pane {
     -fx-background-color: #2D3443;
 }

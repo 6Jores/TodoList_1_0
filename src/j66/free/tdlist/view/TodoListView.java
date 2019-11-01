@@ -22,15 +22,17 @@ public class TodoListView {
 
     private Image todayImage;
     private Image refreshImage;
+    private VBox listContent;
 
-    @FXML
-    VBox listContent;
+
     @FXML
     DatePicker datePicker;
     @FXML
     Button todayButton;
     @FXML
     Button updateButton;
+    @FXML
+    ScrollPane scrollPane;
 
     @FXML
     private void initialize(){
@@ -47,6 +49,11 @@ public class TodoListView {
         updateButton.setGraphic(new ImageView(refreshImage));
         updateButton.setTooltip(new Tooltip("Refresh List"));
 
+        listContent = new VBox();
+        listContent.setPrefWidth(220);
+        scrollPane.setStyle("-fx-background:none");
+        scrollPane.setStyle("-fx-border-color:#b2b2b1");
+
     }
 
     public void initializeTodoList(){
@@ -57,6 +64,7 @@ public class TodoListView {
         for (Task task: taskList){
             listContent.getChildren().add(main.getAnElementView(task).getAnchorPane());
         }
+        scrollPane.setContent(listContent);
         datePicker.setValue(date);
     }
 
