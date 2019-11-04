@@ -379,6 +379,7 @@ public class HierarchyView {
     void setTaskDaily(){
         Task task = (Task)selectedElement;
         task.setDaily(!task.isDaily());
+        TodoListManager.updateDoneTask(task);
         TodoListManager.setSave(false);
         treeView.getSelectionModel().getSelectedItem().setGraphic(getImageView(task));
     }

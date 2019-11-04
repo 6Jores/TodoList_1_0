@@ -115,6 +115,10 @@ public class Main extends Application {
 
             stage.showAndWait();
 
+            if (controllerTodoListView != null){
+                controllerTodoListView.refreshList();
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -251,6 +255,10 @@ public class Main extends Application {
             controller.setMain(this);
 
             stage.showAndWait();
+
+            if (controllerTodoListView != null){
+                controllerTodoListView.refreshList();
+            }
 
         } catch (IOException e) {
             e.printStackTrace();

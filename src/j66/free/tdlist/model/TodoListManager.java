@@ -17,6 +17,7 @@ abstract public class TodoListManager {
     private static TodoList todoList;
     private static ObservableList<TodoList> todoListsNoResults;
     private static boolean save=true;
+    private static boolean autoSave=false;
     private static ObservableList<TodoList> todoLists = FXCollections.observableArrayList();
 
     public static TodoList getTodoList(){
@@ -39,6 +40,9 @@ abstract public class TodoListManager {
 
     public static void setSave(boolean save) {
         TodoListManager.save = save;
+        if (!save && autoSave){
+            persistTodoList();
+        }
     }
 
     public static ObservableList<TodoList> getTodoLists() {
@@ -157,7 +161,7 @@ abstract public class TodoListManager {
 
     public static void updateTask(Task task){
         if (task.getStatus() == StatusTask.PLAN){
-            if(task.getTodoDate().isBefore(LocalDate.now())){
+            if(task.getTodoDate() != null && task.getTodoDate().isBefore(LocalDate.now())){
                 task.setStatus(StatusTask.LATE);
             }
         }
@@ -170,6 +174,10 @@ abstract public class TodoListManager {
             }else {
                 task.setStatus(StatusTask.PLAN);
             }
+        }else if (task.getStatus() == StatusTask.DONE && task.isDaily()){
+            task.setDoneDate(null);
+            task.setStatus(StatusTask.PLAN);
+            task.setTodoDate(LocalDate.now());
         }
     }
 
@@ -262,25 +270,31 @@ abstract public class TodoListManager {
         List<Task> listNormal = new ArrayList<>();
         List<Task> listLow = new ArrayList<>();
         List<Task> listVeryLow = new ArrayList<>();
+        List<Task> listDone = new ArrayList<>();
+
         List<Task> returnList = new ArrayList<>();
 
         for (Task task :sourceList){
-            switch (task.getPriority()){
-                case VERY_HIGH:
-                    listVeryHigh.add(task);
-                    break;
-                case HIGH:
-                    listHigh.add(task);
-                    break;
-                case NORMAL:
-                    listNormal.add(task);
-                    break;
-                case LOW:
-                    listLow.add(task);
-                    break;
-                case VERY_LOW:
-                    listVeryLow.add(task);
-                    break;
+            if (task.getDoneDate() != null && task.getDoneDate().isEqual(LocalDate.now())){
+                listDone.add(task);
+            }else {
+                switch (task.getPriority()){
+                    case VERY_HIGH:
+                        listVeryHigh.add(task);
+                        break;
+                    case HIGH:
+                        listHigh.add(task);
+                        break;
+                    case NORMAL:
+                        listNormal.add(task);
+                        break;
+                    case LOW:
+                        listLow.add(task);
+                        break;
+                    case VERY_LOW:
+                        listVeryLow.add(task);
+                        break;
+                }
             }
         }
 
@@ -289,6 +303,7 @@ abstract public class TodoListManager {
         returnList.addAll(listNormal);
         returnList.addAll(listLow);
         returnList.addAll(listVeryLow);
+        returnList.addAll(listDone);
 
 
         return returnList;
@@ -317,4 +332,7 @@ abstract public class TodoListManager {
         return str;
     }
 
+    public static void setAutoSave(boolean autoSave) {
+        TodoListManager.autoSave = autoSave;
+    }
 }

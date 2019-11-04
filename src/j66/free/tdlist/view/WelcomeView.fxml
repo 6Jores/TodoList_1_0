@@ -18,7 +18,7 @@
    <children>
       <VBox layoutX="139.0" layoutY="-30.0" prefHeight="430.0" prefWidth="603.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label alignment="CENTER" contentDisplay="TOP" prefHeight="65.0" prefWidth="606.0" text="TodoList" textFill="#b2b2b1">
+            <Label alignment="CENTER" contentDisplay="TOP" prefHeight="65.0" prefWidth="606.0" text="TodoList" textFill="#4fd4e5">
                <font>
                   <Font size="36.0" />
                </font>
@@ -26,7 +26,7 @@
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <Line endX="499.29290771484375" endY="-450.0" startX="1012.878662109375" startY="-450.0" stroke="#b2b2b1" strokeWidth="2.0" />
+            <Line endX="499.29290771484375" endY="-450.0" startX="1012.878662109375" startY="-450.0" stroke="#f15a23" strokeWidth="2.0" />
             <HBox prefHeight="350.0" prefWidth="603.0">
                <children>
                   <VBox prefHeight="336.0" prefWidth="310.0">
@@ -139,7 +139,7 @@
                               <Insets left="20.0" top="5.0" />
                            </VBox.margin>
                         </Label>
-                        <Label fx:id="todoListDescription" alignment="TOP_RIGHT" contentDisplay="CENTER" prefHeight="96.0" prefWidth="200.0" text="todoListDescription" textFill="#4fd4e5" wrapText="true">
+                        <Label fx:id="todoListDescription" alignment="TOP_RIGHT" contentDisplay="CENTER" prefHeight="96.0" prefWidth="200.0" text="todoListDescription" textAlignment="RIGHT" textFill="#4fd4e5" wrapText="true">
                            <font>
                               <Font size="16.0" />
                            </font>

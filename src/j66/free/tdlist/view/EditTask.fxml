@@ -15,17 +15,16 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="320.0" style="-fx-background-color: #2D3443;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="j66.free.tdlist.view.EditTask">
    <children>
       <VBox prefHeight="400.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label fx:id="titleLabel" alignment="CENTER" prefHeight="60.0" prefWidth="320.0" text="New - Edit  TodoList" textFill="#b2b2b1">
+            <Label fx:id="titleLabel" alignment="CENTER" prefHeight="60.0" prefWidth="320.0" text="New - Edit  TodoList" textFill="#4fd4e5">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Line endX="220.0" startX="-100.0" stroke="#b2b2b1" strokeWidth="2.0" />
+            <Line endX="220.0" startX="-100.0" stroke="#f15a23" strokeWidth="2.0" />
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <VBox prefHeight="100.0" prefWidth="143.0">
@@ -115,7 +114,7 @@
                   </VBox>
                </children>
             </HBox>
-            <Line endX="220.0" startX="-100.0" stroke="#b2b2b1" strokeWidth="2.0" />
+            <Line endX="220.0" startX="-100.0" stroke="#f15a23" strokeWidth="2.0" />
             <ButtonBar prefHeight="60.0" prefWidth="301.0">
               <buttons>
                 <Button mnemonicParsing="false" onAction="#saveTask" stylesheets="@style.css" text="Save" />

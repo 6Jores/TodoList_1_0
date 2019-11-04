@@ -83,15 +83,13 @@ public class TodoListView {
     }
 
     @FXML
-    void refreshList(){
-        System.out.println("TodoListView - Refresh");
+    public void refreshList(){
         date = datePicker.getValue();
         initializeTodoList();
     }
 
     @FXML
     private void todayList(){
-        System.out.println("TodoListView - Today");
         date = LocalDate.now();
         initializeTodoList();
     }

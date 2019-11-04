@@ -16,12 +16,12 @@
    <children>
       <VBox layoutX="150.0" layoutY="50.0" prefHeight="300.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label fx:id="title" alignment="CENTER" prefHeight="44.0" prefWidth="400.0" text="Creation / Edition TodoList" textFill="#b2b2b1">
+            <Label fx:id="title" alignment="CENTER" prefHeight="44.0" prefWidth="400.0" text="Creation / Edition TodoList" textFill="#4fd4e5">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Line endX="300.0" startX="-100.0" stroke="#b2b2b1" strokeWidth="2.0" />
+            <Line endX="300.0" startX="-100.0" stroke="#f15a23" strokeWidth="2.0" />
             <HBox prefHeight="171.0" prefWidth="402.0">
                <children>
                   <VBox prefHeight="153.0" prefWidth="194.0">

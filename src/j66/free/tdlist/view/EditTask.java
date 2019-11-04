@@ -96,6 +96,9 @@ public class EditTask {
             if (planCheckBox.isSelected()) {
                 LocalDate date = todoDatePicker.getValue();
                 task.setTodoDate(date);
+                if(task.getDoneDate() != null){
+                    task.setDoneDate(null);
+                }
                 if (date.isBefore(LocalDate.now())) {
                     task.setStatus(LATE);
                 } else {

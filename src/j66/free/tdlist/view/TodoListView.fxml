@@ -23,12 +23,12 @@
                         <Button fx:id="updateButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#refreshList" prefHeight="25.0" prefWidth="25.0" styleClass="toolBarButton" stylesheets="@style.css" />
                     </children>
                 </HBox>
-            <ScrollPane fx:id="scrollPane" prefHeight="498.0" prefWidth="250.0" styleClass="scroll_Pane" stylesheets="@style.css">
+            <ScrollPane fx:id="scrollPane" prefHeight="502.0" prefWidth="240.0" styleClass="scroll_Pane" stylesheets="@style.css">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="486.0" prefWidth="223.0" />
               </content>
                <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" />
+                  <Insets bottom="10.0" left="5.0" right="5.0" />
                </VBox.margin>
             </ScrollPane>
             </children>

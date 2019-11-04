@@ -100,6 +100,18 @@ public class ElementView {
             descriptionLabel.setTooltip(tooltip);
         }
 
+        if (task.isDaily()){
+            doOrNotCheckBox.setStyle("-fx-text-fill:#f15a23");
+        }
+
+        if (task.getDoneDate() != null && task.getDoneDate().isEqual(LocalDate.now())){
+
+            doOrNotCheckBox.setStyle("-fx-text-fill:#b2b2b1;");
+            if (task.isDaily()){
+                doOrNotCheckBox.setStyle("-fx-text-fill:#b2b2b1;"+"-fx-font-style:italic;");
+            }
+        }
+
     }
 
     AnchorPane getAnchorPane() {
@@ -138,5 +150,6 @@ public class ElementView {
             task.setDoneDate(null);
         }
         main.getControllerHierarchyView().setSelectedElement(main.getRegister().get(task),task);
+        main.getControllerTodoListView().refreshList();
     }
 }

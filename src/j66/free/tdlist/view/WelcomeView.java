@@ -109,6 +109,13 @@ public class WelcomeView {
     @FXML
     private void openTodoList(){
         if (thereIsASelected()){
+            Alert alert = Tool.getConfirmAlert("Open TodoList...", "With auto save?");
+            Optional<ButtonType> optional = alert.showAndWait();
+            if (optional.isPresent() && optional.get()==ButtonType.OK){
+                TodoListManager.setAutoSave(true);
+            }else{
+                TodoListManager.setAutoSave(false);
+            }
             main.openATodoList(selectedTodoList);
         }else {
             showAlert("Error","Please select a TodoList.");
