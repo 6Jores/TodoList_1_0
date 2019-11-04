@@ -369,7 +369,7 @@ public class HierarchyView {
         Alert alert = Tool.getConfirmAlert("Confirm suppression",
                 selectedElement.getTypeElement()+" : "+selectedElement.getName());
         Optional<ButtonType> option = alert.showAndWait();
-        if (option.get() == ButtonType.OK) {
+        if (option.isPresent() && option.get() == ButtonType.OK) {
             TreeItem<Element> parentSelectedElement = selectedTreeView.getParent();
             TodoListManager.removeElement(selectedElement);
             parentSelectedElement.getChildren().remove(selectedTreeView);
@@ -439,6 +439,8 @@ public class HierarchyView {
         if (row > -1){
             treeView.getSelectionModel().select(row);
         }
-        item.setGraphic(getImageView(task));
+        if (item != null) {
+            item.setGraphic(getImageView(task));
+        }
     }
 }

@@ -161,7 +161,7 @@ public class MainContentView {
         if (!TodoListManager.isSave()){
             Alert alert = Tool.getConfirmAlert("Current TodoList it's not save.","Do you really want to quit ?");
             Optional<ButtonType> option = alert.showAndWait();
-            if (option.get() == ButtonType.OK) {
+            if (option.isPresent() && option.get() == ButtonType.OK) {
                 main.showHome();
             }
         }else
@@ -178,7 +178,7 @@ public class MainContentView {
         if (!TodoListManager.isSave()){
             Alert alert = Tool.getConfirmAlert("Current TodoList it's not save.","Do you really want to quit ?");
             Optional<ButtonType> option = alert.showAndWait();
-            if (option.get() == ButtonType.OK) {
+            if (option.isPresent() && option.get() == ButtonType.OK) {
                 stage.close();
             }
         }else
