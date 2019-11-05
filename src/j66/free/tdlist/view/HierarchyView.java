@@ -320,8 +320,8 @@ public class HierarchyView {
 
     void addElement(){
         newElement = null;
-        ArrayList<TypeElement> choice = new ArrayList<>();
-        Optional<TypeElement> option;
+        ArrayList<Object> choice = new ArrayList<>();
+        Optional<Object> option;
         switch (selectedElement.getTypeElement()){
             case TODOLIST:
                 choice.add(TypeElement.PROJECT);
@@ -333,7 +333,7 @@ public class HierarchyView {
                 break;
         }
         if (choice.size()>0){
-            ChoiceDialog<TypeElement> choiceDialog = Tool.getChoiceDialog(choice,"Select child type.",
+            ChoiceDialog<Object> choiceDialog = Tool.getChoiceDialog(choice,"Select child type.",
                     "Select a type");
             choiceDialog.setSelectedItem(TypeElement.TASK);
             option = choiceDialog.showAndWait();
@@ -422,7 +422,8 @@ public class HierarchyView {
         }
     }
 
-    private void setNewElement(TypeElement typeElement) {
+    private void setNewElement(Object object) {
+        TypeElement typeElement = (TypeElement)object;
         newElement = TodoListManager.getNewElement(typeElement,selectedElement);
     }
 

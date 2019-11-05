@@ -1,6 +1,16 @@
 package j66.free.tdlist.tools;
 
+/**
+ * Author : Jores NOUBISSI
+ * JavaDoc creation Date : 2019-11-05
+ *
+ * Class : Constant
+ * Object : Group basic constants use in the project
+ *
+ * All constants are not there, some of them are directly create in the using class
+ */
 abstract public class Constant {
+    //Dynamic constant for the application portability
     private static final String curDir = System.getProperty("user.dir") + "/";
 
     //Paths
@@ -19,13 +29,10 @@ abstract public class Constant {
     public static final String BOTH_VIEW_IMAGE = IMAGE_PATH+"both.png";
     public static final String HIERARCHY_VIEW_IMAGE = IMAGE_PATH+"hierarchy.png";
     public static final String TODOLIST_VIEW_IMAGE = IMAGE_PATH+"todoListView.png";
-
     public static final String ADD_ELEMENT_IMAGE = IMAGE_PATH+"addElement.png";
-
     public static final String EDIT_ELEMENT_IMAGE = IMAGE_PATH+"editElement.png";
     public static final String REMOVE_ELEMENT_IMAGE = IMAGE_PATH+"removeElement.png";
     public static final String PLAN_TASK_IMAGE = IMAGE_PATH+"planTask.png";
-
     public static final String TODAY_IMAGE = IMAGE_PATH+"today.png";
     public static final String REFRESH_IMAGE = IMAGE_PATH+"refresh.png";
 
