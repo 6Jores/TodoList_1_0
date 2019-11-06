@@ -43,6 +43,8 @@ public class WelcomeView {
     Label todoListEditionDate;
     @FXML
     Tooltip tooltip;
+    @FXML
+    Label labelAbout;
 
     public void setMain(Main main){
         this.main = main;
@@ -74,6 +76,11 @@ public class WelcomeView {
         fileListView.addEventHandler(MouseEvent.MOUSE_CLICKED,eventHandler);
 
         this.search.textProperty().addListener(((observableValue, oldValue, newValue) -> runSearch(newValue)));
+
+        labelAbout.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            if(event.getButton()==MouseButton.PRIMARY)
+                showAbout();
+        });
 
     }
 
@@ -231,5 +238,9 @@ public class WelcomeView {
 
     public void setScene(Scene scene) {
         this.scene = scene;
+    }
+
+    private void showAbout(){
+        main.showAboutView();
     }
 }

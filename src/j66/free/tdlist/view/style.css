@@ -50,6 +50,15 @@
     -fx-border-width:2px;
 }
 
+.label{
+    -fx-text-fill:#b2b2b1;
+}
+
+.labelAbout: hover{
+    -fx-text-fill:#f15a23;
+    -fx-underline:false;
+}
+
 .textAera{
     -fx-text-fill : #b2b2b1;
     -fx-background-color: none;

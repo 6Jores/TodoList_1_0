@@ -153,11 +153,12 @@
                               <Tooltip fx:id="tooltip" text="Description" wrapText="true" />
                            </tooltip>
                         </Label>
-                        <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0" style="-fx-text-fill: #b2b2b1;" text="J66 - 2019" textFill="#b2b2b1">
-                           <VBox.margin>
-                              <Insets left="20.0" top="5.0" />
-                           </VBox.margin>
-                        </Label>
+                        <HBox prefHeight="45.0" prefWidth="233.0">
+                           <children>
+                              <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0" style="-fx-text-fill: #b2b2b1;" text="J66 - 2019 - " textFill="#b2b2b1" />
+                              <Label fx:id="labelAbout" alignment="CENTER" prefHeight="30.0" prefWidth="72.0" styleClass="labelAbout" stylesheets="@style.css" text="About ?" textFill="#b2b2b1" />
+                           </children>
+                        </HBox>
                      </children>
                   </VBox>
                </children>
