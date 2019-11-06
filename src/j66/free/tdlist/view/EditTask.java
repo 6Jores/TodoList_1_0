@@ -17,7 +17,13 @@ import java.util.Collections;
 
 import static j66.free.tdlist.model.StatusTask.*;
 
-
+/**
+ * Author : Jores NOUBISSI
+ * JavaDoc creation Date : 2019-11-06
+ *
+ * Class : EditTask;
+ * Object : Edition and Creation of a Task
+ */
 public class EditTask {
 
     private Task task;
@@ -47,6 +53,10 @@ public class EditTask {
         this.main = main;
     }
 
+    /**
+     * Setting Task and Filling form
+     * @param task : Created or Edited Task
+     */
     public void setTask(Task task) {
         this.task = task;
         if (task.getTodoDate() == null)
@@ -85,6 +95,10 @@ public class EditTask {
     private void cancelAction(){
         stage.close();
     }
+
+    /**
+     * Check information and save Task
+     */
     @FXML
     private void saveTask(){
         if (nameTask.getText().trim().equals("")){

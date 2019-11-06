@@ -15,6 +15,14 @@ import javafx.stage.Stage;
 
 import static j66.free.tdlist.tools.Constant.*;
 
+/**
+ * Author : Jores NOUBISSI
+ * JavaDoc creation Date : 2019-11-06
+ *
+ * Class : EditElement;
+ * Object : EditElement.fxml Controller
+ * For All Elements but not Task
+ */
 public class EditElement {
     @FXML
     Label title;
@@ -28,7 +36,10 @@ public class EditElement {
     private String action;
     private Stage stage;
 
-
+    /**
+     * Saving new or edited TodoList
+     * @param todoList : saved element
+     */
     @FXML
     private void saveTodoList (TodoList todoList){
         String _name = nameElement.getText().trim();
@@ -55,6 +66,9 @@ public class EditElement {
         stage.close();
     }
 
+    /**
+     * Method link to the button
+     */
     @FXML
     private void saveElement(){
         switch (element.getTypeElement()){
@@ -83,18 +97,28 @@ public class EditElement {
 
     }
 
+    public void setStage(Stage stage){
+        this.stage = stage;
+    }
+
+    /**
+     * Setting Element and filling input
+     * @param element created or edited Element
+     */
     public void setElement(Element element){
         this.element = element;
         this.nameElement.setText(element.getName());
         this.descriptionElement.setText(element.getDescription());
     }
 
+    /**
+     * Setting Title
+     * @param action : Edition or Creation
+     */
     public void setAction(String action) {
         this.action = action;
         this.title.setText(action+" "+ element.getTypeElement());
     }
 
-    public void setStage(Stage stage){
-        this.stage = stage;
-    }
+
 }
