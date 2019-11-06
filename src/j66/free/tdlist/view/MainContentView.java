@@ -157,7 +157,7 @@ public class MainContentView {
     }
 
     @FXML
-    private void getMainView(){
+    private void returnToWelcomeView(){
         if (!TodoListManager.isSave()){
             Alert alert = Tool.getConfirmAlert("Current TodoList it's not save.","Do you really want to quit ?");
             Optional<ButtonType> option = alert.showAndWait();

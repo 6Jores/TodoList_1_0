@@ -20,7 +20,7 @@
               <menus>
                 <Menu fx:id="todoListMenu" mnemonicParsing="false" style="-fx-text-fill: #b2b2b1;" text="TodoList">
                   <items>
-                        <MenuItem mnemonicParsing="false" onAction="#getMainView" text="Home">
+                        <MenuItem mnemonicParsing="false" onAction="#returnToWelcomeView" text="Home">
                            <accelerator>
                               <KeyCodeCombination alt="UP" code="H" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
                            </accelerator>
@@ -64,7 +64,7 @@
                   <Button fx:id="listButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#justListView" prefHeight="27.0" prefWidth="27.0" styleClass="toolBarButton" stylesheets="@style.css" />
               </items>
             </ToolBar>
-            <HBox fx:id="hBox" prefHeight="100.0" prefWidth="200.0">
+            <HBox fx:id="hBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="500.0">
                <children>
                   <Pane fx:id="hierarchyPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="250.0" />
                   <Pane fx:id="todoListPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="250.0" />

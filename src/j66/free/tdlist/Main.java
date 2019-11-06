@@ -4,20 +4,25 @@ import j66.free.tdlist.model.Element;
 import j66.free.tdlist.model.Task;
 import j66.free.tdlist.model.TodoList;
 import j66.free.tdlist.model.TodoListManager;
+import j66.free.tdlist.tools.Tool;
 import j66.free.tdlist.view.*;
 
+import javafx.scene.control.Alert;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TreeItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import static j66.free.tdlist.tools.Constant.*;
 
@@ -61,8 +66,20 @@ public class Main extends Application {
 
             mainStage.show();
 
+            mainStage.setOnCloseRequest(this::beforeClosingWelcomeView);
+
         }catch (IOException e){
             e.printStackTrace();
+        }
+    }
+
+    private void beforeClosingWelcomeView(WindowEvent event){
+        Alert alert = Tool.getConfirmAlert("Closing Welcome View","Would you really want to quit ?");
+        Optional<ButtonType> optional = alert.showAndWait();
+        if (optional.isPresent() && optional.get()==ButtonType.OK){
+            mainStage.close();
+        }else {
+            event.consume();
         }
     }
 
@@ -144,8 +161,25 @@ public class Main extends Application {
 
             controllerMainContentView.endInitialization();
 
+            mainStage.setWidth(515);
+            mainStage.setHeight(640);
+            mainStage.setOnCloseRequest(this::beforeClosingMainContentView);
+
         }catch (IOException e){
             e.printStackTrace();
+        }
+    }
+
+    private void beforeClosingMainContentView(WindowEvent event){
+        if (!TodoListManager.isSave()){
+            Alert alert = Tool.getConfirmAlert("Closing the application","Would you really want to quit " +
+                    "without saving?");
+            Optional<ButtonType> optional = alert.showAndWait();
+            if (optional.isPresent() && optional.get()==ButtonType.OK){
+                mainStage.close();
+            }else{
+                event.consume();
+            }
         }
     }
 
@@ -228,6 +262,8 @@ public class Main extends Application {
 
     public void showHome(){
         mainStage.setScene(controllerWelcomeView.getScene());
+        mainStage.setWidth(525);
+        mainStage.setHeight(450);
     }
 
     public void showEditTask(Task task, String action){
