@@ -42,6 +42,13 @@ public class ElementView {
         this.main = main;
     }
 
+    public void setAnchorPane(AnchorPane anchorPane) {
+        this.anchorPane = anchorPane;
+        menuButton.setStyle("-fx-text-fill: #2D3443");
+        this.anchorPane.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> menuButton.setStyle("-fx-text-fill: #4fd4e5"));
+        this.anchorPane.addEventHandler(MouseEvent.MOUSE_EXITED,event -> menuButton.setStyle("-fx-text-fill:#2D3443"));
+    }
+
     public void setTask(Task task) {
         this.task = task;
     }
@@ -116,10 +123,6 @@ public class ElementView {
 
     AnchorPane getAnchorPane() {
         return anchorPane;
-    }
-
-    public void setAnchorPane(AnchorPane anchorPane) {
-        this.anchorPane = anchorPane;
     }
 
     private void rePlanTask(){
