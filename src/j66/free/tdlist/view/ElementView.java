@@ -4,6 +4,7 @@ import j66.free.tdlist.Main;
 
 import j66.free.tdlist.model.StatusTask;
 import j66.free.tdlist.model.Task;
+import j66.free.tdlist.model.TaskManager;
 import j66.free.tdlist.model.TodoListManager;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -95,7 +96,7 @@ public class ElementView {
                 break;
         }
 
-        String info = TodoListManager.getParentInfoForTask(task);
+        String info = TaskManager.getParentInfoForTask(task);
 
         if (!info.equals("")){
             Tooltip tooltip = new Tooltip(info);
@@ -145,13 +146,7 @@ public class ElementView {
 
     @FXML
     private void setDone(){
-        if (doOrNotCheckBox.isSelected()){
-            task.setStatus(StatusTask.DONE);
-            task.setDoneDate(LocalDate.now());
-        }else {
-            TodoListManager.updateDoneTask(task);
-            task.setDoneDate(null);
-        }
+        TaskManager.setTaskDone(task);
         main.getControllerHierarchyView().setSelectedElement(main.getRegister().get(task),task);
         main.getControllerTodoListView().refreshList();
     }

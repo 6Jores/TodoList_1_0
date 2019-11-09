@@ -151,7 +151,7 @@ public class WelcomeView {
     private void deleteTodoList(){
         Alert alert = Tool.getConfirmAlert("Confirm suppression","TodoList : "+selectedTodoList.getName());
         Optional<ButtonType> option = alert.showAndWait();
-        if (option.get() == ButtonType.OK) {
+        if (option.isPresent() && option.get() == ButtonType.OK) {
             if (!TodoListManager.deleteTodoList(selectedTodoList))
                 showAlert("Delete Error","And error had occurred during the delete.");
             else {

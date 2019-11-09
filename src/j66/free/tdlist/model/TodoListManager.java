@@ -159,28 +159,6 @@ abstract public class TodoListManager {
         return rtn;
     }
 
-    public static void updateTask(Task task){
-        if (task.getStatus() == StatusTask.PLAN){
-            if(task.getTodoDate() != null && task.getTodoDate().isBefore(LocalDate.now())){
-                task.setStatus(StatusTask.LATE);
-            }
-        }
-    }
-
-    public static void updateDoneTask(Task task){
-        if (task.getStatus() == StatusTask.DONE && !task.isDaily()){
-            if (task.getTodoDate().isBefore(LocalDate.now())){
-                task.setStatus(StatusTask.LATE);
-            }else {
-                task.setStatus(StatusTask.PLAN);
-            }
-        }else if (task.getStatus() == StatusTask.DONE && task.isDaily()){
-            task.setDoneDate(null);
-            task.setStatus(StatusTask.PLAN);
-            task.setTodoDate(LocalDate.now());
-        }
-    }
-
     public static void removeElement(Element element){
         Element elementParent = element.getParent();
         if (elementParent.getTypeElement() == TypeElement.TODOLIST){
@@ -232,36 +210,23 @@ abstract public class TodoListManager {
         List<Task> taskList = new ArrayList<>();
 
         for (Task task : todoList.getListTask()){
-            if (isTodoForDate(date,task))
+            if (TaskManager.isTodoForDate(date,task))
                 taskList.add(task);
         }
         for (Project project : todoList.getListProject()){
             for (Task task : project.getListTask()){
-                if (isTodoForDate(date,task))
+                if (TaskManager.isTodoForDate(date,task))
                     taskList.add(task);
             }
             for(SubProject subProject : project.getListSubProject()){
                 for (Task task : subProject.getListTask()){
-                    if (isTodoForDate(date,task))
+                    if (TaskManager.isTodoForDate(date,task))
                         taskList.add(task);
                 }
             }
         }
 
         return rangeByPriority(taskList);
-    }
-
-    private static boolean isTodoForDate(LocalDate date, Task task){
-        boolean rtn = false;
-        if (task.getStatus()!= StatusTask.CANCEL){
-            if (task.isDaily()){
-                rtn = true;
-            }else if(task.getStatus() == StatusTask.LATE || task.getStatus() == StatusTask.PLAN) {
-                if (!task.getTodoDate().isAfter(date))
-                    rtn = true;
-            }
-        }
-        return rtn;
     }
 
     private static List<Task> rangeByPriority(List<Task> sourceList){
@@ -307,29 +272,6 @@ abstract public class TodoListManager {
 
 
         return returnList;
-    }
-
-    public static String getParentInfoForTask(Task task){
-        String str = "";
-
-        switch (task.getParent().getTypeElement()){
-
-            case TODOLIST:
-                str += "Orphan task";
-                break;
-            case PROJECT:
-                str += "Parent : Project : "+task.getParent().getName();
-                break;
-            case SUBPROJECT:
-                SubProject subProject = (SubProject) task.getParent();
-                Project project = (Project) subProject.getParent();
-                str += "Parent : SubProject : "+subProject.getName();
-                str += "- - -";
-                str += "Parent Parent : Project : "+project.getName();
-                break;
-        }
-
-        return str;
     }
 
     public static void setAutoSave(boolean autoSave) {

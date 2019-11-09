@@ -113,7 +113,7 @@ public class HierarchyView {
                 rootProject.getChildren().add(rootSubProject);
                 for(Task task:subProject.getListTask()){
                     //task
-                    TodoListManager.updateTask(task);
+                    TaskManager.updateTask(task);
                     TreeItem<Element> itemTask = itemViewFactory(task);
                     rootSubProject.getChildren().add(itemTask);
                 }
@@ -121,14 +121,14 @@ public class HierarchyView {
             //
             for (Task task : project.getListTask()){
                 //task
-                TodoListManager.updateTask(task);
+                TaskManager.updateTask(task);
                 TreeItem<Element> itemTask = itemViewFactory(task);
                 rootProject.getChildren().add(itemTask);
             }
         }
         for (Task task : todoList.getListTask()){
             //task
-            TodoListManager.updateTask(task);
+            TaskManager.updateTask(task);
             TreeItem<Element> itemTask = itemViewFactory(task);
             rootElement.getChildren().add(itemTask);
         }
@@ -379,7 +379,7 @@ public class HierarchyView {
     void setTaskDaily(){
         Task task = (Task)selectedElement;
         task.setDaily(!task.isDaily());
-        TodoListManager.updateDoneTask(task);
+        TaskManager.updateTask(task);
         TodoListManager.setSave(false);
         treeView.getSelectionModel().getSelectedItem().setGraphic(getImageView(task));
     }
