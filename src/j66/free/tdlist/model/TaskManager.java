@@ -2,8 +2,18 @@ package j66.free.tdlist.model;
 
 import java.time.LocalDate;
 
+/**
+ * Authot : Jores NOUBISSI
+ * JavaDoc ceation Date : 2019-11-06
+ *
+ * Class : TaskManager
+ * Object : Manage logic action on a task
+ */
 abstract public class TaskManager {
-
+    /**
+     * Update task status and date information
+     * @param task : task to update
+     */
     public static void updateTask(Task task){
         switch (task.getStatus()){
             case PLAN:
@@ -28,6 +38,10 @@ abstract public class TaskManager {
         }
     }
 
+    /**
+     * Set Done or not and update relative information
+     * @param task : Task to Set
+     */
     public static void setTaskDone (Task task){
         if(task.getStatus()==StatusTask.DONE){
             task.setDoneDate(null);
@@ -39,6 +53,11 @@ abstract public class TaskManager {
         }
     }
 
+    /**
+     *
+     * @param task : Task to get information
+     * @return A string as Parent's information
+     */
     public static String getParentInfoForTask(Task task){
         String str = "";
 
@@ -55,13 +74,19 @@ abstract public class TaskManager {
                 Project project = (Project) subProject.getParent();
                 str += "Parent : SubProject : "+subProject.getName();
                 str += "- - -";
-                str += "Parent Parent : Project : "+project.getName();
+                str += "Parent of Parent : Project : "+project.getName();
                 break;
         }
 
         return str;
     }
 
+    /**
+     *
+     * @param date : The Date to check
+     * @param task : The Task
+     * @return a boolean
+     */
     static boolean isTodoForDate(LocalDate date, Task task){
         boolean rtn = false;
         updateTask(task);
