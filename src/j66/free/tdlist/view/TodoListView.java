@@ -37,6 +37,8 @@ public class TodoListView {
     @FXML
     private void initialize(){
 
+        datePicker.valueProperty().addListener((observable,oldDate,newDate)->refreshList());
+
         try{
             todayImage= new Image(new FileInputStream(Constant.TODAY_IMAGE),15,15,false,false);
             refreshImage= new Image(new FileInputStream(Constant.REFRESH_IMAGE),15,15,false,false);
