@@ -25,6 +25,7 @@ public class TodoListView {
     private VBox listContent;
 
 
+
     @FXML
     DatePicker datePicker;
     @FXML
@@ -61,11 +62,16 @@ public class TodoListView {
         listContent.getChildren().clear();
 
         List<Task> taskList = TodoListManager.getListTaskForDate(date);
-        for (Task task: taskList){
-            listContent.getChildren().add(main.getAnElementView(task).getAnchorPane());
+        if (taskList.size()!=0){
+            for (Task task: taskList){
+                listContent.getChildren().add(main.getAnElementView(task).getAnchorPane());
+            }
+        }else {
+            listContent.getChildren().add(ElementView.getElementNoTask());
         }
         scrollPane.setContent(listContent);
         datePicker.setValue(date);
+
     }
 
     public void setMain(Main main) {

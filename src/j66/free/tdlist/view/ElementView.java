@@ -33,6 +33,8 @@ public class ElementView {
     private Task task;
     private AnchorPane anchorPane;
 
+    static private Label elementNoTask;
+
     @FXML
     private void initialize(){
         EventHandler<MouseEvent> eventHandler = e -> contextMenu.show(menuButton,e.getScreenX(),e.getScreenY());
@@ -149,5 +151,18 @@ public class ElementView {
         TaskManager.setTaskDone(task);
         main.getControllerHierarchyView().setSelectedElement(main.getRegister().get(task),task);
         main.getControllerTodoListView().refreshList();
+    }
+
+    static Label getElementNoTask(){
+        if (elementNoTask == null)
+            setElementNoTask();
+        return elementNoTask;
+    }
+
+    static private void setElementNoTask(){
+        elementNoTask = new Label("No Tasks for this day.");
+        elementNoTask.setStyle("-fx-alignment:center; -fx-font-size:12pt");
+        elementNoTask.setTextFill(Color.web("#b2b2b1"));
+        elementNoTask.setPrefWidth(220);
     }
 }

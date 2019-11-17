@@ -323,6 +323,8 @@ public class HierarchyView {
         Task task = (Task) selectedElement;
         task.setStatus(StatusTask.CANCEL);
         selectedTreeView.setGraphic(new ImageView(cancelImage));
+        refreshList();
+
     }
 
     void addElement(){
@@ -362,10 +364,11 @@ public class HierarchyView {
         if (selectedElement.getTypeElement()==TypeElement.TASK){
             main.showEditTask((Task)selectedElement,ACTION_EDIT_ELEMENT);
             selectedTreeView.setGraphic(getImageView((Task)selectedElement));
-            main.getControllerTodoListView().refreshList();
+            refreshList();
         }else{
             main.showEditElement(selectedElement,ACTION_EDIT_ELEMENT);
         }
+        initializeDescription(selectedElement);
     }
 
     void planTask(){
@@ -451,5 +454,9 @@ public class HierarchyView {
         if (item != null) {
             item.setGraphic(getImageView(task));
         }
+    }
+
+    void refreshList(){
+        main.getControllerTodoListView().refreshList();
     }
 }

@@ -4,6 +4,7 @@ import j66.free.tdlist.model.Element;
 import j66.free.tdlist.model.Task;
 import j66.free.tdlist.model.TodoList;
 import j66.free.tdlist.model.TodoListManager;
+import j66.free.tdlist.tools.Constant;
 import j66.free.tdlist.tools.Tool;
 import j66.free.tdlist.view.*;
 
@@ -164,6 +165,8 @@ public class Main extends Application {
             mainStage.setWidth(515);
             mainStage.setHeight(640);
             mainStage.setOnCloseRequest(this::beforeClosingMainContentView);
+
+            mainStage.setTitle(TodoListManager.getTodoList().getName()+" - "+ APP_NAME);
 
         }catch (IOException e){
             e.printStackTrace();
