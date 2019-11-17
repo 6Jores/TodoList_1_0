@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
@@ -62,6 +63,8 @@ public class MainContentView {
     Button listButton;
     @FXML
     Button removeButton;
+    @FXML
+    Line line;
 
 
     @FXML
@@ -210,28 +213,31 @@ public class MainContentView {
 
     @FXML
     private void justHierarchyView(){
-
         hBox.getChildren().removeAll(hierarchyPane,todoListPane);
         hBox.getChildren().add(hierarchyPane);
 
-        stage.setWidth(265);
+        setViewSize(0,640,265,true);
 
         hierarchyButton.setDisable(true);
         bothButton.setDisable(false);
         listButton.setDisable(false);
+
+        main.getControllerTodoListView().setSlimViewOrNot(false);
     }
 
     @FXML
-    private void justListView(){
+    private void justTodoListView(){
 
         hBox.getChildren().removeAll(hierarchyPane,todoListPane);
         hBox.getChildren().add(todoListPane);
 
-        stage.setWidth(265);
+        setViewSize(0,640,265,true);
 
         hierarchyButton.setDisable(false);
         bothButton.setDisable(false);
         listButton.setDisable(true);
+
+        main.getControllerTodoListView().setSlimViewOrNot(false);
     }
 
     @FXML
@@ -239,16 +245,40 @@ public class MainContentView {
         hBox.getChildren().removeAll(hierarchyPane,todoListPane);
         hBox.getChildren().add(hierarchyPane);
         hBox.getChildren().add(todoListPane);
-        stage.setWidth(515);
+
+        setViewSize(0,640,515,true);
 
         hierarchyButton.setDisable(false);
         bothButton.setDisable(true);
         listButton.setDisable(false);
+
+        main.getControllerTodoListView().setSlimViewOrNot(false);
+    }
+
+    @FXML
+    private void slimView(){
+        hBox.getChildren().removeAll(hierarchyPane,todoListPane);
+        hBox.getChildren().add(todoListPane);
+
+        setViewSize(-43,640-43,265,false);
+        main.getControllerTodoListView().setSlimViewOrNot(true);
     }
 
     @FXML
     private void aboutView(){
         main.showAboutView();
+    }
+
+    private void setHeadVisibility(boolean visibility){
+        line.setVisible(visibility);
+        toolBar.setVisible(visibility);
+    }
+
+    private void setViewSize(int offset, int height, int width, boolean headVisibility){
+        hBox.setTranslateY(offset);
+        stage.setHeight(height);
+        stage.setWidth(width);
+        setHeadVisibility(headVisibility);
     }
 
 

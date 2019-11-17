@@ -165,4 +165,8 @@ public class ElementView {
         elementNoTask.setTextFill(Color.web("#b2b2b1"));
         elementNoTask.setPrefWidth(220);
     }
+
+    public Line getStatusLine() {
+        return statusLine;
+    }
 }

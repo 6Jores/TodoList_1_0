@@ -31,18 +31,25 @@
                               <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
                            </accelerator>
                         </MenuItem>
-                    <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Close">
+                    <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Quit">
                            <accelerator>
-                              <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                              <KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
                            </accelerator>
                         </MenuItem>
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="View">
                   <items>
+                        <MenuItem mnemonicParsing="false" onAction="#slimView" text="Slim View">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="V" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                           </accelerator></MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#bothView" text="Both View">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="B" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                           </accelerator></MenuItem>
                         <MenuItem mnemonicParsing="false" onAction="#justHierarchyView" text="Just Hierarchy" />
-                    <MenuItem mnemonicParsing="false" onAction="#justListView" text="Just TodoList" />
-                        <MenuItem mnemonicParsing="false" onAction="#bothView" text="Both View" />
+                    <MenuItem mnemonicParsing="false" onAction="#justTodoListView" text="Just TodoList" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="About">
@@ -62,10 +69,10 @@
                   <Separator orientation="VERTICAL" prefHeight="200.0" />
                   <Button fx:id="hierarchyButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#justHierarchyView" prefHeight="27.0" prefWidth="27.0" styleClass="toolBarButton" stylesheets="@style.css" />
                   <Button fx:id="bothButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#bothView" prefHeight="27.0" prefWidth="27.0" styleClass="toolBarButton" stylesheets="@style.css" />
-                  <Button fx:id="listButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#justListView" prefHeight="27.0" prefWidth="27.0" styleClass="toolBarButton" stylesheets="@style.css" />
+                  <Button fx:id="listButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#justTodoListView" prefHeight="27.0" prefWidth="27.0" styleClass="toolBarButton" stylesheets="@style.css" />
               </items>
             </ToolBar>
-            <Line endX="398.0" startX="-100.0" stroke="#b2b2b1" strokeWidth="3.0" />
+            <Line fx:id="line" endX="398.0" startX="-100.0" stroke="#b2b2b1" strokeWidth="3.0" />
             <HBox fx:id="hBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="500.0">
                <children>
                   <Pane fx:id="hierarchyPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="250.0" />

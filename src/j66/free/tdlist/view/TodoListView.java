@@ -24,7 +24,7 @@ public class TodoListView {
     private Image refreshImage;
     private VBox listContent;
 
-
+    private boolean slimViewOrNot;
 
     @FXML
     DatePicker datePicker;
@@ -64,7 +64,13 @@ public class TodoListView {
         List<Task> taskList = TodoListManager.getListTaskForDate(date);
         if (taskList.size()!=0){
             for (Task task: taskList){
-                listContent.getChildren().add(main.getAnElementView(task).getAnchorPane());
+                ElementView elementView = main.getAnElementView(task);
+                if (slimViewOrNot){
+                    elementView.descriptionLabel.setVisible(false);
+                    elementView.getAnchorPane().setPrefHeight(40);
+                    elementView.getStatusLine().setTranslateY(-30);
+                }
+                listContent.getChildren().add(elementView.getAnchorPane());
             }
         }else {
             listContent.getChildren().add(ElementView.getElementNoTask());
@@ -101,4 +107,10 @@ public class TodoListView {
         date = LocalDate.now();
         initializeTodoList();
     }
+
+    public void setSlimViewOrNot(boolean slimViewOrNot) {
+        this.slimViewOrNot = slimViewOrNot;
+        refreshList();
+    }
+
 }
