@@ -276,5 +276,11 @@ abstract public class TodoListManager {
 
     public static void setAutoSave(boolean autoSave) {
         TodoListManager.autoSave = autoSave;
+        if (autoSave && todoList!=null)
+            persistTodoList();
+    }
+
+    public static boolean isAutoSave() {
+        return autoSave;
     }
 }

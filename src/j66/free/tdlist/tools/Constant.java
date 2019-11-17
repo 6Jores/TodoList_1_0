@@ -35,6 +35,7 @@ abstract public class Constant {
     public static final String PLAN_TASK_IMAGE = IMAGE_PATH+"planTask.png";
     public static final String TODAY_IMAGE = IMAGE_PATH+"today.png";
     public static final String REFRESH_IMAGE = IMAGE_PATH+"refresh.png";
+    public static final String AUTO_SAVE_IMAGE = IMAGE_PATH+"autoSave.png";
 
     //Texts
     public static final String APP_NAME = "TodoList";

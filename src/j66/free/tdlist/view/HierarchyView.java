@@ -37,6 +37,7 @@ public class HierarchyView {
     private Image removeElementImage;
     private Image editElementImage;
     private Image planTaskImage;
+    private Image autoSaveImage;
     private ContextMenu contextMenu;
 
     private TreeItem<Element> selectedTreeView;
@@ -93,6 +94,7 @@ public class HierarchyView {
             editElementImage = new Image(new FileInputStream(EDIT_ELEMENT_IMAGE),20,20,false,false);
             removeElementImage = new Image(new FileInputStream(REMOVE_ELEMENT_IMAGE),20,20,false,false);
             planTaskImage =  new Image(new FileInputStream(PLAN_TASK_IMAGE),20,20,false,false);
+            autoSaveImage =  new Image(new FileInputStream(AUTO_SAVE_IMAGE),20,20,false,false);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -167,8 +169,6 @@ public class HierarchyView {
             }else{
                 contextMenu.getItems().add(item0);
             }
-
-
             if (selectedElement.getTypeElement() != TypeElement.TODOLIST){
                 MenuItem item2 = new MenuItem("Edit Element");
                 item2.setGraphic(new ImageView(editElementImage));
@@ -178,6 +178,13 @@ public class HierarchyView {
                 item3.setGraphic(new ImageView(removeElementImage));
                 contextMenu.getItems().add(item3);
                 item3.setOnAction(actionEvent -> removeElement());
+            }else{
+                CheckMenuItem autoSaveOrNotMenuItem = new CheckMenuItem("AutoSave");
+                autoSaveOrNotMenuItem.setGraphic(new ImageView(autoSaveImage));
+                autoSaveOrNotMenuItem.setSelected(TodoListManager.isAutoSave());
+                autoSaveOrNotMenuItem.setOnAction(actionEvent ->
+                        TodoListManager.setAutoSave(autoSaveOrNotMenuItem.isSelected()));
+                contextMenu.getItems().add(autoSaveOrNotMenuItem);
             }
 
             Menu info = new Menu("Info");
@@ -382,6 +389,7 @@ public class HierarchyView {
         TaskManager.updateTask(task);
         TodoListManager.setSave(false);
         treeView.getSelectionModel().getSelectedItem().setGraphic(getImageView(task));
+        main.getControllerHierarchyView().updateAdding();
     }
 
     private ImageView getImageView(Task task){
