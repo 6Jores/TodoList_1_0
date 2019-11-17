@@ -33,6 +33,7 @@ public class MainContentView {
     private Image _editElementImage;
     private Image _removeElementImage;
 
+
     @FXML
     HBox hBox;
     @FXML
@@ -80,6 +81,7 @@ public class MainContentView {
             _editElementImage = new Image(new FileInputStream(EDIT_ELEMENT_IMAGE),20,20,false,false);
             _removeElementImage = new Image(new FileInputStream(REMOVE_ELEMENT_IMAGE),20,20,false,false);
             _planTaskImage =  new Image(new FileInputStream(PLAN_TASK_IMAGE),20,20,false,false);
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

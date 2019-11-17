@@ -18,6 +18,7 @@ abstract public class Constant {
     private static final String IMAGE_PATH = curDir+"files/images/";
 
     //image paths
+    public static final String APP_ICON_IMAGE = IMAGE_PATH+"icon.png";
     public static final String PROJECT_IMAGE = IMAGE_PATH+"project.png";
     public static final String SUB_PROJECT_IMAGE = IMAGE_PATH+"subProject.png";
     public static final String PLAN_IMAGE = IMAGE_PATH+"plan.png";

@@ -14,11 +14,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TreeItem;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -36,6 +39,8 @@ public class Main extends Application {
     private TodoListView controllerTodoListView;
     private Map<Task, TreeItem<Element>> register = new HashMap<>();
 
+    private Image _appIconImage;
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -44,6 +49,14 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         mainStage = primaryStage;
         mainStage.setTitle(WELCOME_VIEW_TITLE);
+
+        try {
+            _appIconImage = new Image(new FileInputStream(APP_ICON_IMAGE),49,46,false,false);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        mainStage.getIcons().add(_appIconImage);
 
         this.initialization();
     }
@@ -99,6 +112,7 @@ public class Main extends Application {
             Scene scene = new Scene(pane);
             stage.setScene(scene);
             stage.setResizable(false);
+            stage.getIcons().add(_appIconImage);
 
             stage.showAndWait();
         } catch (IOException e) {
@@ -124,6 +138,7 @@ public class Main extends Application {
             Scene scene = new Scene(pane);
             stage.setScene(scene);
             stage.setResizable(false);
+            stage.getIcons().add(_appIconImage);
 
             EditElement controller = loader.getController();
             controller.setMain(this);
@@ -285,6 +300,7 @@ public class Main extends Application {
             Scene scene = new Scene(mainContent);
             stage.setScene(scene);
             stage.setResizable(false);
+            stage.getIcons().add(_appIconImage);
 
             EditTask controller = loader.getController();
             controller.setTask(task);
