@@ -83,3 +83,16 @@
 .scroll_Pane > .viewport{
     -fx-background-color : #2D3443;
 }
+
+.menuTitle .label{
+    -fx-text-fill:#4fd4e5;
+    -fx-underline:true;
+}
+
+.menuTitle .context-menu {
+    -fx-background-color : #2D3443;
+}
+
+.menuTitle {
+    -fx-background-color: #2D3443;
+}

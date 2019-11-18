@@ -17,9 +17,9 @@
    <children>
       <VBox prefHeight="605.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <MenuBar fx:id="menuBar">
+            <MenuBar fx:id="menuBar" styleClass="menuTitle" stylesheets="@style.css">
               <menus>
-                <Menu fx:id="todoListMenu" mnemonicParsing="false" style="-fx-text-fill: #b2b2b1;" text="TodoList">
+                <Menu fx:id="todoListMenu" mnemonicParsing="false" style="-fx-background-color: #2D3443;" text="TodoList">
                   <items>
                         <MenuItem mnemonicParsing="false" onAction="#returnToWelcomeView" text="Home">
                            <accelerator>
@@ -38,7 +38,7 @@
                         </MenuItem>
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="View">
+                <Menu mnemonicParsing="false" text="View...">
                   <items>
                         <MenuItem mnemonicParsing="false" onAction="#slimView" text="Slim View">
                            <accelerator>
