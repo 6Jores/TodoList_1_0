@@ -107,21 +107,25 @@ public class EditTask {
             task.setName(nameTask.getText());
             task.setDescription(descriptionTask.getText());
 
+            task.setPriority(priorityTaskComboBox.getValue());
+            task.setDaily(dailyCheckBox.isSelected());
+
             if (planCheckBox.isSelected()) {
-                LocalDate date = todoDatePicker.getValue();
-                task.setTodoDate(date);
+                if (!task.isDaily()){
+                    LocalDate date = todoDatePicker.getValue();
+                    task.setTodoDate(date);
+
+                    if (date.isBefore(LocalDate.now())) {
+                        task.setStatus(LATE);
+                    } else {
+                        task.setStatus(PLAN);
+                    }
+                }
                 if(task.getDoneDate() != null){
                     task.setDoneDate(null);
                 }
-                if (date.isBefore(LocalDate.now())) {
-                    task.setStatus(LATE);
-                } else {
-                    task.setStatus(PLAN);
-                }
             }
 
-            task.setPriority(priorityTaskComboBox.getValue());
-            task.setDaily(dailyCheckBox.isSelected());
             if (archivedCheckBox.isSelected()) {
                 task.setStatus(CANCEL);
             }

@@ -18,7 +18,7 @@ abstract public class TaskManager {
         switch (task.getStatus()){
             case PLAN:
                 if (task.isDaily()){
-                    if (!task.getTodoDate().isEqual(LocalDate.now())){
+                    if (task.getTodoDate() != null && !task.getTodoDate().isEqual(LocalDate.now())){
                         task.setTodoDate(LocalDate.now());
                     }
                 }else if (task.getTodoDate().isBefore(LocalDate.now())){
@@ -27,7 +27,7 @@ abstract public class TaskManager {
                 break;
             case DONE:
                 if (task.isDaily()){
-                    if (!task.getDoneDate().isEqual(LocalDate.now())){
+                    if (task.getDoneDate() != null && !task.getDoneDate().isEqual(LocalDate.now())){
                         task.setDoneDate(null);
                         task.setStatus(StatusTask.PLAN);
                         task.setTodoDate(LocalDate.now());
