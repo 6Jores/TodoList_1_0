@@ -6,7 +6,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="200.0" prefWidth="400.0" style="-fx-background-color: #2D3443;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="200.0" prefWidth="400.0" style="-fx-background-color: #2D3443;" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox layoutX="150.0" layoutY="34.0" prefHeight="200.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -15,7 +15,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" prefHeight="36.0" prefWidth="402.0" text="For notices, remarks and recommandations : noubissi.jores@gmail.com" textAlignment="CENTER" textFill="#b2b2b1" />
+            <Label alignment="CENTER" prefHeight="36.0" prefWidth="402.0" text="For notices, remarks and advise : noubissi.jores@gmail.com" textAlignment="CENTER" textFill="#b2b2b1" />
             <Line endX="300.0" endY="300.0" startX="-100.0" startY="300.0" stroke="#f15a23" strokeWidth="2.0" />
             <Label alignment="CENTER" prefHeight="50.0" prefWidth="400.0" text="TodoList - V1.0 - Licence : CC - BY - NC - SA" textAlignment="CENTER" textFill="#4fd4e5">
                <font>

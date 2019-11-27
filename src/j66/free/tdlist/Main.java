@@ -4,7 +4,6 @@ import j66.free.tdlist.model.Element;
 import j66.free.tdlist.model.Task;
 import j66.free.tdlist.model.TodoList;
 import j66.free.tdlist.model.TodoListManager;
-import j66.free.tdlist.tools.Constant;
 import j66.free.tdlist.tools.Tool;
 import j66.free.tdlist.view.*;
 
