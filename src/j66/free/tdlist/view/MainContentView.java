@@ -22,6 +22,13 @@ import java.util.Optional;
 
 import static j66.free.tdlist.tools.Constant.*;
 
+/**
+ * Author : Jores NOUBISSI
+ * JavaDoc creation Date : 2019-12-02
+ *
+ * Class : MainContentView
+ * Object : Manage HierarchyView and TodoListView
+ */
 public class MainContentView {
     private Main main;
     private Stage stage;
@@ -66,15 +73,18 @@ public class MainContentView {
     @FXML
     Line line;
 
-
+    /**
+     * Initialization
+     */
     @FXML
     private void initialize(){
-
         EventHandler<MouseEvent> eventHandler = e -> setItemMenuSave();
         menuBar.addEventHandler(MouseEvent.MOUSE_ENTERED,eventHandler);
-
     }
 
+    /**
+     * Images initialization
+     */
     private void initializeImages(){
         try{
             _bothViewImage = new Image(new FileInputStream(BOTH_VIEW_IMAGE),20,20,false,false);
@@ -90,12 +100,20 @@ public class MainContentView {
         }
     }
 
+    /**
+     *
+     * @param main the main
+     */
     public void setMain(Main main) {
         this.main = main;
         initializeImages();
         initToolBar();
     }
 
+    /**
+     * Finalization of initialization
+     * Adding Hierarchy view and TodoListView
+     */
     public void endInitialization(){
         this.main.initHierarchyView();
         this.main.initTodoListView(LocalDate.now());
@@ -103,14 +121,24 @@ public class MainContentView {
         todoListPane.getChildren().add(this.main.getControllerTodoListView().getAnchorPane());
     }
 
+    /**
+     *
+     * @param stage the stage
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
+    /**
+     * Setting ItemMenu Save
+     */
     private void setItemMenuSave(){
         menuItemSave.setDisable(TodoListManager.isSave());
     }
 
+    /**
+     * ToolBar initialization
+     */
     private void initToolBar(){
         addButton.setGraphic(new ImageView(_addElementImage));
         addButton.setTooltip(new Tooltip("Add Element"));
@@ -135,6 +163,10 @@ public class MainContentView {
         listButton.setTooltip(new Tooltip("Just TodoList View"));
     }
 
+    /**
+     * ToolBar updating
+     * @param selectedElement : selected element
+     */
     void updateToolBarElement(Element selectedElement){
         if (toolBar.isVisible()){
             switch (selectedElement.getTypeElement()){
@@ -161,6 +193,9 @@ public class MainContentView {
         }
     }
 
+    /**
+     * Closing mainContent and return to welcomeView
+     */
     @FXML
     private void returnToWelcomeView(){
         if (!TodoListManager.isSave()){
@@ -173,11 +208,17 @@ public class MainContentView {
             main.showHome();
     }
 
+    /**
+     * Action save current todoList
+     */
     @FXML
     private void saveTodoList(){
         TodoListManager.persistTodoList();
     }
 
+    /**
+     * Close the application
+     */
     @FXML
     private void closeApp (){
         if (!TodoListManager.isSave()){
@@ -191,26 +232,41 @@ public class MainContentView {
 
     }
 
+    /**
+     * Adding and element on hierarchyView
+     */
     @FXML
     private void addElement(){
         main.getControllerHierarchyView().addElement();
     }
 
+    /**
+     * Plan the task selected on hierarchyView
+     */
     @FXML
     private void planTask(){
         main.getControllerHierarchyView().planTask();
     }
 
+    /**
+     * Edit the element selected on hierarchyView
+     */
     @FXML
     private void editElement(){
         main.getControllerHierarchyView().editElement();
     }
 
+    /**
+     * Remove the element selected on hierarchyView
+     */
     @FXML
     private void removeElement(){
         main.getControllerHierarchyView().removeElement();
     }
 
+    /**
+     * Show just the hierarchyView
+     */
     @FXML
     private void justHierarchyView(){
         hBox.getChildren().removeAll(hierarchyPane,todoListPane);
@@ -225,6 +281,9 @@ public class MainContentView {
         main.getControllerTodoListView().setSlimViewOrNot(false);
     }
 
+    /**
+     * Show just the TodoListView
+     */
     @FXML
     private void justTodoListView(){
 
@@ -240,6 +299,9 @@ public class MainContentView {
         main.getControllerTodoListView().setSlimViewOrNot(false);
     }
 
+    /**
+     * Show the TodoListView and hierarchyView
+     */
     @FXML
     private void bothView(){
         hBox.getChildren().removeAll(hierarchyPane,todoListPane);
@@ -255,6 +317,9 @@ public class MainContentView {
         main.getControllerTodoListView().setSlimViewOrNot(false);
     }
 
+    /**
+     * Show slimView
+     */
     @FXML
     private void slimView(){
         hBox.getChildren().removeAll(hierarchyPane,todoListPane);
@@ -264,16 +329,30 @@ public class MainContentView {
         main.getControllerTodoListView().setSlimViewOrNot(true);
     }
 
+    /**
+     * Show About the application
+     */
     @FXML
     private void aboutView(){
         main.showAboutView();
     }
 
+    /**
+     * for slimView
+     * @param visibility visible or not
+     */
     private void setHeadVisibility(boolean visibility){
         line.setVisible(visibility);
         toolBar.setVisible(visibility);
     }
 
+    /**
+     *
+     * @param offset - HBox offset
+     * @param height - scene height
+     * @param width - scene width
+     * @param headVisibility - head or not
+     */
     private void setViewSize(int offset, int height, int width, boolean headVisibility){
         hBox.setTranslateY(offset);
         stage.setHeight(height);

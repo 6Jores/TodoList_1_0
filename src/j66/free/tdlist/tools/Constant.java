@@ -5,7 +5,7 @@ package j66.free.tdlist.tools;
  * JavaDoc creation Date : 2019-11-05
  *
  * Class : Constant
- * Object : Group basic constants use in the project
+ * Object : Group basic constants used in the project
  *
  * All constants are not there, some of them are directly create in the using class
  */

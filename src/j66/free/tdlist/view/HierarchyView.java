@@ -21,6 +21,13 @@ import java.util.Optional;
 
 import static j66.free.tdlist.tools.Constant.*;
 
+/**
+ * Author : Jores NOUBISSI
+ * JavaDoc creation Date : 2019-12-02
+ *
+ * Class : HierarchyView
+ * Object : TodoList' Hierarchy ListView
+ */
 public class HierarchyView {
 
     private Main main;
@@ -54,6 +61,9 @@ public class HierarchyView {
     @FXML
     TreeView<Element> treeView;
 
+    /**
+     * Initialization
+     */
     @FXML
     private void initialize(){
 
@@ -73,12 +83,19 @@ public class HierarchyView {
         treeView.addEventFilter(MouseEvent.MOUSE_CLICKED,eventHandler);
     }
 
+    /**
+     *
+     * @param main the main
+     */
     public void setMain(Main main) {
         this.main = main;
         initializeDescription(null);
         initializeTreeView(TodoListManager.getTodoList());
     }
 
+    /**
+     * Image initialization
+     */
     private void initializeImages(){
         try {
             projectImage = new Image(new FileInputStream(PROJECT_IMAGE),20,20,false,false);
@@ -100,6 +117,10 @@ public class HierarchyView {
         }
     }
 
+    /**
+     * TreeView Initialisation
+     * @param todoList : current todoList
+     */
     private void initializeTreeView(TodoList todoList){
 
         TreeItem<Element> rootElement = itemViewFactory(todoList);
@@ -137,6 +158,10 @@ public class HierarchyView {
         treeView.setRoot(rootElement);
     }
 
+    /**
+     * ContextMenu
+     * @param event : the filter event
+     */
     private void showContextMenu(MouseEvent event){
         contextMenu = new ContextMenu();
 
@@ -263,6 +288,11 @@ public class HierarchyView {
         treeView.setOnContextMenuRequested(contextMenuEvent -> contextMenu.show(treeView, event.getScreenX(),event.getScreenY()));
     }
 
+    /**
+     * Set the TreeItem
+     * @param element : the element
+     * @return TreeItem
+     */
     private TreeItem<Element> itemViewFactory(Element element){
         TreeItem<Element> item = new TreeItem<>();
         switch (element.getTypeElement()){
@@ -286,6 +316,10 @@ public class HierarchyView {
         return item;
     }
 
+    /**
+     * Description of selected element
+     * @param element : selected element
+     */
     private void initializeDescription(Element element){
         if (element != null){
             elementName.setText(element.getName());
@@ -301,6 +335,11 @@ public class HierarchyView {
         }
     }
 
+    /**
+     * If the text is too long, add and tooltip to the label
+     * @param label : the label
+     * @param maxLength : the length
+     */
     private void toolTipIfNecessary(Label label, int maxLength){
         if (label != null){
             if (label.getText().length()>maxLength){
@@ -311,14 +350,25 @@ public class HierarchyView {
         }
     }
 
+    /**
+     *
+     * @return Get anchorPane
+     */
     AnchorPane getAnchorPane() {
         return anchorPane;
     }
 
+    /**
+     *
+     * @param anchorPane to anchorPane to set
+     */
     public void setAnchorPane(AnchorPane anchorPane) {
         this.anchorPane = anchorPane;
     }
 
+    /**
+     * Cancel a Task
+     */
     void cancelTask(){
         Task task = (Task) selectedElement;
         task.setStatus(StatusTask.CANCEL);
@@ -327,6 +377,9 @@ public class HierarchyView {
 
     }
 
+    /**
+     * Add an element to the todoList
+     */
     void addElement(){
         newElement = null;
         ArrayList<Object> choice = new ArrayList<>();
@@ -360,6 +413,9 @@ public class HierarchyView {
 
     }
 
+    /**
+     * Run Edit Element
+     */
     void editElement(){
         if (selectedElement.getTypeElement()==TypeElement.TASK){
             main.showEditTask((Task)selectedElement,ACTION_EDIT_ELEMENT);
@@ -371,10 +427,16 @@ public class HierarchyView {
         initializeDescription(selectedElement);
     }
 
+    /**
+     * Plan a task
+     */
     void planTask(){
         editElement();
     }
 
+    /**
+     * Remove an element
+     */
     void removeElement(){
         Alert alert = Tool.getConfirmAlert("Confirm suppression",
                 selectedElement.getTypeElement()+" : "+selectedElement.getName());
@@ -386,6 +448,9 @@ public class HierarchyView {
         }
     }
 
+    /**
+     * Set a task daily
+     */
     void setTaskDaily(){
         Task task = (Task)selectedElement;
         task.setDaily(!task.isDaily());
@@ -395,6 +460,11 @@ public class HierarchyView {
         main.getControllerHierarchyView().updateAdding();
     }
 
+    /**
+     *
+     * @param task selected task
+     * @return the ImageView
+     */
     private ImageView getImageView(Task task){
         ImageView imageView=null;
         if (task.isDaily() && task.getStatus()!=StatusTask.CANCEL){
@@ -421,6 +491,9 @@ public class HierarchyView {
         return imageView;
     }
 
+    /**
+     * Set Selected Element
+     */
     private void setSelectedElement(){
         selectedTreeView = treeView.getSelectionModel().getSelectedItem();
         if (selectedTreeView != null){
@@ -433,15 +506,27 @@ public class HierarchyView {
         }
     }
 
+    /**
+     * set a new element
+     * @param object an element
+     */
     private void setNewElement(Object object) {
         TypeElement typeElement = (TypeElement)object;
         newElement = TodoListManager.getNewElement(typeElement,selectedElement);
     }
 
+    /**
+     * TreeView updating with new element
+     */
     void updateAdding(){
         selectedTreeView.getChildren().add(itemViewFactory(newElement));
     }
 
+    /**
+     * Selection of an element on the TreeView
+     * @param item TreeItem
+     * @param task a Task
+     */
     void setSelectedElement(TreeItem<Element> item,Task task){
         int row = treeView.getRow(item);
         if (item != null){
@@ -456,7 +541,10 @@ public class HierarchyView {
         }
     }
 
-    void refreshList(){
+    /**
+     * Raffret the TodoListView
+     */
+    private void refreshList(){
         main.getControllerTodoListView().refreshList();
     }
 }

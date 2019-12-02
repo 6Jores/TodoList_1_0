@@ -1,11 +1,10 @@
 package j66.free.tdlist.view;
 
 import j66.free.tdlist.Main;
-
 import j66.free.tdlist.model.StatusTask;
 import j66.free.tdlist.model.Task;
 import j66.free.tdlist.model.TaskManager;
-import j66.free.tdlist.model.TodoListManager;
+
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -17,6 +16,13 @@ import javafx.scene.shape.Line;
 
 import java.time.LocalDate;
 
+/**
+ * Author : Jores NOUBISSI
+ * JavaDoc creation Date : 2019-12-02
+ *
+ * Class : ElementView
+ * Object : View of an element for ListView
+ */
 public class ElementView {
     @FXML
     CheckBox doOrNotCheckBox;
@@ -35,16 +41,27 @@ public class ElementView {
 
     static private Label elementNoTask;
 
+    /**
+     * Initialization of listeners
+     */
     @FXML
     private void initialize(){
         EventHandler<MouseEvent> eventHandler = e -> contextMenu.show(menuButton,e.getScreenX(),e.getScreenY());
         menuButton.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
     }
 
+    /**
+     *
+     * @param main : The general main
+     */
     public void setMain(Main main) {
         this.main = main;
     }
 
+    /**
+     * setting and initialization
+     * @param anchorPane the anchorPane
+     */
     public void setAnchorPane(AnchorPane anchorPane) {
         this.anchorPane = anchorPane;
         menuButton.setStyle("-fx-text-fill: #2D3443");
@@ -52,10 +69,21 @@ public class ElementView {
         this.anchorPane.addEventHandler(MouseEvent.MOUSE_EXITED,event -> menuButton.setStyle("-fx-text-fill:#2D3443"));
     }
 
+    /**
+     *
+     * @param task : the task of this view
+     */
     public void setTask(Task task) {
         this.task = task;
     }
 
+    /**
+     * Initialization
+     * - Title
+     * - Context menu
+     * - Description
+     * - Tooltip
+     */
     public void initElementView(){
 
         doOrNotCheckBox.setText(task.getName());
@@ -124,28 +152,44 @@ public class ElementView {
 
     }
 
+    /**
+     *
+     * @return the anchorPane
+     */
     AnchorPane getAnchorPane() {
         return anchorPane;
     }
 
+    /**
+     * Get EditTaskView
+     */
     private void rePlanTask(){
         main.getControllerHierarchyView().setSelectedElement(main.getRegister().get(task),task);
         main.getControllerHierarchyView().editElement();
         main.getControllerTodoListView().refreshList();
     }
 
+    /**
+     * Set a task archived
+     */
     private void archiveTask(){
         main.getControllerHierarchyView().setSelectedElement(main.getRegister().get(task),task);
         main.getControllerHierarchyView().cancelTask();
         main.getControllerTodoListView().refreshList();
     }
 
+    /**
+     * Set a task daily
+     */
     private void setDailyTask(){
         main.getControllerHierarchyView().setSelectedElement(main.getRegister().get(task),task);
         main.getControllerHierarchyView().setTaskDaily();
         main.getControllerTodoListView().refreshList();
     }
 
+    /**
+     * Set a task done
+     */
     @FXML
     private void setDone(){
         TaskManager.setTaskDone(task);
@@ -153,12 +197,19 @@ public class ElementView {
         main.getControllerTodoListView().refreshList();
     }
 
+    /**
+     * To notify no Task for a day
+     * @return element not task
+     */
     static Label getElementNoTask(){
         if (elementNoTask == null)
             setElementNoTask();
         return elementNoTask;
     }
 
+    /**
+     * Init ElementNoTask
+     */
     static private void setElementNoTask(){
         elementNoTask = new Label("No Tasks for this day.");
         elementNoTask.setStyle("-fx-alignment:center; -fx-font-size:12pt");
@@ -166,7 +217,11 @@ public class ElementView {
         elementNoTask.setPrefWidth(220);
     }
 
-    public Line getStatusLine() {
+    /**
+     *
+     * @return the line to show the priority
+     */
+    Line getStatusLine() {
         return statusLine;
     }
 }

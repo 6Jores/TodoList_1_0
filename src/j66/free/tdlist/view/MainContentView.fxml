@@ -78,7 +78,7 @@
                <children>
                   <Pane fx:id="hierarchyPane" prefHeight="540.0" prefWidth="250.0">
                      <HBox.margin>
-                        <Insets left="5.0" right="5.0" />
+                        <Insets left="4.0" right="4.0" />
                      </HBox.margin></Pane>
                   <Pane fx:id="todoListPane" maxWidth="1.7976931348623157E308" prefHeight="540.0" prefWidth="250.0">
                      <HBox.margin>

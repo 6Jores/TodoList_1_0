@@ -3,6 +3,7 @@ package j66.free.tdlist.view;
 import j66.free.tdlist.Main;
 import j66.free.tdlist.model.PriorityTask;
 import j66.free.tdlist.model.Task;
+import j66.free.tdlist.model.TypeElement;
 import j66.free.tdlist.tools.Constant;
 import j66.free.tdlist.tools.Tool;
 
@@ -21,8 +22,8 @@ import static j66.free.tdlist.model.StatusTask.*;
  * Author : Jores NOUBISSI
  * JavaDoc creation Date : 2019-11-06
  *
- * Class : EditTask;
- * Object : Edition and Creation of a Task
+ * Class : EditTask
+ * Object : View for Edition or Creation Task
  */
 public class EditTask {
 
@@ -53,6 +54,10 @@ public class EditTask {
         this.main = main;
     }
 
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
     /**
      * Setting Task and Filling form
      * @param task : Created or Edited Task
@@ -73,15 +78,18 @@ public class EditTask {
         priorityTaskComboBox.getSelectionModel().select(task.getPriority());
     }
 
+    /**
+     *
+     * @param action Creation or Edition
+     */
     public void setAction(String action) {
         this.action = action;
-        titleLabel.setText(action + " Task");
+        titleLabel.setText(action + " " + TypeElement.TASK);
     }
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
-
+    /**
+     * View initialization
+     */
     @FXML
     private void initialize(){
         todoDatePicker.setShowWeekNumbers(true);
@@ -91,6 +99,9 @@ public class EditTask {
         priorityTaskComboBox.setItems(observableList);
     }
 
+    /**
+     * Cancel the action
+     */
     @FXML
     private void cancelAction(){
         stage.close();
@@ -139,6 +150,9 @@ public class EditTask {
 
     }
 
+    /**
+     * Enable or not TodoDate setting
+     */
     @FXML
     private void updatePickerEnable(){
         todoDatePicker.setDisable(!planCheckBox.isSelected());
