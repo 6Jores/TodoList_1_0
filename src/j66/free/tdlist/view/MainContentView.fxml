@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -13,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="500.0" style="-fx-background-color: none;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.211" xmlns:fx="http://javafx.com/fxml/1" fx:controller="j66.free.tdlist.view.MainContentView">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="515.0" style="-fx-background-color: #2D3443;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="j66.free.tdlist.view.MainContentView">
    <children>
       <VBox prefHeight="605.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -72,12 +73,21 @@
                   <Button fx:id="listButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#justTodoListView" prefHeight="27.0" prefWidth="27.0" styleClass="toolBarButton" stylesheets="@style.css" />
               </items>
             </ToolBar>
-            <Line fx:id="line" endX="398.0" startX="-100.0" stroke="#b2b2b1" strokeWidth="3.0" />
-            <HBox fx:id="hBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="500.0">
+            <Line fx:id="line" endX="415.0" startX="-100.0" stroke="#b2b2b1" strokeWidth="3.0" />
+            <HBox fx:id="hBox" prefHeight="535.0" prefWidth="500.0" style="-fx-background-color: #2D3443;">
                <children>
-                  <Pane fx:id="hierarchyPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="250.0" />
-                  <Pane fx:id="todoListPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="250.0" />
+                  <Pane fx:id="hierarchyPane" prefHeight="540.0" prefWidth="250.0">
+                     <HBox.margin>
+                        <Insets left="5.0" right="5.0" />
+                     </HBox.margin></Pane>
+                  <Pane fx:id="todoListPane" maxWidth="1.7976931348623157E308" prefHeight="540.0" prefWidth="250.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin></Pane>
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </HBox>
          </children>
       </VBox>

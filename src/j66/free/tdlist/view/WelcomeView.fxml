@@ -156,7 +156,10 @@
                         <HBox prefHeight="45.0" prefWidth="233.0">
                            <children>
                               <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0" style="-fx-text-fill: #b2b2b1;" text="J66 - 2019 - " textFill="#b2b2b1" />
-                              <Label fx:id="labelAbout" alignment="CENTER" prefHeight="30.0" prefWidth="72.0" styleClass="labelAbout" stylesheets="@style.css" text="About ?" textFill="#b2b2b1" />
+                              <Label fx:id="labelAbout" alignment="CENTER" prefHeight="30.0" prefWidth="72.0" styleClass="labelAbout" stylesheets="@style.css" text="About ?" textFill="#b2b2b1">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin></Label>
                            </children>
                         </HBox>
                      </children>
