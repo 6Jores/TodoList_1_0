@@ -15,6 +15,14 @@ import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Author : Jores NOUBISSI
+ * JavaDoc creation Date : 2019-12-02
+ *
+ * Class : TodoListView
+ * Object : List tasks of a day
+ */
+
 public class TodoListView {
     private Main main;
     private LocalDate date;
@@ -35,6 +43,9 @@ public class TodoListView {
     @FXML
     ScrollPane scrollPane;
 
+    /**
+     * Initialization view
+     */
     @FXML
     private void initialize(){
 
@@ -57,6 +68,9 @@ public class TodoListView {
 
     }
 
+    /**
+     * Initialization elements
+     */
     public void initializeTodoList(){
 
         listContent.getChildren().clear();
@@ -80,35 +94,61 @@ public class TodoListView {
 
     }
 
+    /**
+     *
+     * @param main The main
+     */
     public void setMain(Main main) {
         this.main = main;
     }
 
+    /**
+     *
+     * @param anchorPane set the AnchorPane
+     */
     public void setAnchorPane(AnchorPane anchorPane) {
         this.anchorPane = anchorPane;
     }
 
+    /**
+     *
+     * @param date The TodoList of the date
+     */
     public void setDate(LocalDate date) {
         this.date = date;
     }
 
+    /**
+     *
+     * @return the anchorPane
+     */
     AnchorPane getAnchorPane() {
         return anchorPane;
     }
 
+    /**
+     * Refresh to list of task for a date
+     */
     @FXML
     public void refreshList(){
         date = datePicker.getValue();
         initializeTodoList();
     }
 
+    /**
+     * Show the list of task for today
+     */
     @FXML
     private void todayList(){
         date = LocalDate.now();
         initializeTodoList();
     }
 
-    public void setSlimViewOrNot(boolean slimViewOrNot) {
+    /**
+     *
+     * @param slimViewOrNot, it's a slimView or not?
+     */
+    void setSlimViewOrNot(boolean slimViewOrNot) {
         this.slimViewOrNot = slimViewOrNot;
         refreshList();
     }

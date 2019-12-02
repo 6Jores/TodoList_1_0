@@ -29,6 +29,13 @@ import java.util.Optional;
 
 import static j66.free.tdlist.tools.Constant.*;
 
+/**
+ * Author : Jores NOUBISSI
+ * JavaDoc creation Date : 2019-12-02
+ *
+ * Class : Main
+ * Object : The controller
+ */
 public class Main extends Application {
 
     private Stage mainStage;
@@ -36,6 +43,10 @@ public class Main extends Application {
     private WelcomeView controllerWelcomeView;
     private HierarchyView controllerHierarchyView;
     private TodoListView controllerTodoListView;
+
+    /**
+     * The register is a link between the hierarchyView and the TodoListView
+     */
     private Map<Task, TreeItem<Element>> register = new HashMap<>();
 
     private Image _appIconImage;
@@ -44,6 +55,10 @@ public class Main extends Application {
         launch(args);
     }
 
+    /**
+     * App running
+     * @param primaryStage : primary Stage
+     */
     @Override
     public void start(Stage primaryStage) {
         mainStage = primaryStage;
@@ -60,6 +75,9 @@ public class Main extends Application {
         this.initialization();
     }
 
+    /**
+     * Initialization
+     */
     private void initialization(){
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("view/WelcomeView.fxml"));
@@ -86,6 +104,10 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Action before Closing WelcomeView
+     * @param event : the trigger event
+     */
     private void beforeClosingWelcomeView(WindowEvent event){
         Alert alert = Tool.getConfirmAlert("Closing Welcome View","Would you really want to quit ?");
         Optional<ButtonType> optional = alert.showAndWait();
@@ -96,6 +118,9 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * init and show the about view
+     */
     public void showAboutView(){
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("view/AboutView.fxml"));
@@ -119,10 +144,18 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Welcome view updating
+     */
     public void updateWelcomeView (){
         controllerWelcomeView.updateFileListView();
     }
 
+    /**
+     *
+     * @param element the element to edit
+     * @param action the action
+     */
     public void showEditElement(Element element, String action){
         try{
             FXMLLoader loader = new FXMLLoader();
@@ -156,6 +189,10 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Open a todoList
+     * @param todoList the todoList to open
+     */
     public void openATodoList(TodoList todoList){
 
         TodoListManager.setTodoList(todoList);
@@ -187,6 +224,10 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Action before Closing WelcomeView
+     * @param event the trigger event
+     */
     private void beforeClosingMainContentView(WindowEvent event){
         if (!TodoListManager.isSave()){
             Alert alert = Tool.getConfirmAlert("Closing the application","Would you really want to quit " +
@@ -200,6 +241,9 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Hierarchy view initialization
+     */
     public void initHierarchyView(){
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("view/HierarchyView.fxml"));
@@ -217,6 +261,10 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * TodoList view initialisation
+     * @param date : the date for the initialization
+     */
     public void initTodoListView(LocalDate date){
         FXMLLoader loader =  new FXMLLoader();
         loader.setLocation(Main.class.getResource("view/TodoListView.fxml"));
@@ -238,6 +286,11 @@ public class Main extends Application {
 
     }
 
+    /**
+     *
+     * @param task the task for the élement View
+     * @return an elementView
+     */
     public ElementView getAnElementView(Task task){
         ElementView elementView = new ElementView();
 
@@ -261,28 +314,50 @@ public class Main extends Application {
         return elementView;
     }
 
+    /**
+     *
+     * @return the Hierarchy View Controller
+     */
     public HierarchyView getControllerHierarchyView() {
         return controllerHierarchyView;
     }
 
+    /**
+     *
+     * @return the Welcome View Controller
+     */
     public WelcomeView getControllerWelcomeView() {
         return controllerWelcomeView;
     }
-
+    /**
+     *
+     * @return the Main Content View Controller
+     */
     public MainContentView getControllerMainContentView() {
         return controllerMainContentView;
     }
-
+    /**
+     *
+     * @return the TodoList View Controller
+     */
     public TodoListView getControllerTodoListView() {
         return controllerTodoListView;
     }
 
+    /***
+     * Return to Welcome View
+     */
     public void showHome(){
         mainStage.setScene(controllerWelcomeView.getScene());
         mainStage.setWidth(525);
         mainStage.setHeight(450);
     }
 
+    /**
+     *
+     * @param task the task for edition
+     * @param action edition or creation
+     */
     public void showEditTask(Task task, String action){
 
         FXMLLoader loader = new FXMLLoader();
@@ -320,10 +395,19 @@ public class Main extends Application {
 
     }
 
+    /**
+     *
+     * @param task : the task from todoListView
+     * @param treeItem the treeItem from HierarchyView
+     */
     public void updateRegister(Task task, TreeItem<Element> treeItem){
         register.put(task,treeItem);
     }
 
+    /**
+     *
+     * @return the register
+     */
     public Map<Task, TreeItem<Element>> getRegister() {
         return register;
     }

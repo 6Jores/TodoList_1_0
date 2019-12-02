@@ -19,7 +19,13 @@ import java.util.Optional;
 
 import static j66.free.tdlist.tools.Tool.showAlert;
 
-
+/**
+ * Author : Jores NOUBISSI
+ * JavaDoc creation Date : 2019-12-02
+ *
+ * Class : Welcome View
+ * Object : Application first view
+ */
 public class WelcomeView {
 
     private Main main;
@@ -46,6 +52,10 @@ public class WelcomeView {
     @FXML
     Label labelAbout;
 
+    /**
+     *
+     * @param main The main
+     */
     public void setMain(Main main){
         this.main = main;
 
@@ -56,6 +66,9 @@ public class WelcomeView {
         initializeDescription(null);
     }
 
+    /**
+     * View initialization
+     */
     @FXML
     private void initialize(){
         fileListView.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue)
@@ -84,6 +97,9 @@ public class WelcomeView {
 
     }
 
+    /**
+     * Show or not archived TodoList
+     */
     @FXML
     public void setArchivedOrNot(){
         if (search.getText().equals(""))
@@ -92,6 +108,10 @@ public class WelcomeView {
             runSearch(search.getText());
     }
 
+    /**
+     * Show description of the selected todoList
+     * @param todoList : selected todoList
+     */
     void initializeDescription(TodoList todoList){
         if (todoList != null && !todoList.getName().equals(Constant.NO_RESULT)){
             todoListName.setText(todoList.getName());
@@ -113,6 +133,9 @@ public class WelcomeView {
         }
     }
 
+    /**
+     * Open a selected todoList
+     */
     @FXML
     private void openTodoList(){
         if (thereIsASelected()){
@@ -129,17 +152,26 @@ public class WelcomeView {
         }
     }
 
+    /**
+     * Set a todoList archived or not
+     */
     private void archiveTodoList(){
         selectedTodoList.setArchived(!selectedTodoList.isArchived());
         setArchivedOrNot();
         TodoListManager.persistATodoList(selectedTodoList);
     }
 
+    /**
+     * Create a new todoList
+     */
     private void newTodoList(){
         search.setText("");
         main.showEditElement(TodoListManager.getTodoList(true), Constant.ACTION_NEW_ELEMENT);
     }
 
+    /**
+     * Copy a todoList
+     */
     private void copyTodoList(){
         if (!TodoListManager.copyTodoList(selectedTodoList))
             showAlert("Copy Error","And error had occurred during the copy.");
@@ -148,6 +180,9 @@ public class WelcomeView {
         }
     }
 
+    /**
+     * Delete a todoList
+     */
     private void deleteTodoList(){
         Alert alert = Tool.getConfirmAlert("Confirm suppression","TodoList : "+selectedTodoList.getName());
         Optional<ButtonType> option = alert.showAndWait();
@@ -161,27 +196,45 @@ public class WelcomeView {
         }
     }
 
+    /**
+     * Edit a todoList
+     */
     private void editTodoList(){
         main.showEditElement(selectedTodoList, Constant.ACTION_EDIT_ELEMENT);
     }
 
+    /**
+     * Filter list of todoList
+     * @param key : for research
+     */
     private void runSearch(String key){
         if (key != null){
             updateFileListView(TodoListManager.getTodoLists(key,withArchivedOrNot.isSelected()));
         }
     }
 
+    /**
+     * show a particular list
+     * @param todoLists : todoLists list
+     */
     private void updateFileListView(ObservableList<TodoList> todoLists){
         fileListView.getItems().clear();
         fileListView.getItems().addAll(todoLists);
 
     }
 
+    /**
+     * Show all todoLists
+     */
     public void updateFileListView(){
         fileListView.getItems().clear();
         fileListView.getItems().addAll(TodoListManager.getTodoLists(withArchivedOrNot.isSelected()));
     }
 
+    /**
+     *
+     * @return a todoList is selected or not
+     */
     private boolean thereIsASelected(){
         boolean rtn = fileListView.getSelectionModel().getSelectedItem() != null;
         if (rtn) {
@@ -191,6 +244,10 @@ public class WelcomeView {
         return rtn;
     }
 
+    /**
+     *
+     * @param event : Show context menu after right click
+     */
     private void showPop(MouseEvent event){
 
         contextMenu = new ContextMenu();
@@ -232,14 +289,25 @@ public class WelcomeView {
         fileListView.setOnContextMenuRequested(contextMenuEvent -> contextMenu.show(fileListView, event.getScreenX(),event.getScreenY()));
     }
 
+    /**
+     *
+     * @return the view' scene
+     */
     public Scene getScene() {
         return scene;
     }
 
+    /**
+     *
+     * @param scene set the scene
+     */
     public void setScene(Scene scene) {
         this.scene = scene;
     }
 
+    /**
+     * Show About the application
+     */
     private void showAbout(){
         main.showAboutView();
     }
