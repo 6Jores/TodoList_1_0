@@ -49,11 +49,6 @@ public class Main extends Application {
         mainStage = primaryStage;
         mainStage.setTitle(WELCOME_VIEW_TITLE);
 
-        Alert alert = Tool.getConfirmAlert("Start","Just for test");
-        alert.showAndWait();
-        System.out.println("java version: "+System.getProperty("java.version"));
-        System.out.println("javafx.version: " + System.getProperty("javafx.version"));
-
         try {
             _appIconImage = new Image(new FileInputStream(APP_ICON_IMAGE),49,46,false,false);
         } catch (FileNotFoundException e) {

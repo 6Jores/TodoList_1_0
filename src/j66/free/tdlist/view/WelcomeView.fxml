@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minWidth="-Infinity" prefHeight="436.0" prefWidth="515.0" style="-fx-background-color: #2D3443;" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1" fx:controller="j66.free.tdlist.view.WelcomeView">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="515.0" style="-fx-background-color: #2D3443;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="j66.free.tdlist.view.WelcomeView">
    <children>
       <VBox layoutX="139.0" layoutY="-30.0" prefHeight="430.0" prefWidth="603.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -26,7 +26,7 @@
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <Line endX="499.29290771484375" endY="-450.0" startX="1012.878662109375" startY="-450.0" stroke="#f15a23" strokeWidth="2.0" />
+            <Line endX="530.0" endY="-425.0" startY="-425.0" stroke="#f15a23" strokeWidth="2.0" />
             <HBox prefHeight="350.0" prefWidth="603.0">
                <children>
                   <VBox prefHeight="336.0" prefWidth="310.0">
