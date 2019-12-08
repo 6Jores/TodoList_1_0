@@ -8,7 +8,22 @@ In this file, you'll find basic Github readme information and a small presentati
 2. Presentation and tutorial
 
 ## 1. Basic Github Information
+### 1.Installation
+TodoList is a JavaFX application. In this repository, we have all necessary file to run the application in a Java IDE.
+For a daily easy use, you can create a .jar file(the main class is j66.free.tdlist.Main). The folder ___files___ must be in the same directory than the .jar file.
 
+You could have some problems to run the .jar file, you must check that you use a jre with javafx to open .jar files in your computer.
+
+This application has been developed with java jdk 12.0.1 and my test with jre 8.0.211
+### 2.Contribution
+Just do a pull requests, it'll be a pleasure to receive your contribution.
+### 3.Version
+This repository contain the version 1.0 of TodoList.
+### 4.Licence
+The application is shared with a Common Creative Licence : BY - NC - SA.
+### 5.Author
+[Jores NOUBISSI](https://www.linkedin.com/in/jores-noubissi-82a69b54/)
+ 
 ## 2. Presentation and tutorial
 ### 1.Introduction
 
