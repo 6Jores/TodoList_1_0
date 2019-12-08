@@ -16,7 +16,7 @@ You could have some problems to run the .jar file, you must check that you use a
 
 This application has been developed with java jdk 12.0.1 and my test with jre 8.0.211
 ### 2.Contribution
-Just do a pull requests, it'll be a pleasure to receive your contribution.
+Just do a pull request, it'll be a pleasure to receive your contribution.
 ### 3.Version
 This repository contain the version 1.0 of TodoList.
 ### 4.Licence
